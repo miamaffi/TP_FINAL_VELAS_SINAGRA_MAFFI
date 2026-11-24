@@ -1,0 +1,14 @@
+,pregunta,respuesta (números de esta corrida)
+0,1. ¿Qué movimientos marcaron la historia?,"17 tramos en que el precio se duplicó o se cortó a la mitad; casi todos coinciden con noticias (exchanges, China, ETFs, la Fed, liquidaciones)"
+1,2. ¿En qué se diferencian las velas de Bitcoin?,"volatilidad anual 67%, 365 velas por año y casi sin saltos de apertura (0% de los días)"
+2,3. ¿Los patrones de los libros anticipan algo?,el más fuerte es 'tres soldados blancos' (p corregido 0.007; z train +0.53 → validación +0.31 → ciclo actual -0.12); el martillo aparece 28 veces y no se distingue del azar (p corregido 0.77)
+3,4. ¿La planilla del profe funciona en Bitcoin?,"P(sube >3% en 3 ruedas | sharpe > 0,9) = 32% vs 27% sin condición"
+4,5. ¿Se repite algo en la misma fase del halving?,"año 1 de cada ciclo: ciclo 2012 +8190%, ciclo 2016 +286%, ciclo 2020 +562%, ciclo 2024 +31% | forma de las velas por fase: χ² p = 0.000"
+5,6. ¿Qué familias encuentra la máquina?,"10 familias; la de mayor efecto es F8 (semana en subida, termina con vela verde fuerte: z +0.78 en train → +0.32 en validación → +0.06 en el ciclo actual)"
+6,7. ¿A qué se parece hoy?,las 5 gemelas siguieron caminos distintos a 7 días (de -4% a +4%)
+7,8. ¿Reglas simples y Monte Carlo?,"Martillo 0.333, Inercia 0.344, Gemela del pasado 0.339, Monte Carlo (paseo aleatorio) 0.314, Monte Carlo (historia del último año) 0.386"
+8,9. ¿Foto (CNN) o secuencia (LSTM)?,LSTM: 0.296 vs CNN: 0.342 (-0.046) → peor
+9,10. ¿Un pre-entrenado ve más?,"Kronos (pre-entrenado) 0.388 (p corregido 0.40), Chronos-2 (pre-entrenado) 0.338 (p corregido 1.00)"
+10,11. ¿Alguno le gana al azar en el ciclo actual?,"NO: ningún candidato supera al azar con el p corregido por comparaciones múltiples (con p sin corregir < 0,05: Monte Carlo (historia del último año), Kronos (pre-entrenado))"
+11,12. ¿Por qué se equivocan?,"ver sección 13: frontera difusa, fotos nuevas, cambio de mercado, noticias"
+12,13. ¿Qué más probamos?,"9 intentos descartados (14.7): más datos, reentrenar y redes más grandes no mejoraron"

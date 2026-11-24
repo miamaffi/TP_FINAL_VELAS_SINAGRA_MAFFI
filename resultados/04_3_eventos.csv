@@ -1,0 +1,19 @@
+,fecha,evento,retorno 7 días,percentil,fuente
+0,10-04-2013,Mt. Gox se satura y frena la operatoria,-60.7%,0,https://www.pcworld.com/article/451281/bitcoin-exchange-mt-gox-suspends-service-following-huge-swing-in-trading-price.html
+1,05-12-2013,China prohíbe a los bancos operar bitcoin,-23.0%,1,https://www.npr.org/sections/thetwo-way/2013/12/05/248967111/china-bans-bitcoin-trading-by-banks
+2,07-02-2014,Mt. Gox suspende los retiros,-12.4%,7,https://techcrunch.com/2014/02/28/mt-gox-files-for-bankruptcy
+3,04-01-2015,Hackeo de Bitstamp,-5.5%,20,https://techcrunch.com/2015/01/05/bitstamp-bitcoin-exchange-hack/
+4,04-09-2017,China prohíbe las ICO,-8.7%,13,https://fortune.com/2017/09/04/ico-china-central-bank-ban/
+5,10-12-2017,Futuros de bitcoin en Cboe,+29.7%,98,https://ir.cboe.com/news/news-details/2017/Cboe-Bitcoin-Futures-Open-for-Trading-12-11-2017
+6,18-06-2019,Facebook anuncia Libra,+25.9%,97,https://www.axios.com/2019/06/18/facebook-unveils-libra-its-long-awaited-cryptocurrency-project
+7,12-03-2020,'Jueves negro' del COVID,-22.1%,2,https://www.cnbc.com/2020/03/13/bitcoin-loses-half-of-its-value-in-two-day-plunge.html
+8,11-08-2020,MicroStrategy compra bitcoin,+0.5%,49,https://www.theblock.co/linked/74534/microstrategy-becomes-first-listed-company-to-buy-bitcoin
+9,08-02-2021,Tesla compra USD 1.500 M en bitcoin,+23.4%,96,https://www.bloomberg.com/news/articles/2021-02-08/tesla-invests-1-5-billion-in-bitcoin-plans-to-accept-cryptocurrency
+10,12-05-2021,Tesla deja de aceptar bitcoin,-35.2%,0,https://techcrunch.com/2021/05/12/elon-musk-technoking-of-tesla-orders-a-halt-to-bitcoin-car-payments
+11,07-09-2021,El Salvador: bitcoin de curso legal,-10.6%,9,https://en.wikipedia.org/wiki/Bitcoin_in_El_Salvador
+12,09-05-2022,Colapso de Terra/Luna,-12.3%,7,https://www.theblock.co/post/146444/terra-luna-and-ust-how-we-got-here
+13,11-11-2022,Quiebra de FTX,-4.9%,22,https://www.bloomberg.com/news/articles/2022-11-11/ftx-com-goes-bankrupt-in-stunning-reversal-for-crypto-exchange
+14,10-01-2024,La SEC aprueba los ETF spot,-7.3%,15,https://www.sec.gov/newsroom/speeches-statements/gensler-statement-spot-bitcoin-011023
+15,05-11-2024,Elección presidencial en EE.UU.,+29.8%,98,https://www.theblock.co/post/325658/bitcoin-breaks-above-90000-amid-rally-led-by-trumps-victory
+16,06-03-2025,Reserva Estratégica de Bitcoin de EE.UU.,-10.5%,10,https://www.whitehouse.gov/presidential-actions/2025/03/establishment-of-the-strategic-bitcoin-reserve-and-united-states-digital-asset-stockpile/
+17,10-10-2025,Liquidaciones récord tras aranceles a China,-12.5%,7,https://decrypt.co/343941/bitcoin-ethereum-dogecoin-down-record-19-billion-crypto-liquidations

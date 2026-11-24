@@ -1,0 +1,11 @@
+familia,descripción,veces,dif z (todo),p,dif z train,dif z val,dif z test,¿se sostiene?,% sube (train),% sube (val),% sube (test),p Holm
+F1,"semana en bajada, termina con vela chica",336,-0.0642,0.3497,-0.0808,-0.0754,0.0275,no había efecto,0.3636,0.3131,0.375,0.4525
+F2,"semana en subida, termina con vela chica",295,0.1878,0.009,0.3413,-0.0339,0.0497,se apagó después de 2020,0.4625,0.3647,0.34,0.0539
+F3,"semana en subida, termina con vela chica",384,0.0866,0.1618,0.1915,0.0036,-0.0352,se apagó después de 2020,0.4249,0.3793,0.24,0.4525
+F4,"semana quieta, termina con vela chica",1913,-0.0717,0.1508,-0.1697,0.0017,0.1006,se apagó después de 2020,0.3462,0.3441,0.3394,0.4525
+F5,"semana en bajada, termina con vela chica",355,-0.1053,0.1019,-0.1241,-0.0691,-0.0801,se apagó después de 2020,0.3799,0.3137,0.3108,0.4076
+F6,"semana en subida, termina con vela chica",306,0.3648,0.001,0.4249,0.3542,0.0582,hasta 2024; en el ciclo actual se apagó,0.5371,0.5,0.3023,0.01
+F7,"semana en bajada, termina con vela verde",354,-0.1286,0.0549,-0.1764,-0.0285,-0.1211,se apagó después de 2020,0.3118,0.3148,0.3421,0.2747
+F8,"semana en subida, termina con vela verde fuerte",358,0.5694,0.001,0.7756,0.3197,0.0594,hasta 2024; en el ciclo actual se apagó,0.5915,0.4688,0.3265,0.01
+F9,"semana quieta, termina con vela chica",382,-0.1916,0.001,-0.2638,-0.2129,0.0449,hasta 2024; en el ciclo actual se apagó,0.3077,0.25,0.325,0.01
+F10,"semana en bajada, termina con vela roja fuerte",371,-0.2408,0.001,-0.2057,-0.1846,-0.3011,"sí, hasta hoy",0.377,0.3763,0.3263,0.01

@@ -1,0 +1,411 @@
+3. Velas 1h: 133,837 velas | 2011-08-18 → 2026-11-24 00:00 | sin operaciones: 6443
+
+3. Velas 4h:  33,459 velas | 2011-08-18 → 2026-11-23 20:00 | sin operaciones: 888
+
+3. Velas 1d:   5,577 velas | 2011-08-18 → 2026-11-23 00:00 | sin operaciones: 33
+
+3. Velas 1w:     797 velas | 2011-08-15 → 2026-11-16 00:00 | sin operaciones: 0
+
+3. Validación vs la diaria OFICIAL de Bitstamp: diferencia mediana del cierre = 0.0% en 5,544 días
+
+3. Validación vs la diaria de Coinbase (otro exchange): diferencia mediana del cierre = 0.0255% en 4,145 días
+
+4.2 Hitos detectados (el precio se duplicó o se cortó a la mitad): 17 tramos, 8 subidas y 9 caídas
+
+4.2 Duración mediana: subidas 295 días, caídas 260 días | caída más profunda -85% | caídas de más de 200 días: -85%, -83%, -63%, -77%, -53%
+
+4.3 Eventos: 13 de 18 fueron seguidos por una semana extrema (percentil ≤10 o ≥90)
+
+5. Benchmark: 8 activos, período común 09-11-2017 → 20-11-2026
+
+5. Benchmark (mismo período, velas diarias):
+                 rendimiento anual  volatilidad anual  peor caída  velas por año  % días con mecha larga  cuerpo medio (% del precio)  rango diario medio (% del precio)  % días con salto de apertura  correlación con BTC
+Bitcoin (BTC)                0.263              0.667      -0.834          365.0                   0.301                        0.023                              0.048                         0.000                1.000
+Ethereum (ETH)               0.196              0.847      -0.940          365.0                   0.266                        0.030                              0.057                         0.013                0.801
+Litecoin (LTC)              -0.050              0.919      -0.935          365.0                   0.265                        0.032                              0.062                         0.018                0.735
+Ripple (XRP)                 0.172              1.049      -0.959          365.0                   0.275                        0.033                              0.064                         0.024                0.573
+S&P 500                      0.115              0.191      -0.339          252.0                   0.235                        0.006                              0.012                         0.227                0.311
+Nasdaq                       0.143              0.234      -0.364          252.0                   0.243                        0.008                              0.015                         0.424                0.332
+Oro                          0.118              0.178      -0.339          252.0                   0.263                        0.007                              0.014                         0.148                0.114
+Eli Lilly (LLY)              0.380              0.314      -0.345          252.0                   0.299                        0.011                              0.024                         0.387                0.099
+
+5. ¿Por qué Bitcoin?
+- Se mueve mucho: volatilidad anual de 67%, contra 21% de mediana en los mercados tradicionales → las velas tienen cuerpos y mechas grandes (2.3% de cuerpo medio por día).
+- Opera 24/7: 365 velas por año (contra 252) y casi sin saltos de apertura (0% de los días, contra 31% en los tradicionales): cada vela empieza donde terminó la anterior, así que toda la información del día está en la vela.
+- Tiene la historia más larga de las cripto (desde 2011 en Bitstamp, con 4 halvings), y las otras cripto se mueven con ella (correlación mediana 0.73): es la que marca el paso del mercado cripto.
+- Es muy distinto de la acción del profe: LLY se mueve 31% por año. Una regla pensada para LLY (como 'sube más de 3% en 3 ruedas') no significa lo mismo en Bitcoin.
+
+6. Umbral k = 0.380  →  'lateral' si el movimiento de 7 días es menor a 0.38 volatilidades
+
+6. Días con respuesta: 5,054  (último: 2026-11-16)
+
+6. Cantidad de días por período y clase:
+clase    baja  lateral  sube  total
+periodo                            
+train     738      893  1049   2680
+val       370      556   507   1433
+test      311      322   308    941
+total    1419     1771  1864   5054
+
+6. Ejemplo 06-10-2025: cierre $124,728 → 7 días después $115,265 (-7.6%) | volatilidad reciente 3.8% | z = -2.06 → BAJA
+
+7.1 Patrones clásicos (2013-hoy). Referencia, todos los días: veces 5054.000, retorno 7d medio 0.018, sube 0.369, baja 0.281, lateral 0.350
+                       veces  retorno 7d medio   sube   baja  lateral  dif z (todo)      p  dif z train  dif z val  dif z test                            ¿se sostiene? muestra chica  p Holm
+patrón                                                                                                                                                                                       
+martillo                  28             0.011  0.393  0.286    0.321         0.071  0.772       -0.319      0.810      -0.191                 se apagó después de 2020            sí   0.772
+estrella fugaz            13             0.093  0.538  0.231    0.231         0.851  0.023        1.050     -0.050       0.742                 se apagó después de 2020            sí   0.115
+envolvente alcista       373             0.023  0.394  0.263    0.343         0.072  0.230        0.010      0.084       0.233                          no había efecto                 0.689
+envolvente bajista       327             0.010  0.346  0.278    0.376        -0.144  0.041       -0.244     -0.103       0.065  hasta 2024; en el ciclo actual se apagó                 0.164
+doji                     566             0.011  0.334  0.288    0.378        -0.064  0.253       -0.039     -0.039      -0.161                          no había efecto                 0.689
+tres soldados blancos    645             0.046  0.471  0.253    0.276         0.387  0.001        0.530      0.313      -0.118  hasta 2024; en el ciclo actual se apagó                 0.007
+tres cuervos negros      492             0.003  0.333  0.325    0.341        -0.224  0.007       -0.380     -0.167       0.077  hasta 2024; en el ciclo actual se apagó                 0.042
+
+7.2 La planilla del profe en Bitcoin y en LLY:
+                                 días  P(fut3 > 3%)  P(fut3 > 3% | sharpe > 0,9)  días con sharpe > 0,9  P(fut3 > 3% | sharpe < −0,9)  P(fut3 > 3% | HAMMER)  P(fut3 > 1 desvío)  P(fut3 > 1 desvío | sharpe > 0,9)
+Bitcoin (2013-hoy)             4820.0         0.271                        0.320                  768.0                         0.245                  0.316               0.138                              0.167
+LLY (misma historia de Yahoo)  5253.0         0.112                        0.099                  893.0                         0.128                  0.067               0.144                              0.130
+
+7.3 Rendimiento de cada año del ciclo:
+             año 1  año 2            año 3  año 4
+ciclo 2012  +8190%   -63%              -5%  +104%
+ciclo 2016   +286%  +166%             +89%   -25%
+ciclo 2020   +562%   -49%              -7%  +125%
+ciclo 2024    +31%   -11%  -19% (en curso)    NaN
+
+7.3 Tipo de vela según el año del ciclo (χ² = 63.4, 12 gl, p = 0.0000):
+tipo_de_vela    cuerpo rojo  cuerpo verde   doji  mecha inferior larga  mecha superior larga
+anio_del_ciclo                                                                              
+1                     0.241         0.417  0.116                 0.165                 0.060
+2                     0.346         0.338  0.108                 0.130                 0.078
+3                     0.322         0.350  0.113                 0.125                 0.089
+4                     0.290         0.361  0.112                 0.161                 0.076
+
+7.4 Familias: silueta por cantidad de familias {4: np.float64(0.096), 5: np.float64(0.116), 6: np.float64(0.127), 7: np.float64(0.136), 8: np.float64(0.151), 9: np.float64(0.15), 10: np.float64(0.155)} → elegimos 10
+
+7.4 Familias de velas:
+                                             descripción  veces  dif z (todo)      p  dif z train  dif z val  dif z test                            ¿se sostiene?  % sube (train)  % sube (val)  % sube (test)  p Holm
+familia                                                                                                                                                                                                               
+F1              semana en bajada, termina con vela chica    336        -0.064  0.350       -0.081     -0.075       0.028                          no había efecto           0.364         0.313          0.375   0.453
+F2              semana en subida, termina con vela chica    295         0.188  0.009        0.341     -0.034       0.050                 se apagó después de 2020           0.462         0.365          0.340   0.054
+F3              semana en subida, termina con vela chica    384         0.087  0.162        0.191      0.004      -0.035                 se apagó después de 2020           0.425         0.379          0.240   0.453
+F4                 semana quieta, termina con vela chica   1913        -0.072  0.151       -0.170      0.002       0.101                 se apagó después de 2020           0.346         0.344          0.339   0.453
+F5              semana en bajada, termina con vela chica    355        -0.105  0.102       -0.124     -0.069      -0.080                 se apagó después de 2020           0.380         0.314          0.311   0.408
+F6              semana en subida, termina con vela chica    306         0.365  0.001        0.425      0.354       0.058  hasta 2024; en el ciclo actual se apagó           0.537         0.500          0.302   0.010
+F7              semana en bajada, termina con vela verde    354        -0.129  0.055       -0.176     -0.028      -0.121                 se apagó después de 2020           0.312         0.315          0.342   0.275
+F8       semana en subida, termina con vela verde fuerte    358         0.569  0.001        0.776      0.320       0.059  hasta 2024; en el ciclo actual se apagó           0.592         0.469          0.327   0.010
+F9                 semana quieta, termina con vela chica    382        -0.192  0.001       -0.264     -0.213       0.045  hasta 2024; en el ciclo actual se apagó           0.308         0.250          0.325   0.010
+F10       semana en bajada, termina con vela roja fuerte    371        -0.241  0.001       -0.206     -0.185      -0.301                            sí, hasta hoy           0.377         0.376          0.326   0.010
+
+7.5 Shazam con las velas hasta el 23-11-2026 (de 563 píxeles encendidos):
+termina el  píxeles distintos  7 días después  30 días después
+27-08-2015                484           0.010            0.039
+23-11-2025                529           0.041            0.007
+10-02-2026                539          -0.019            0.025
+07-06-2026                577           0.038           -0.000
+27-11-2019                593          -0.044           -0.037
+
+7.6 RESUMEN DE PATRONES:
+                                                        tipo  veces  dif z train  dif z val  dif z test                            ¿se sostiene?      p  p Holm (todos juntos)                                                   veredicto
+martillo                                             clásico     28       -0.319      0.810      -0.191                 se apagó después de 2020  0.772                  0.919                                    no se distingue del azar
+estrella fugaz                                       clásico     13        1.050     -0.050       0.742                 se apagó después de 2020  0.023                  0.230                                    no se distingue del azar
+envolvente alcista                                   clásico    373        0.010      0.084       0.233                          no había efecto  0.230                  0.919                                    no se distingue del azar
+envolvente bajista                                   clásico    327       -0.244     -0.103       0.065  hasta 2024; en el ciclo actual se apagó  0.041                  0.369                                    no se distingue del azar
+doji                                                 clásico    566       -0.039     -0.039      -0.161                          no había efecto  0.253                  0.919                                    no se distingue del azar
+tres soldados blancos                                clásico    645        0.530      0.313      -0.118  hasta 2024; en el ciclo actual se apagó  0.001                  0.017  real en el pasado, hasta 2024; en el ciclo actual se apagó
+tres cuervos negros                                  clásico    492       -0.380     -0.167       0.077  hasta 2024; en el ciclo actual se apagó  0.007                  0.084                                    no se distingue del azar
+F1: semana en bajada, termina con vela chica         familia    336       -0.081     -0.075       0.028                          no había efecto  0.350                  0.919                                    no se distingue del azar
+F2: semana en subida, termina con vela chica         familia    295        0.341     -0.034       0.050                 se apagó después de 2020  0.009                  0.099                                    no se distingue del azar
+F3: semana en subida, termina con vela chica         familia    384        0.191      0.004      -0.035                 se apagó después de 2020  0.162                  0.905                                    no se distingue del azar
+F4: semana quieta, termina con vela chica            familia   1913       -0.170      0.002       0.101                 se apagó después de 2020  0.151                  0.905                                    no se distingue del azar
+F5: semana en bajada, termina con vela chica         familia    355       -0.124     -0.069      -0.080                 se apagó después de 2020  0.102                  0.713                                    no se distingue del azar
+F6: semana en subida, termina con vela chica         familia    306        0.425      0.354       0.058  hasta 2024; en el ciclo actual se apagó  0.001                  0.017  real en el pasado, hasta 2024; en el ciclo actual se apagó
+F7: semana en bajada, termina con vela verde         familia    354       -0.176     -0.028      -0.121                 se apagó después de 2020  0.055                  0.440                                    no se distingue del azar
+F8: semana en subida, termina con vela verde fuerte  familia    358        0.776      0.320       0.059  hasta 2024; en el ciclo actual se apagó  0.001                  0.017  real en el pasado, hasta 2024; en el ciclo actual se apagó
+F9: semana quieta, termina con vela chica            familia    382       -0.264     -0.213       0.045  hasta 2024; en el ciclo actual se apagó  0.001                  0.017  real en el pasado, hasta 2024; en el ciclo actual se apagó
+F10: semana en bajada, termina con vela roja fuerte  familia    371       -0.206     -0.185      -0.301                            sí, hasta hoy  0.001                  0.017                                        real y sigue vigente
+
+7.6 ¿Qué nos llevamos? De 17 patrones, 5 se distinguen del azar con todo el historial (Holm). Siguen vigentes en el ciclo actual: F10: semana en bajada, termina con vela roja fuerte. Se apagaron: tres soldados blancos, F6: semana en subida, termina con vela chica, F8: semana en subida, termina con vela verde fuerte, F9: semana quieta, termina con vela chica.
+
+8. Días con martillo después de una semana bajista: 28 de 5054
+
+8. Baselines en VALIDACIÓN (el test se mira recién en la sección 12):
+              balanced_acc_validacion
+Azar                            0.348
+Siempre sube                    0.333
+Martillo                        0.335
+Inercia                         0.362
+
+8.2 Monte Carlo (paseo aleatorio): balanced accuracy en validación = 0.345 | probabilidad media (baja, lateral, sube) = [0.352 0.296 0.352]
+
+8.2 Monte Carlo (historia del último año): balanced accuracy en validación = 0.385 | probabilidad media (baja, lateral, sube) = [0.324 0.281 0.395]
+
+Arquitectura (09_arquitectura_cnn): 42,051 parámetros en total
+                          capa forma de los datos  parámetros
+               foto de entrada        (1, 64, 90)           0
+                      bloque 1       (16, 32, 90)         288
+                      bloque 2       (32, 16, 90)        7776
+                      bloque 3        (64, 8, 90)       30912
+resumen 4x4 + dropout + salida               (3,)        3075
+
+CNN - prueba de ventana (balanced accuracy en validación):
+         promedio  desvio
+ventana                  
+5           0.356   0.005
+10          0.362   0.014
+20          0.353   0.020
+30          0.349   0.016
+60          0.336   0.013
+
+CNN - mejor promedio: ventana 10. Ventana elegida (regla de un desvío): N = 5
+
+CNN: balanced accuracy en validación = 0.369
+
+9.5 Gemela del pasado: balanced accuracy en validación = 0.343
+
+Arquitectura LSTM: 5,219 parámetros en total
+
+LSTM - prueba de ventana (balanced accuracy en validación):
+         promedio  desvio
+ventana                  
+5           0.360   0.013
+10          0.389   0.005
+20          0.379   0.007
+30          0.386   0.020
+60          0.374   0.004
+
+LSTM - mejor promedio: ventana 10. Ventana elegida (regla de un desvío): N = 10
+
+LSTM: balanced accuracy en validación = 0.392
+
+11. Pre-entrenados: 941 días del test, contexto de 400 velas; examen limpio desde 01-11-2025 (381 días)
+
+11. Kronos (pre-entrenado): balanced accuracy en el test = 0.388 (941 días)
+
+11. Chronos-2 (pre-entrenado): balanced accuracy en el test = 0.338 (941 días)
+
+11.4 Nuestras redes vs pre-entrenados (balanced accuracy):
+                           test completo  examen limpio (desde nov-2025)
+CNN                                0.342                           0.350
+LSTM                               0.296                           0.312
+Kronos (pre-entrenado)             0.388                           0.393
+Chronos-2 (pre-entrenado)          0.338                           0.331
+
+11.4 ¿Aciertan más cuando coinciden?
+ red             pre-entrenado  % días que coinciden  acierto cuando coinciden  acierto cuando NO coinciden
+ CNN    Kronos (pre-entrenado)                 0.268                     0.413                        0.322
+LSTM    Kronos (pre-entrenado)                 0.302                     0.320                        0.292
+ CNN Chronos-2 (pre-entrenado)                 0.631                     0.350                        0.340
+LSTM Chronos-2 (pre-entrenado)                 0.692                     0.321                        0.255
+
+12. Test: 941 días, del 20-04-2024 al 16-11-2026 (sube 33%, baja 33%, lateral 34%)
+
+12.2 Resultados en el TEST (candidatos):
+                                                tipo  balanced_acc  IC95 desde  IC95 hasta  accuracy  p_valor  dias_acertados  errores_leves  errores_graves  dias  p_corregido (Holm) significativo
+modelo                                                                                                                                                                                              
+Azar                                        Baseline         0.317       0.291       0.344     0.317    0.860             298            445             198   941               1.000            no
+Siempre sube                                Baseline         0.333       0.333       0.333     0.327    1.000             308            322             311   941               1.000            no
+Martillo                                    Baseline         0.333       0.330       0.336     0.342    0.627             322            617               2   941               1.000            no
+Inercia                                     Baseline         0.344       0.295       0.375     0.344    0.276             324            401             216   941               1.000            no
+Gemela del pasado                           Baseline         0.339       0.297       0.372     0.339    0.354             319            406             216   941               1.000            no
+Monte Carlo (paseo aleatorio)             Simulación         0.314       0.285       0.343     0.310    0.948             292            324             325   941               1.000            no
+Monte Carlo (historia del último año)     Simulación         0.386       0.314       0.442     0.383    0.006             360            328             253   941               0.066            no
+CNN                                       Red propia         0.342       0.312       0.370     0.346    0.224             326            505             110   941               1.000            no
+LSTM                                      Red propia         0.296       0.268       0.329     0.301    0.959             283            570              88   941               1.000            no
+Kronos (pre-entrenado)                 Pre-entrenado         0.388       0.341       0.450     0.387    0.040             364            393             184   941               0.400            no
+Chronos-2 (pre-entrenado)              Pre-entrenado         0.338       0.330       0.352     0.346    0.267             326            603              12   941               1.000            no
+
+12.2b Calibración de las probabilidades en el test (Brier):
+                                       Brier (más bajo = mejor)  probabilidad media de 'sube'  mejora vs ⅓
+⅓ para cada clase (no sabe nada)                         0.6667                        0.3333       0.0000
+frecuencias del entrenamiento                            0.6738                        0.3914      -0.0071
+Monte Carlo (paseo aleatorio)                            0.6720                        0.3528      -0.0053
+Monte Carlo (historia del último año)                    0.6619                        0.3833       0.0048
+CNN                                                      0.6713                        0.3126      -0.0046
+LSTM                                                     0.6816                        0.2938      -0.0149
+
+12.6b ¿Las redes vieron venir los hitos? (primeros 7 días desde el giro):
+                                 período                                                                    pasó                     CNN dijo                    LSTM dijo                  Kronos dijo
+hito                                                                                                                                                                                                   
+20-08-2011 caída -81%      antes de 2013  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+20-10-2011 subida +10123%  antes de 2013  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+09-04-2013 caída -70%              train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+16-04-2013 subida +119%            train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+24-04-2013 caída -55%              train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+06-07-2013 subida +1606%           train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+04-12-2013 caída -85%              train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+14-01-2015 subida +11094%          train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+16-12-2017 caída -83%              train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+15-12-2018 subida +306%            train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+26-06-2019 caída -63%              train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+12-03-2020 subida +1213%           train  sin predicción fuera de muestra (las redes aprendieron con estos días)                                                                                       
+13-04-2021 caída -53%                val                                             sube 0 · lateral 1 · baja 6  sube 2 · lateral 3 · baja 2  sube 1 · lateral 3 · baja 3                             
+20-07-2021 subida +127%              val                                             sube 7 · lateral 0 · baja 0  sube 2 · lateral 5 · baja 0  sube 1 · lateral 6 · baja 0                             
+08-11-2021 caída -77%                val                                             sube 0 · lateral 0 · baja 7  sube 2 · lateral 3 · baja 2  sube 3 · lateral 0 · baja 4                             
+21-11-2022 subida +691%              val                                             sube 0 · lateral 7 · baja 0  sube 0 · lateral 6 · baja 1  sube 0 · lateral 7 · baja 0                             
+06-10-2025 caída -53%               test                                             sube 0 · lateral 0 · baja 7  sube 1 · lateral 5 · baja 1  sube 4 · lateral 2 · baja 1  sube 0 · lateral 2 · baja 5
+
+12.7 Inversión simulada (USD 1.000 el día del halving):
+                                       capital final (USD)  semanas invertido
+Siempre sube                                       923.477              1.000
+Comprar y mantener                                 923.500              1.000
+Martillo                                           956.667              0.007
+Chronos-2 (pre-entrenado)                         1000.000              0.000
+LSTM                                              1022.276              0.096
+Inercia                                           1034.389              0.281
+Monte Carlo (paseo aleatorio)                     1050.993              0.526
+CNN                                               1065.515              0.119
+Azar                                              1287.895              0.289
+Kronos (pre-entrenado)                            1337.902              0.274
+Monte Carlo (historia del último año)             1640.901              0.563
+Gemela del pasado                                 1874.469              0.437
+
+13.2 Confianza vs acierto:
+modelo confianza  confianza_media  acierto
+   CNN      alta            0.380    0.332
+   CNN      baja            0.366    0.387
+   CNN  muy alta            0.402    0.349
+   CNN  muy baja            0.351    0.318
+  LSTM      alta            0.411    0.289
+  LSTM      baja            0.390    0.285
+  LSTM  muy alta            0.444    0.340
+  LSTM  muy baja            0.363    0.288
+
+13.3 Acierto según qué tan nueva es la foto:
+                CNN   LSTM  píxeles distintos (promedio)
+conocida      0.345  0.281                        98.498
+muy conocida  0.284  0.297                        78.873
+muy nueva     0.353  0.302                       137.864
+rara          0.404  0.323                       114.583
+
+13.4 Comportamiento del mercado en cada período:
+         volatilidad_anual_mediana  movimiento_semanal_tipico  cuerpo_promedio_de_la_vela  dias_con_martillo
+periodo                                                                                                     
+train                        0.651                      0.061                       0.432              0.017
+val                          0.576                      0.047                       0.425              0.011
+test                         0.422                      0.035                       0.433              0.006
+
+13.4 Acierto según la volatilidad del momento (test):
+                      CNN   LSTM
+agitadas            0.389  0.376
+normales            0.335  0.281
+semanas tranquilas  0.315  0.245
+
+13.5 Acierto según el tamaño del movimiento siguiente:
+                     CNN   LSTM  días
+lateral clarísimo  0.673  0.691   165
+lateral justo      0.637  0.618   157
+movimiento claro   0.172  0.133   413
+movimiento enorme  0.162  0.068    74
+movimiento justo   0.242  0.091   132
+
+13.5 Las 10 semanas más extremas del test:
+           retorno 7 días  pasó   CNN dijo  LSTM dijo
+14-08-2026         +24.4%  sube  lateral ✘  lateral ✘
+29-01-2026         -25.7%  baja  lateral ✘  lateral ✘
+04-11-2024         +30.9%  sube  lateral ✘  lateral ✘
+30-05-2026         -17.5%  baja  lateral ✘  lateral ✘
+20-02-2025         -13.9%  baja     sube ✘     baja ✔
+07-11-2026         -15.4%  baja     baja ✔  lateral ✘
+29-07-2024         -19.1%  baja     baja ✔  lateral ✘
+27-09-2025         +11.6%  sube  lateral ✘  lateral ✘
+09-10-2025         -11.1%  baja  lateral ✘     sube ✘
+13-11-2025         -13.1%  baja  lateral ✘  lateral ✘
+
+14.1 ¿Velas diarias o semanales? (balanced accuracy en validación):
+                      promedio  desvio
+período    velas                      
+12 semanas diarias       0.359   0.016
+           semanales     0.358   0.016
+4 semanas  diarias       0.336   0.039
+           semanales     0.348   0.010
+
+14.2 Acciones descargadas: 30 de 30 (AAPL, MSFT, AMZN, GOOGL, NVDA, TSLA, LLY, JPM, V, JNJ, XOM, PG, KO, PEP, WMT, HD, DIS, NFLX, INTC, CSCO, ORCL, BA, CAT, MCD, NKE, PFE, MRK, CVX, GS, UNH)
+
+14.2 Ejemplos de acciones: 112,502 (Bitcoin solo tenía 2,680) | clases: baja 29%, lateral 33%, sube 38%
+
+CNN + acciones: balanced accuracy en validación = 0.347
+
+LSTM + acciones: balanced accuracy en validación = 0.358
+
+14.3 ETHUSD: 954 días de entrenamiento (08-2017 → 05-2020)
+
+14.3 LTCUSD: 1,013 días de entrenamiento (06-2017 → 05-2020)
+
+14.3 XRPUSD: 1,170 días de entrenamiento (12-2016 → 05-2020)
+
+CNN + criptos: balanced accuracy en validación = 0.353
+
+LSTM + criptos: balanced accuracy en validación = 0.370
+
+14.3 ¿Qué datos extra ayudan? (balanced accuracy en validación):
+      solo Bitcoin  + acciones  + criptos
+CNN          0.369       0.347      0.353
+LSTM         0.392       0.358      0.370
+
+14.4 Reentrenamiento: 11 bloques de 3 meses (el resultado, bloque por bloque, abajo)
+
+14.4 Acierto por bloque de 3 meses:
+         días    CNN  CNN reentrenada   LSTM  LSTM reentrenada
+bloque                                                        
+04-2024    91  0.341            0.308  0.242             0.341
+07-2024    92  0.380            0.337  0.315             0.380
+10-2024    92  0.283            0.337  0.315             0.380
+01-2025    90  0.478            0.267  0.367             0.311
+04-2025    91  0.297            0.176  0.264             0.297
+07-2025    92  0.283            0.239  0.228             0.250
+10-2025    92  0.359            0.380  0.413             0.293
+01-2026    90  0.356            0.344  0.444             0.333
+04-2026    91  0.341            0.330  0.198             0.242
+07-2026    92  0.402            0.315  0.304             0.370
+10-2026    28  0.179            0.929  0.036             0.107
+
+14.5 Arquitectura CNN-LSTM híbrida: 6,707 parámetros
+
+CNN-LSTM híbrida: balanced accuracy en validación = 0.374
+
+ResNet-18 (pre-entrenado en ImageNet): balanced accuracy en validación = 0.346
+
+14.7 Lo que probamos y descartamos:
+                                                                                       qué se probó  validación  validación del base   test  test del base  p test  p test corregido (Holm)                                                                  motivo
+descarte                                                                                                                                                                                                                                                           
+CNN, velas semanales                   ¿resumir la semana en una vela ve mejor que 7 velas diarias?       0.353                0.347    NaN            NaN     NaN                      NaN                                                 no mejoró en validación
+CNN + acciones                                más datos: 30 acciones líquidas de EE.UU. (2005-2020)       0.347                0.369  0.350          0.342   0.167                    1.000                                                 no mejoró en validación
+LSTM + acciones                               más datos: 30 acciones líquidas de EE.UU. (2005-2020)       0.358                0.392  0.362          0.296   0.076                    0.607                                                 no mejoró en validación
+CNN + criptos                                                             más datos: ETH, LTC y XRP       0.353                0.369  0.335          0.342   0.446                    1.000                                                 no mejoró en validación
+LSTM + criptos                                                            más datos: ETH, LTC y XRP       0.370                0.392  0.303          0.296   0.926                    1.000                                                 no mejoró en validación
+CNN reentrenada                                          el mercado cambia: reentrenar cada 3 meses         NaN                0.369  0.322          0.342   0.713                    1.000  se evalúa por bloques de 3 meses (14.4): no tiene una validación única
+LSTM reentrenada                                         el mercado cambia: reentrenar cada 3 meses         NaN                0.392  0.312          0.296   0.834                    1.000  se evalúa por bloques de 3 meses (14.4): no tiene una validación única
+CNN-LSTM híbrida                          combinar convolución y recurrente (Livieris et al., 2021)       0.374                0.392  0.308          0.296   0.912                    1.000                                                 no mejoró en validación
+ResNet-18 (pre-entrenado en ImageNet)  una red de imágenes gigante ya entrenada (transfer learning)       0.346                0.369  0.330          0.342   0.623                    1.000                                                 no mejoró en validación
+
+15. CONCLUSIONES
+
+15. RESPUESTAS PREGUNTA POR PREGUNTA:
+1. ¿Qué movimientos marcaron la historia?
+   → 17 tramos en que el precio se duplicó o se cortó a la mitad; casi todos coinciden con noticias (exchanges, China, ETFs, la Fed, liquidaciones)
+2. ¿En qué se diferencian las velas de Bitcoin?
+   → volatilidad anual 67%, 365 velas por año y casi sin saltos de apertura (0% de los días)
+3. ¿Los patrones de los libros anticipan algo?
+   → el más fuerte es 'tres soldados blancos' (p corregido 0.007; z train +0.53 → validación +0.31 → ciclo actual -0.12); el martillo aparece 28 veces y no se distingue del azar (p corregido 0.77)
+4. ¿La planilla del profe funciona en Bitcoin?
+   → P(sube >3% en 3 ruedas | sharpe > 0,9) = 32% vs 27% sin condición
+5. ¿Se repite algo en la misma fase del halving?
+   → año 1 de cada ciclo: ciclo 2012 +8190%, ciclo 2016 +286%, ciclo 2020 +562%, ciclo 2024 +31% | forma de las velas por fase: χ² p = 0.000
+6. ¿Qué familias encuentra la máquina?
+   → 10 familias; la de mayor efecto es F8 (semana en subida, termina con vela verde fuerte: z +0.78 en train → +0.32 en validación → +0.06 en el ciclo actual)
+7. ¿A qué se parece hoy?
+   → las 5 gemelas siguieron caminos distintos a 7 días (de -4% a +4%)
+8. ¿Reglas simples y Monte Carlo?
+   → Martillo 0.333, Inercia 0.344, Gemela del pasado 0.339, Monte Carlo (paseo aleatorio) 0.314, Monte Carlo (historia del último año) 0.386
+9. ¿Foto (CNN) o secuencia (LSTM)?
+   → LSTM: 0.296 vs CNN: 0.342 (-0.046) → peor
+10. ¿Un pre-entrenado ve más?
+   → Kronos (pre-entrenado) 0.388 (p corregido 0.40), Chronos-2 (pre-entrenado) 0.338 (p corregido 1.00)
+11. ¿Alguno le gana al azar en el ciclo actual?
+   → NO: ningún candidato supera al azar con el p corregido por comparaciones múltiples (con p sin corregir < 0,05: Monte Carlo (historia del último año), Kronos (pre-entrenado))
+12. ¿Por qué se equivocan?
+   → ver sección 13: frontera difusa, fotos nuevas, cambio de mercado, noticias
+13. ¿Qué más probamos?
+   → 9 intentos descartados (14.7): más datos, reentrenar y redes más grandes no mejoraron
+
+- Respuesta a la pregunta central: las velas de Bitcoin esconden sobre todo INERCIA de corto plazo (rachas que tienden a seguir), más fuerte en 2013-2020 y cada vez más débil, un ciclo de 4 años visible a escala de años, y grandes movimientos que coinciden con noticias. Para anticipar la semana siguiente, ningún modelo (CNN, LSTM, Monte Carlo ni Kronos) supera al azar con la corrección por comparaciones múltiples: el movimiento semanal del ciclo actual NO estaba anunciado en las velas (apoya H0, en línea con Fama 1970, Marshall et al. 2006 y Urquhart 2016).

@@ -1,0 +1,14 @@
+,día,precio ese día,precio 7 días después,cambio,"RESPUESTA
+(ya la sabíamos)",la CNN dijo,la LSTM dijo
+0,20-04-2024,"$64,990","$63,429",-2.4%,LATERAL,lateral ✔,lateral ✔
+1,14-07-2024,"$60,823","$68,158",+12.1%,SUBE,sube ✔,sube ✔
+2,07-10-2024,"$62,212","$66,070",+6.2%,SUBE,sube ✔,lateral ✘
+3,01-01-2025,"$94,388","$95,065",+0.7%,LATERAL,lateral ✔,baja ✘
+4,27-03-2025,"$87,219","$83,132",-4.7%,BAJA,baja ✔,lateral ✘
+5,21-06-2025,"$102,139","$107,348",+5.1%,SUBE,baja ✘,lateral ✘
+6,14-09-2025,"$115,342","$115,292",-0.0%,LATERAL,lateral ✔,lateral ✔
+7,09-12-2025,"$92,695","$87,843",-5.2%,BAJA,lateral ✘,lateral ✘
+8,04-03-2026,"$72,691","$70,196",-3.4%,LATERAL,sube ✘,lateral ✔
+9,29-05-2026,"$73,373","$61,042",-16.8%,BAJA,lateral ✘,lateral ✘
+10,22-08-2026,"$77,066","$78,235",+1.5%,LATERAL,sube ✘,sube ✘
+11,16-11-2026,"$64,822","$61,209",-5.6%,BAJA,lateral ✘,lateral ✘

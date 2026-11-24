@@ -1,0 +1,18 @@
+hito,período,pasó,CNN dijo,LSTM dijo,Kronos dijo
+20-08-2011 caída -81%,antes de 2013,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+20-10-2011 subida +10123%,antes de 2013,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+09-04-2013 caída -70%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+16-04-2013 subida +119%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+24-04-2013 caída -55%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+06-07-2013 subida +1606%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+04-12-2013 caída -85%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+14-01-2015 subida +11094%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+16-12-2017 caída -83%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+15-12-2018 subida +306%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+26-06-2019 caída -63%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+12-03-2020 subida +1213%,train,sin predicción fuera de muestra (las redes aprendieron con estos días),,,
+13-04-2021 caída -53%,val,sube 0 · lateral 1 · baja 6,sube 2 · lateral 3 · baja 2,sube 1 · lateral 3 · baja 3,
+20-07-2021 subida +127%,val,sube 7 · lateral 0 · baja 0,sube 2 · lateral 5 · baja 0,sube 1 · lateral 6 · baja 0,
+08-11-2021 caída -77%,val,sube 0 · lateral 0 · baja 7,sube 2 · lateral 3 · baja 2,sube 3 · lateral 0 · baja 4,
+21-11-2022 subida +691%,val,sube 0 · lateral 7 · baja 0,sube 0 · lateral 6 · baja 1,sube 0 · lateral 7 · baja 0,
+06-10-2025 caída -53%,test,sube 0 · lateral 0 · baja 7,sube 1 · lateral 5 · baja 1,sube 4 · lateral 2 · baja 1,sube 0 · lateral 2 · baja 5

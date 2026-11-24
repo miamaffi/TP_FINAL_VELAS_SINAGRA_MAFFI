@@ -1,0 +1,9 @@
+,modelo,confianza,confianza_media,acierto
+0,CNN,alta,0.38,0.332
+1,CNN,baja,0.366,0.387
+2,CNN,muy alta,0.402,0.349
+3,CNN,muy baja,0.351,0.318
+4,LSTM,alta,0.411,0.289
+5,LSTM,baja,0.39,0.285
+6,LSTM,muy alta,0.444,0.34
+7,LSTM,muy baja,0.363,0.288

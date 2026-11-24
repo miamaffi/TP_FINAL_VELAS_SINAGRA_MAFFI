@@ -1,0 +1,6 @@
+,capa,forma de los datos,parámetros
+0,foto de entrada,"(1, 64, 90)",0
+1,bloque 1,"(16, 32, 90)",288
+2,bloque 2,"(32, 16, 90)",7776
+3,bloque 3,"(64, 8, 90)",30912
+4,resumen 4x4 + dropout + salida,"(3,)",3075

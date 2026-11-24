@@ -1,0 +1,5 @@
+,CNN,LSTM,píxeles distintos (promedio)
+conocida,0.345,0.281,98.498
+muy conocida,0.284,0.297,78.873
+muy nueva,0.353,0.302,137.864
+rara,0.404,0.323,114.583

@@ -1,0 +1,5 @@
+,red,pre-entrenado,% días que coinciden,acierto cuando coinciden,acierto cuando NO coinciden
+0,CNN,Kronos (pre-entrenado),0.268,0.413,0.322
+1,LSTM,Kronos (pre-entrenado),0.302,0.32,0.292
+2,CNN,Chronos-2 (pre-entrenado),0.631,0.35,0.34
+3,LSTM,Chronos-2 (pre-entrenado),0.692,0.321,0.255

@@ -1,0 +1,5 @@
+,test completo,examen limpio (desde nov-2025)
+CNN,0.342,0.35
+LSTM,0.296,0.312
+Kronos (pre-entrenado),0.388,0.393
+Chronos-2 (pre-entrenado),0.338,0.331

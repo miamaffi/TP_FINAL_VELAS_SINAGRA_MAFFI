@@ -1,0 +1,18 @@
+,tipo,veces,dif z train,dif z val,dif z test,¿se sostiene?,p,p Holm (todos juntos),veredicto
+martillo,clásico,28,-0.3189,0.81,-0.1906,se apagó después de 2020,0.7722,0.9191,no se distingue del azar
+estrella fugaz,clásico,13,1.0495,-0.0501,0.7415,se apagó después de 2020,0.023,0.2298,no se distingue del azar
+envolvente alcista,clásico,373,0.0096,0.0843,0.2332,no había efecto,0.2298,0.9191,no se distingue del azar
+envolvente bajista,clásico,327,-0.2441,-0.1027,0.065,hasta 2024; en el ciclo actual se apagó,0.041,0.3686,no se distingue del azar
+doji,clásico,566,-0.0392,-0.0395,-0.1614,no había efecto,0.2527,0.9191,no se distingue del azar
+tres soldados blancos,clásico,645,0.5304,0.3125,-0.1184,hasta 2024; en el ciclo actual se apagó,0.001,0.017,"real en el pasado, hasta 2024; en el ciclo actual se apagó"
+tres cuervos negros,clásico,492,-0.3799,-0.1667,0.0766,hasta 2024; en el ciclo actual se apagó,0.007,0.0839,no se distingue del azar
+"F1: semana en bajada, termina con vela chica",familia,336,-0.0808,-0.0754,0.0275,no había efecto,0.3497,0.9191,no se distingue del azar
+"F2: semana en subida, termina con vela chica",familia,295,0.3413,-0.0339,0.0497,se apagó después de 2020,0.009,0.0989,no se distingue del azar
+"F3: semana en subida, termina con vela chica",familia,384,0.1915,0.0036,-0.0352,se apagó después de 2020,0.1618,0.9051,no se distingue del azar
+"F4: semana quieta, termina con vela chica",familia,1913,-0.1697,0.0017,0.1006,se apagó después de 2020,0.1508,0.9051,no se distingue del azar
+"F5: semana en bajada, termina con vela chica",familia,355,-0.1241,-0.0691,-0.0801,se apagó después de 2020,0.1019,0.7133,no se distingue del azar
+"F6: semana en subida, termina con vela chica",familia,306,0.4249,0.3542,0.0582,hasta 2024; en el ciclo actual se apagó,0.001,0.017,"real en el pasado, hasta 2024; en el ciclo actual se apagó"
+"F7: semana en bajada, termina con vela verde",familia,354,-0.1764,-0.0285,-0.1211,se apagó después de 2020,0.0549,0.4396,no se distingue del azar
+"F8: semana en subida, termina con vela verde fuerte",familia,358,0.7756,0.3197,0.0594,hasta 2024; en el ciclo actual se apagó,0.001,0.017,"real en el pasado, hasta 2024; en el ciclo actual se apagó"
+"F9: semana quieta, termina con vela chica",familia,382,-0.2638,-0.2129,0.0449,hasta 2024; en el ciclo actual se apagó,0.001,0.017,"real en el pasado, hasta 2024; en el ciclo actual se apagó"
+"F10: semana en bajada, termina con vela roja fuerte",familia,371,-0.2057,-0.1846,-0.3011,"sí, hasta hoy",0.001,0.017,real y sigue vigente

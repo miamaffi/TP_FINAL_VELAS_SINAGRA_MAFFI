@@ -1,0 +1,5 @@
+periodo,baja,lateral,sube,total
+train,738,893,1049,2680
+val,370,556,507,1433
+test,311,322,308,941
+total,1419,1771,1864,5054

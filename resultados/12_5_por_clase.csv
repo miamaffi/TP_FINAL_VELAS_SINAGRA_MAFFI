@@ -1,0 +1,7 @@
+,modelo,clase,detectó (recall),"cuando lo dijo, acertó (precisión)"
+0,CNN,baja,0.199,0.369
+1,CNN,lateral,0.655,0.349
+2,CNN,sube,0.172,0.315
+3,LSTM,baja,0.122,0.268
+4,LSTM,lateral,0.655,0.315
+5,LSTM,sube,0.11,0.264

@@ -1,0 +1,10 @@
+descarte,qué se probó,validación,validación del base,test,test del base,p test,p test corregido (Holm),motivo
+"CNN, velas semanales",¿resumir la semana en una vela ve mejor que 7 velas diarias?,0.3529,0.3472,,,,,no mejoró en validación
+CNN + acciones,más datos: 30 acciones líquidas de EE.UU. (2005-2020),0.3468,0.3693,0.3503,0.3422,0.1668,1.0,no mejoró en validación
+LSTM + acciones,más datos: 30 acciones líquidas de EE.UU. (2005-2020),0.3585,0.3922,0.3623,0.296,0.0759,0.6074,no mejoró en validación
+CNN + criptos,"más datos: ETH, LTC y XRP",0.3526,0.3693,0.3346,0.3422,0.4456,1.0,no mejoró en validación
+LSTM + criptos,"más datos: ETH, LTC y XRP",0.3703,0.3922,0.3027,0.296,0.9261,1.0,no mejoró en validación
+CNN reentrenada,el mercado cambia: reentrenar cada 3 meses,,0.3693,0.3218,0.3422,0.7133,1.0,se evalúa por bloques de 3 meses (14.4): no tiene una validación única
+LSTM reentrenada,el mercado cambia: reentrenar cada 3 meses,,0.3922,0.312,0.296,0.8342,1.0,se evalúa por bloques de 3 meses (14.4): no tiene una validación única
+CNN-LSTM híbrida,"combinar convolución y recurrente (Livieris et al., 2021)",0.3741,0.3922,0.3079,0.296,0.9121,1.0,no mejoró en validación
+ResNet-18 (pre-entrenado en ImageNet),una red de imágenes gigante ya entrenada (transfer learning),0.3462,0.3693,0.3298,0.3422,0.6234,1.0,no mejoró en validación

@@ -1,0 +1,4 @@
+,CNN,LSTM
+agitadas,0.389,0.376
+normales,0.335,0.281
+semanas tranquilas,0.315,0.245
