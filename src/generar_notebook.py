@@ -672,11 +672,11 @@ CONTEXTO_HITOS = {
 }
 
 def contexto_de(fecha, tolerancia=10):
-    # Busca el contexto del hito que empieza en esa fecha (con unos días de tolerancia por si cambian los datos)
-    for clave, valor in CONTEXTO_HITOS.items():
-        if abs((pd.Timestamp(clave, tz="UTC") - fecha).days) <= tolerancia:
-            return valor
-    return ("contexto pendiente", "")
+    # Busca el contexto del hito que empieza en esa fecha: el MÁS CERCANO, con unos días de tolerancia por si cambian los datos
+    # (en abril de 2013 hay tres hitos en dos semanas: tomar el primero que entra en la tolerancia les cruzaba los textos)
+    distancias = {clave: abs((pd.Timestamp(clave, tz="UTC") - fecha).days) for clave in CONTEXTO_HITOS}
+    clave = min(distancias, key=distancias.get)
+    return CONTEXTO_HITOS[clave] if distancias[clave] <= tolerancia else ("contexto pendiente", "")
 
 HITOS["contexto"] = [contexto_de(f)[0] for f in HITOS["inicio"]]
 HITOS["fuente"] = [contexto_de(f)[1] for f in HITOS["inicio"]]

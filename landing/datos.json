@@ -1,0 +1,1505 @@
+{
+"hitos": [
+{
+"inicio": "2011-08-20",
+"fin": "2011-10-20",
+"dias": 61,
+"p0": 12.0,
+"p1": 2.0,
+"mov": "-81%",
+"tipo": "caída",
+"abierto": false,
+"contexto": "Fin de la primera burbuja (jun-2011, impulsada por notas de prensa sobre Silk Road) y hackeo de Mt. Gox de jun-2011.",
+"fuente": "https://fortune.com/2021/01/02/is-bitcoin-a-bubble-will-it-crash-again-history"
+},
+{
+"inicio": "2011-10-20",
+"fin": "2013-04-09",
+"dias": 537,
+"p0": 2.0,
+"p1": 229.0,
+"mov": "10123%",
+"tipo": "subida",
+"abierto": false,
+"contexto": "Recuperación lenta y creciente interés mediático; en mar-2013, la crisis bancaria de Chipre se asoció (con causalidad discutida) a la demanda de bitcoin.",
+"fuente": "https://money.cnn.com/2013/03/28/investing/bitcoin-cyprus/"
+},
+{
+"inicio": "2013-04-09",
+"fin": "2013-04-16",
+"dias": 7,
+"p0": 229.0,
+"p1": 68.0,
+"mov": "-70%",
+"tipo": "caída",
+"abierto": false,
+"contexto": "Mt. Gox, que concentraba la mayor parte del volumen, se satura por la avalancha de usuarios y frena la operatoria (10-abr-2013).",
+"fuente": "https://www.pcworld.com/article/451281/bitcoin-exchange-mt-gox-suspends-service-following-huge-swing-in-trading-price.html"
+},
+{
+"inicio": "2013-04-16",
+"fin": "2013-04-24",
+"dias": 8,
+"p0": 68.0,
+"p1": 149.0,
+"mov": "119%",
+"tipo": "subida",
+"abierto": false,
+"contexto": "Rebote rápido después del pánico del crash de Mt. Gox.",
+"fuente": "https://en.wikipedia.org/wiki/History_of_bitcoin"
+},
+{
+"inicio": "2013-04-24",
+"fin": "2013-07-06",
+"dias": 73,
+"p0": 149.0,
+"p1": 66.0,
+"mov": "-55%",
+"tipo": "caída",
+"abierto": false,
+"contexto": "Presión regulatoria: el DHS de EE.UU. incauta cuentas de la filial de Mt. Gox (14-may-2013).",
+"fuente": "https://techcrunch.com/2013/05/16/mt-gox-dwolla-account-money-seizure"
+},
+{
+"inicio": "2013-07-06",
+"fin": "2013-12-04",
+"dias": 151,
+"p0": 66.0,
+"p1": 1132.0,
+"mov": "1606%",
+"tipo": "subida",
+"abierto": false,
+"contexto": "Audiencia del Senado de EE.UU. de tono favorable (18-nov-2013) y fuerte demanda desde China; supera USD 1.000 el 27-nov.",
+"fuente": "https://money.cnn.com/2013/11/27/investing/Bitcoin-1000"
+},
+{
+"inicio": "2013-12-04",
+"fin": "2015-01-14",
+"dias": 406,
+"p0": 1132.0,
+"p1": 171.0,
+"mov": "-85%",
+"tipo": "caída",
+"abierto": false,
+"contexto": "El Banco Popular de China prohíbe a los bancos operar con bitcoin (5-dic-2013) y Mt. Gox quiebra con 850.000 BTC perdidos (feb-2014).",
+"fuente": "https://techcrunch.com/2014/02/28/mt-gox-files-for-bankruptcy"
+},
+{
+"inicio": "2015-01-14",
+"fin": "2017-12-16",
+"dias": 1067,
+"p0": 171.0,
+"p1": 19188.0,
+"mov": "11094%",
+"tipo": "subida",
+"abierto": false,
+"contexto": "Segundo halving (jul-2016), boom de las ICO en 2017 y lanzamiento de futuros de bitcoin en Cboe y CME (dic-2017).",
+"fuente": "https://ir.cboe.com/news/news-details/2017/Cboe-Bitcoin-Futures-Open-for-Trading-12-11-2017"
+},
+{
+"inicio": "2017-12-16",
+"fin": "2018-12-15",
+"dias": 364,
+"p0": 19188.0,
+"p1": 3180.0,
+"mov": "-83%",
+"tipo": "caída",
+"abierto": false,
+"contexto": "Estalla la burbuja de las ICO: China las prohíbe, la SEC sanciona y el temor regulatorio se generaliza.",
+"fuente": "https://www.nbcnews.com/business/markets/bitcoin-high-2017-decline-2018-data-n949576"
+},
+{
+"inicio": "2018-12-15",
+"fin": "2019-06-26",
+"dias": 193,
+"p0": 3180.0,
+"p1": 12921.0,
+"mov": "306%",
+"tipo": "subida",
+"abierto": false,
+"contexto": "Facebook anuncia Libra (18-jun-2019) y crece la expectativa por el halving de 2020.",
+"fuente": "https://www.cnbc.com/2019/06/26/bitcoin-soars-close-to-13000-hitting-a-17-month-high.html"
+},
+{
+"inicio": "2019-06-26",
+"fin": "2020-03-12",
+"dias": 260,
+"p0": 12921.0,
+"p1": 4842.0,
+"mov": "-63%",
+"tipo": "caída",
+"abierto": false,
+"contexto": "Deriva bajista en la segunda mitad de 2019 (contexto no verificado) y pánico del COVID: el 12-mar-2020 bitcoin cae ~37% en un día.",
+"fuente": "https://www.cnbc.com/2020/03/13/bitcoin-loses-half-of-its-value-in-two-day-plunge.html"
+},
+{
+"inicio": "2020-03-12",
+"fin": "2021-04-13",
+"dias": 397,
+"p0": 4842.0,
+"p1": 63564.0,
+"mov": "1213%",
+"tipo": "subida",
+"abierto": false,
+"contexto": "Estímulo monetario pospandemia, narrativa de 'oro digital' y entrada institucional: MicroStrategy (ago-2020), PayPal (oct-2020), Tesla (feb-2021), Coinbase en Nasdaq (abr-2021).",
+"fuente": "https://www.coindesk.com/markets/2020/12/16/first-mover-stimulus-tests-bitcoin-in-real-time-and-it-passes-20k/"
+},
+{
+"inicio": "2021-04-13",
+"fin": "2021-07-20",
+"dias": 98,
+"p0": 63564.0,
+"p1": 29787.0,
+"mov": "-53%",
+"tipo": "caída",
+"abierto": false,
+"contexto": "Tesla deja de aceptar bitcoin (12-may-2021) y China lanza una ofensiva contra la minería y el trading (21-may-2021).",
+"fuente": "https://www.scmp.com/tech/policy/article/3134473/china-escalates-crackdown-bitcoin-mining-trading"
+},
+{
+"inicio": "2021-07-20",
+"fin": "2021-11-08",
+"dias": 111,
+"p0": 29787.0,
+"p1": 67559.0,
+"mov": "127%",
+"tipo": "subida",
+"abierto": false,
+"contexto": "Bitcoin moneda de curso legal en El Salvador (7-sep-2021), primer ETF de futuros en EE.UU. (19-oct-2021) e inflación récord en EE.UU.",
+"fuente": "https://www.aljazeera.com/amp/economy/2021/11/10/bitcoin-flirts-with-69000-on-heels-of-surging-inflation-news"
+},
+{
+"inicio": "2021-11-08",
+"fin": "2022-11-21",
+"dias": 378,
+"p0": 67559.0,
+"p1": 15766.0,
+"mov": "-77%",
+"tipo": "caída",
+"abierto": false,
+"contexto": "La Fed sube tasas (desde mar-2022) y caen en cadena Terra/Luna (may-2022), Celsius y Three Arrows (jun-2022) y FTX (nov-2022).",
+"fuente": "https://www.bloomberg.com/news/articles/2022-11-11/ftx-com-goes-bankrupt-in-stunning-reversal-for-crypto-exchange"
+},
+{
+"inicio": "2022-11-21",
+"fin": "2025-10-06",
+"dias": 1050,
+"p0": 15766.0,
+"p1": 124728.0,
+"mov": "691%",
+"tipo": "subida",
+"abierto": false,
+"contexto": "La SEC aprueba los ETF spot (10-ene-2024), cuarto halving (abr-2024), elección de Trump (nov-2024) y Reserva Estratégica de Bitcoin (mar-2025).",
+"fuente": "https://www.sec.gov/newsroom/speeches-statements/gensler-statement-spot-bitcoin-011023"
+},
+{
+"inicio": "2025-10-06",
+"fin": "2026-06-30",
+"dias": 267,
+"p0": 124728.0,
+"p1": 58526.0,
+"mov": "-53%",
+"tipo": "caída",
+"abierto": true,
+"contexto": "Liquidaciones récord (~USD 19.000 M) tras el anuncio de aranceles a China (10-oct-2025), salidas de los ETF, dudas sobre la Fed y ventas de empresas 'tesoreras' de bitcoin (Strategy vende parte de su reserva en jun-2026).",
+"fuente": "https://www.aljazeera.com/economy/2025/11/18/bitcoin-ticks-up-after-erasing-all-of-2025-gains"
+}
+],
+"eventos": [
+{
+"fecha": "2013-04-10",
+"evento": "Mt. Gox se satura y frena la operatoria",
+"ret": "-60.7%",
+"pct": 0,
+"fuente": "https://www.pcworld.com/article/451281/bitcoin-exchange-mt-gox-suspends-service-following-huge-swing-in-trading-price.html"
+},
+{
+"fecha": "2013-12-05",
+"evento": "China prohíbe a los bancos operar bitcoin",
+"ret": "-23.0%",
+"pct": 1,
+"fuente": "https://www.npr.org/sections/thetwo-way/2013/12/05/248967111/china-bans-bitcoin-trading-by-banks"
+},
+{
+"fecha": "2014-02-07",
+"evento": "Mt. Gox suspende los retiros",
+"ret": "-12.4%",
+"pct": 7,
+"fuente": "https://techcrunch.com/2014/02/28/mt-gox-files-for-bankruptcy"
+},
+{
+"fecha": "2015-01-04",
+"evento": "Hackeo de Bitstamp",
+"ret": "-5.5%",
+"pct": 20,
+"fuente": "https://techcrunch.com/2015/01/05/bitstamp-bitcoin-exchange-hack/"
+},
+{
+"fecha": "2017-09-04",
+"evento": "China prohíbe las ICO",
+"ret": "-8.7%",
+"pct": 13,
+"fuente": "https://fortune.com/2017/09/04/ico-china-central-bank-ban/"
+},
+{
+"fecha": "2017-12-10",
+"evento": "Futuros de bitcoin en Cboe",
+"ret": "+29.7%",
+"pct": 98,
+"fuente": "https://ir.cboe.com/news/news-details/2017/Cboe-Bitcoin-Futures-Open-for-Trading-12-11-2017"
+},
+{
+"fecha": "2019-06-18",
+"evento": "Facebook anuncia Libra",
+"ret": "+25.9%",
+"pct": 97,
+"fuente": "https://www.axios.com/2019/06/18/facebook-unveils-libra-its-long-awaited-cryptocurrency-project"
+},
+{
+"fecha": "2020-03-12",
+"evento": "'Jueves negro' del COVID",
+"ret": "-22.1%",
+"pct": 2,
+"fuente": "https://www.cnbc.com/2020/03/13/bitcoin-loses-half-of-its-value-in-two-day-plunge.html"
+},
+{
+"fecha": "2020-08-11",
+"evento": "MicroStrategy compra bitcoin",
+"ret": "+0.5%",
+"pct": 49,
+"fuente": "https://www.theblock.co/linked/74534/microstrategy-becomes-first-listed-company-to-buy-bitcoin"
+},
+{
+"fecha": "2021-02-08",
+"evento": "Tesla compra USD 1.500 M en bitcoin",
+"ret": "+23.4%",
+"pct": 96,
+"fuente": "https://www.bloomberg.com/news/articles/2021-02-08/tesla-invests-1-5-billion-in-bitcoin-plans-to-accept-cryptocurrency"
+},
+{
+"fecha": "2021-05-12",
+"evento": "Tesla deja de aceptar bitcoin",
+"ret": "-35.2%",
+"pct": 0,
+"fuente": "https://techcrunch.com/2021/05/12/elon-musk-technoking-of-tesla-orders-a-halt-to-bitcoin-car-payments"
+},
+{
+"fecha": "2021-09-07",
+"evento": "El Salvador: bitcoin de curso legal",
+"ret": "-10.6%",
+"pct": 9,
+"fuente": "https://en.wikipedia.org/wiki/Bitcoin_in_El_Salvador"
+},
+{
+"fecha": "2022-05-09",
+"evento": "Colapso de Terra/Luna",
+"ret": "-12.3%",
+"pct": 7,
+"fuente": "https://www.theblock.co/post/146444/terra-luna-and-ust-how-we-got-here"
+},
+{
+"fecha": "2022-11-11",
+"evento": "Quiebra de FTX",
+"ret": "-4.9%",
+"pct": 22,
+"fuente": "https://www.bloomberg.com/news/articles/2022-11-11/ftx-com-goes-bankrupt-in-stunning-reversal-for-crypto-exchange"
+},
+{
+"fecha": "2024-01-10",
+"evento": "La SEC aprueba los ETF spot",
+"ret": "-7.3%",
+"pct": 15,
+"fuente": "https://www.sec.gov/newsroom/speeches-statements/gensler-statement-spot-bitcoin-011023"
+},
+{
+"fecha": "2024-11-05",
+"evento": "Elección presidencial en EE.UU.",
+"ret": "+29.8%",
+"pct": 98,
+"fuente": "https://www.theblock.co/post/325658/bitcoin-breaks-above-90000-amid-rally-led-by-trumps-victory"
+},
+{
+"fecha": "2025-03-06",
+"evento": "Reserva Estratégica de Bitcoin de EE.UU.",
+"ret": "-10.5%",
+"pct": 10,
+"fuente": "https://www.whitehouse.gov/presidential-actions/2025/03/establishment-of-the-strategic-bitcoin-reserve-and-united-states-digital-asset-stockpile/"
+},
+{
+"fecha": "2025-10-10",
+"evento": "Liquidaciones récord tras aranceles a China",
+"ret": "-12.5%",
+"pct": 7,
+"fuente": "https://decrypt.co/343941/bitcoin-ethereum-dogecoin-down-record-19-billion-crypto-liquidations"
+}
+],
+"bench": [
+{
+"activo": "Bitcoin (BTC)",
+"rend": 0.2629,
+"vol": 0.6667,
+"caida": -0.8343,
+"velas": 365.0,
+"cuerpo": 0.023,
+"salto": 0.0,
+"corr": 1.0
+},
+{
+"activo": "Ethereum (ETH)",
+"rend": 0.1963,
+"vol": 0.8468,
+"caida": -0.9396,
+"velas": 365.0,
+"cuerpo": 0.0299,
+"salto": 0.0133,
+"corr": 0.8012
+},
+{
+"activo": "Litecoin (LTC)",
+"rend": -0.0497,
+"vol": 0.9187,
+"caida": -0.9345,
+"velas": 365.0,
+"cuerpo": 0.0321,
+"salto": 0.0182,
+"corr": 0.7347
+},
+{
+"activo": "Ripple (XRP)",
+"rend": 0.1717,
+"vol": 1.0494,
+"caida": -0.9587,
+"velas": 365.0,
+"cuerpo": 0.0329,
+"salto": 0.0243,
+"corr": 0.5731
+},
+{
+"activo": "S&P 500",
+"rend": 0.1151,
+"vol": 0.1909,
+"caida": -0.3392,
+"velas": 252.0,
+"cuerpo": 0.0063,
+"salto": 0.2265,
+"corr": 0.3114
+},
+{
+"activo": "Nasdaq",
+"rend": 0.1433,
+"vol": 0.2339,
+"caida": -0.364,
+"velas": 252.0,
+"cuerpo": 0.0081,
+"salto": 0.424,
+"corr": 0.3318
+},
+{
+"activo": "Oro",
+"rend": 0.1178,
+"vol": 0.1776,
+"caida": -0.339,
+"velas": 252.0,
+"cuerpo": 0.007,
+"salto": 0.148,
+"corr": 0.1136
+},
+{
+"activo": "Eli Lilly (LLY)",
+"rend": 0.3798,
+"vol": 0.3144,
+"caida": -0.3448,
+"velas": 252.0,
+"cuerpo": 0.0114,
+"salto": 0.387,
+"corr": 0.0991
+}
+],
+"familias": [
+{
+"id": "F1",
+"desc": "semana en bajada, termina con vela chica",
+"veces": 336,
+"tr": -0.0808,
+"va": -0.0754,
+"te": 0.0275,
+"holm": 0.4525,
+"sost": "no había efecto",
+"centro": [
+-0.26650997089921935,
+-0.26818998193579974,
+0.37588987428834897,
+0.5852576689847988,
+-0.33691372394803637,
+-0.3450756471009838,
+0.355648670733643,
+0.6149794771541512,
+-2.0030694928513273,
+-2.0031583792245558,
+0.25352532566447805,
+0.8947768116637483,
+0.6104515473921154,
+0.6179359437754504,
+0.507928888122031,
+0.8564234100992021,
+0.12130136690978847,
+0.128751948071012,
+0.4340735346714617,
+0.5718305951431553
+]
+},
+{
+"id": "F2",
+"desc": "semana en subida, termina con vela chica",
+"veces": 295,
+"tr": 0.3413,
+"va": -0.0339,
+"te": 0.0497,
+"holm": 0.0539,
+"sost": "se apagó después de 2020",
+"centro": [
+0.6790967153615071,
+0.6921503162291236,
+0.4258852291399767,
+0.49571278551455433,
+2.125329735841522,
+2.1204785528005807,
+0.47723163138483915,
+0.2810521977495284,
+-0.23496579109391288,
+-0.23569178936414686,
+0.6636473376815266,
+0.7805214526609201,
+-0.0016557513935878676,
+-0.008986528965834545,
+0.48636571666384754,
+0.7575056723571925,
+0.17239692564191983,
+0.165128285916135,
+0.4007709710677671,
+0.5915578690567983
+]
+},
+{
+"id": "F3",
+"desc": "semana en subida, termina con vela chica",
+"veces": 384,
+"tr": 0.1915,
+"va": 0.0036,
+"te": -0.0352,
+"holm": 0.4525,
+"sost": "se apagó después de 2020",
+"centro": [
+2.020897177161537,
+2.0184869843668998,
+0.4937293707370189,
+0.35462386228243903,
+-0.20906101788926534,
+-0.2132224478151778,
+0.6186667575144704,
+0.7505935147554657,
+-0.0025370720296072485,
+-0.006317412256541199,
+0.4360078666752124,
+0.6468819895254576,
+0.5892375365319222,
+0.5818232421193006,
+0.38780368196873805,
+0.4802866843576357,
+0.21574600564225216,
+0.2151156999951423,
+0.3805423449792279,
+0.4827903263646843
+]
+},
+{
+"id": "F4",
+"desc": "semana quieta, termina con vela chica",
+"veces": 1913,
+"tr": -0.1697,
+"va": 0.0017,
+"te": 0.1006,
+"holm": 0.4525,
+"sost": "se apagó después de 2020",
+"centro": [
+0.04109181696521698,
+0.040725823156614424,
+0.2750858954818499,
+0.37019047066434335,
+0.05276014341461307,
+0.052059307556071036,
+0.25246532209786926,
+0.34368357387528115,
+0.06805411980977899,
+0.06717553970428713,
+0.23902601336378027,
+0.34092010913939563,
+0.08419026006200249,
+0.08259109561674517,
+0.24356664145695722,
+0.3238910421113378,
+0.026550056274958003,
+0.025074691855807227,
+0.23780789486744128,
+0.33050926318429796
+]
+},
+{
+"id": "F5",
+"desc": "semana en bajada, termina con vela chica",
+"veces": 355,
+"tr": -0.1241,
+"va": -0.0691,
+"te": -0.0801,
+"holm": 0.4076,
+"sost": "se apagó después de 2020",
+"centro": [
+-0.337427105863891,
+-0.3432794617072393,
+0.4239660578117761,
+0.6996758044439703,
+-1.9763434571250127,
+-1.9741375119558326,
+0.3100081118329361,
+0.9601816801212233,
+0.6199033198416785,
+0.629089924664921,
+0.5047753338423806,
+0.8818511765968093,
+0.1446316120958931,
+0.1484527060307003,
+0.4279292162293006,
+0.5775226556476183,
+0.03459469499189747,
+0.04023252163601877,
+0.35180466995113036,
+0.4922076335790938
+]
+},
+{
+"id": "F6",
+"desc": "semana en subida, termina con vela chica",
+"veces": 306,
+"tr": 0.4249,
+"va": 0.3542,
+"te": 0.0582,
+"holm": 0.01,
+"sost": "hasta 2024; en el ciclo actual se apagó",
+"centro": [
+0.4563981268381794,
+0.4575722207019337,
+0.4269031486591405,
+0.524209129837129,
+0.8056593649749086,
+0.8095659113043367,
+0.4246756291177312,
+0.42462123022138776,
+2.082366104644004,
+2.07608670383394,
+0.49309155724609544,
+0.2968938608189452,
+0.6368693965029352,
+0.6313964614614522,
+0.7419877228833156,
+0.67911966710104,
+-0.25079693754183663,
+-0.26129477601522333,
+0.6602956223125396,
+0.9608563562191208
+]
+},
+{
+"id": "F7",
+"desc": "semana en bajada, termina con vela verde",
+"veces": 354,
+"tr": -0.1764,
+"va": -0.0285,
+"te": -0.1211,
+"holm": 0.2747,
+"sost": "se apagó después de 2020",
+"centro": [
+0.18522444502801175,
+0.18418504676163533,
+0.34651879284191983,
+0.4985624397988696,
+-0.1903965119989613,
+-0.19298524494397995,
+0.3527931838731539,
+0.5068523227694401,
+-0.23240359653386897,
+-0.2384438886384878,
+0.36274764620042477,
+0.5476702934377237,
+-2.079907429115895,
+-2.0826494577239076,
+0.21814878576742958,
+0.8856538600409557,
+0.5293131732749672,
+0.535786489077057,
+0.5020518417516597,
+0.8630311262307369
+]
+},
+{
+"id": "F8",
+"desc": "semana en subida, termina con vela verde fuerte",
+"veces": 358,
+"tr": 0.7756,
+"va": 0.3197,
+"te": 0.0594,
+"holm": 0.01,
+"sost": "hasta 2024; en el ciclo actual se apagó",
+"centro": [
+0.21154251861024848,
+0.20640475034825032,
+0.45148032172971864,
+0.6462380034451439,
+0.3434404007801479,
+0.34059128759220475,
+0.36933259507652516,
+0.5306587600224627,
+0.5167181125012179,
+0.5219796536806866,
+0.40042889367943496,
+0.4575948762699318,
+1.0055566055437761,
+1.0147017242025498,
+0.4011062590845793,
+0.37627765136069835,
+1.9571282184358778,
+1.9574970984325306,
+0.5270823158927138,
+0.3132780398273595
+]
+},
+{
+"id": "F9",
+"desc": "semana quieta, termina con vela chica",
+"veces": 382,
+"tr": -0.2638,
+"va": -0.2129,
+"te": 0.0449,
+"holm": 0.01,
+"sost": "hasta 2024; en el ciclo actual se apagó",
+"centro": [
+-1.9619764056372346,
+-1.9614932290214402,
+0.28554924565634043,
+0.9263072535498269,
+0.5882305167802124,
+0.5991726547305343,
+0.4957530768610009,
+0.8436839705633497,
+0.16837537687415774,
+0.16611084203228296,
+0.3937267762137018,
+0.5019632268812924,
+0.05241173299002705,
+0.05508407299981542,
+0.33449341003639965,
+0.4630331902247378,
+0.1753215299938741,
+0.1752674758501579,
+0.3743524282048461,
+0.49264488839278525
+]
+},
+{
+"id": "F10",
+"desc": "semana en bajada, termina con vela roja fuerte",
+"veces": 371,
+"tr": -0.2057,
+"va": -0.1846,
+"te": -0.3011,
+"holm": 0.01,
+"sost": "sí, hasta hoy",
+"centro": [
+0.04166459555488291,
+0.039327132599098084,
+0.3545442329299581,
+0.5264738180112641,
+0.05113578895683797,
+0.05161526176075856,
+0.32903575985198774,
+0.47038294086108445,
+-0.19283453773505752,
+-0.1928406600961839,
+0.33052232147178645,
+0.4902373068171142,
+-0.3578394613809962,
+-0.36221146158327716,
+0.3076759569512615,
+0.5710110710390691,
+-2.0409494496018588,
+-2.045803017475318,
+0.19452005577822526,
+0.8083591168896584
+]
+}
+],
+"clasicos": [
+{
+"nombre": "martillo",
+"veces": 28,
+"tr": -0.3189,
+"va": 0.81,
+"te": -0.1906,
+"holm": 0.9191,
+"veredicto": "no se distingue del azar"
+},
+{
+"nombre": "estrella fugaz",
+"veces": 13,
+"tr": 1.0495,
+"va": -0.0501,
+"te": 0.7415,
+"holm": 0.2298,
+"veredicto": "no se distingue del azar"
+},
+{
+"nombre": "envolvente alcista",
+"veces": 373,
+"tr": 0.0096,
+"va": 0.0843,
+"te": 0.2332,
+"holm": 0.9191,
+"veredicto": "no se distingue del azar"
+},
+{
+"nombre": "envolvente bajista",
+"veces": 327,
+"tr": -0.2441,
+"va": -0.1027,
+"te": 0.065,
+"holm": 0.3686,
+"veredicto": "no se distingue del azar"
+},
+{
+"nombre": "doji",
+"veces": 566,
+"tr": -0.0392,
+"va": -0.0395,
+"te": -0.1614,
+"holm": 0.9191,
+"veredicto": "no se distingue del azar"
+},
+{
+"nombre": "tres soldados blancos",
+"veces": 645,
+"tr": 0.5304,
+"va": 0.3125,
+"te": -0.1184,
+"holm": 0.017,
+"veredicto": "real en el pasado, hasta 2024; en el ciclo actual se apagó"
+},
+{
+"nombre": "tres cuervos negros",
+"veces": 492,
+"tr": -0.3799,
+"va": -0.1667,
+"te": 0.0766,
+"holm": 0.0839,
+"veredicto": "no se distingue del azar"
+}
+],
+"test": [
+{
+"modelo": "Azar",
+"tipo": "Baseline",
+"ba": 0.3167,
+"lo": 0.2915,
+"hi": 0.3443,
+"p": 0.8601,
+"holm": 1.0
+},
+{
+"modelo": "Siempre sube",
+"tipo": "Baseline",
+"ba": 0.3333,
+"lo": 0.3333,
+"hi": 0.3333,
+"p": 1.0,
+"holm": 1.0
+},
+{
+"modelo": "Martillo",
+"tipo": "Baseline",
+"ba": 0.3334,
+"lo": 0.3303,
+"hi": 0.3362,
+"p": 0.6274,
+"holm": 1.0
+},
+{
+"modelo": "Inercia",
+"tipo": "Baseline",
+"ba": 0.3439,
+"lo": 0.295,
+"hi": 0.375,
+"p": 0.2757,
+"holm": 1.0
+},
+{
+"modelo": "Gemela del pasado",
+"tipo": "Baseline",
+"ba": 0.3394,
+"lo": 0.2973,
+"hi": 0.3719,
+"p": 0.3536,
+"holm": 1.0
+},
+{
+"modelo": "Monte Carlo (paseo aleatorio)",
+"tipo": "Simulación",
+"ba": 0.3145,
+"lo": 0.2852,
+"hi": 0.3434,
+"p": 0.9481,
+"holm": 1.0
+},
+{
+"modelo": "Monte Carlo (historia del último año)",
+"tipo": "Simulación",
+"ba": 0.3858,
+"lo": 0.3135,
+"hi": 0.4423,
+"p": 0.006,
+"holm": 0.0659
+},
+{
+"modelo": "CNN",
+"tipo": "Red propia",
+"ba": 0.3422,
+"lo": 0.3118,
+"hi": 0.3698,
+"p": 0.2238,
+"holm": 1.0
+},
+{
+"modelo": "LSTM",
+"tipo": "Red propia",
+"ba": 0.296,
+"lo": 0.2675,
+"hi": 0.3287,
+"p": 0.959,
+"holm": 1.0
+},
+{
+"modelo": "Kronos (pre-entrenado)",
+"tipo": "Pre-entrenado",
+"ba": 0.388,
+"lo": 0.3415,
+"hi": 0.4496,
+"p": 0.04,
+"holm": 0.3996
+},
+{
+"modelo": "Chronos-2 (pre-entrenado)",
+"tipo": "Pre-entrenado",
+"ba": 0.3379,
+"lo": 0.3298,
+"hi": 0.3517,
+"p": 0.2667,
+"holm": 1.0
+}
+],
+"ciclos": {
+"columns": [
+"año 1",
+"año 2",
+"año 3",
+"año 4"
+],
+"index": [
+"ciclo 2012",
+"ciclo 2016",
+"ciclo 2020",
+"ciclo 2024"
+],
+"data": [
+[
+"+8190%",
+"-63%",
+"-5%",
+"+104%"
+],
+[
+"+286%",
+"+166%",
+"+89%",
+"-25%"
+],
+[
+"+562%",
+"-49%",
+"-7%",
+"+125%"
+],
+[
+"+31%",
+"-11%",
+"-19% (en curso)",
+null
+]
+]
+},
+"tipo_fase": {
+"columns": [
+"cuerpo rojo",
+"cuerpo verde",
+"doji",
+"mecha inferior larga",
+"mecha superior larga"
+],
+"index": [
+1,
+2,
+3,
+4
+],
+"data": [
+[
+0.2405,
+0.4173,
+0.1164,
+0.1655,
+0.0603
+],
+[
+0.3459,
+0.3384,
+0.1075,
+0.1301,
+0.0781
+],
+[
+0.3222,
+0.3503,
+0.1135,
+0.1249,
+0.0891
+],
+[
+0.29,
+0.3607,
+0.1119,
+0.161,
+0.0765
+]
+]
+},
+"planilla": {
+"columns": [
+"días",
+"P(fut3 > 3%)",
+"P(fut3 > 3% | sharpe > 0,9)",
+"días con sharpe > 0,9",
+"P(fut3 > 3% | sharpe < −0,9)",
+"P(fut3 > 3% | HAMMER)",
+"P(fut3 > 1 desvío)",
+"P(fut3 > 1 desvío | sharpe > 0,9)"
+],
+"index": [
+"Bitcoin (2013-hoy)",
+"LLY (misma historia de Yahoo)"
+],
+"data": [
+[
+4820.0,
+0.271,
+0.3203,
+768.0,
+0.2452,
+0.3158,
+0.138,
+0.1667
+],
+[
+5253.0,
+0.1117,
+0.0985,
+893.0,
+0.1282,
+0.0674,
+0.1435,
+0.1299
+]
+]
+},
+"brier": {
+"columns": [
+"Brier (más bajo = mejor)",
+"probabilidad media de 'sube'",
+"mejora vs ⅓"
+],
+"index": [
+"⅓ para cada clase (no sabe nada)",
+"frecuencias del entrenamiento",
+"Monte Carlo (paseo aleatorio)",
+"Monte Carlo (historia del último año)",
+"CNN",
+"LSTM"
+],
+"data": [
+[
+0.6667,
+0.3333,
+0.0
+],
+[
+0.6738,
+0.3914,
+-0.0071
+],
+[
+0.672,
+0.3528,
+-0.0053
+],
+[
+0.6619,
+0.3833,
+0.0048
+],
+[
+0.6713,
+0.3126,
+-0.0046
+],
+[
+0.6816,
+0.2938,
+-0.0149
+]
+]
+},
+"inversion": [
+{
+"modelo": "Siempre sube",
+"capital": 923.477
+},
+{
+"modelo": "Comprar y mantener",
+"capital": 923.5
+},
+{
+"modelo": "Martillo",
+"capital": 956.667
+},
+{
+"modelo": "Chronos-2 (pre-entrenado)",
+"capital": 1000.0
+},
+{
+"modelo": "LSTM",
+"capital": 1022.276
+},
+{
+"modelo": "Inercia",
+"capital": 1034.389
+},
+{
+"modelo": "Monte Carlo (paseo aleatorio)",
+"capital": 1050.993
+},
+{
+"modelo": "CNN",
+"capital": 1065.515
+},
+{
+"modelo": "Azar",
+"capital": 1287.895
+},
+{
+"modelo": "Kronos (pre-entrenado)",
+"capital": 1337.902
+},
+{
+"modelo": "Monte Carlo (historia del último año)",
+"capital": 1640.901
+},
+{
+"modelo": "Gemela del pasado",
+"capital": 1874.469
+}
+],
+"extremas": {
+"columns": [
+"retorno 7 días",
+"pasó",
+"CNN dijo",
+"LSTM dijo"
+],
+"index": [
+"14-08-2026",
+"29-01-2026",
+"04-11-2024",
+"30-05-2026",
+"20-02-2025",
+"07-11-2026",
+"29-07-2024",
+"27-09-2025",
+"09-10-2025",
+"13-11-2025"
+],
+"data": [
+[
+"+24.4%",
+"sube",
+"lateral ✘",
+"lateral ✘"
+],
+[
+"-25.7%",
+"baja",
+"lateral ✘",
+"lateral ✘"
+],
+[
+"+30.9%",
+"sube",
+"lateral ✘",
+"lateral ✘"
+],
+[
+"-17.5%",
+"baja",
+"lateral ✘",
+"lateral ✘"
+],
+[
+"-13.9%",
+"baja",
+"sube ✘",
+"baja ✔"
+],
+[
+"-15.4%",
+"baja",
+"baja ✔",
+"lateral ✘"
+],
+[
+"-19.1%",
+"baja",
+"baja ✔",
+"lateral ✘"
+],
+[
+"+11.6%",
+"sube",
+"lateral ✘",
+"lateral ✘"
+],
+[
+"-11.1%",
+"baja",
+"lateral ✘",
+"sube ✘"
+],
+[
+"-13.1%",
+"baja",
+"lateral ✘",
+"lateral ✘"
+]
+]
+},
+"hitos_redes": {
+"columns": [
+"período",
+"pasó",
+"CNN dijo",
+"LSTM dijo",
+"Kronos dijo"
+],
+"index": [
+"20-08-2011 caída -81%",
+"20-10-2011 subida +10123%",
+"09-04-2013 caída -70%",
+"16-04-2013 subida +119%",
+"24-04-2013 caída -55%",
+"06-07-2013 subida +1606%",
+"04-12-2013 caída -85%",
+"14-01-2015 subida +11094%",
+"16-12-2017 caída -83%",
+"15-12-2018 subida +306%",
+"26-06-2019 caída -63%",
+"12-03-2020 subida +1213%",
+"13-04-2021 caída -53%",
+"20-07-2021 subida +127%",
+"08-11-2021 caída -77%",
+"21-11-2022 subida +691%",
+"06-10-2025 caída -53%"
+],
+"data": [
+[
+"antes de 2013",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"antes de 2013",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"train",
+"sin predicción fuera de muestra (las redes aprendieron con estos días)",
+null,
+null,
+null
+],
+[
+"val",
+"sube 0 · lateral 1 · baja 6",
+"sube 2 · lateral 3 · baja 2",
+"sube 1 · lateral 3 · baja 3",
+null
+],
+[
+"val",
+"sube 7 · lateral 0 · baja 0",
+"sube 2 · lateral 5 · baja 0",
+"sube 1 · lateral 6 · baja 0",
+null
+],
+[
+"val",
+"sube 0 · lateral 0 · baja 7",
+"sube 2 · lateral 3 · baja 2",
+"sube 3 · lateral 0 · baja 4",
+null
+],
+[
+"val",
+"sube 0 · lateral 7 · baja 0",
+"sube 0 · lateral 6 · baja 1",
+"sube 0 · lateral 7 · baja 0",
+null
+],
+[
+"test",
+"sube 0 · lateral 0 · baja 7",
+"sube 1 · lateral 5 · baja 1",
+"sube 4 · lateral 2 · baja 1",
+"sube 0 · lateral 2 · baja 5"
+]
+]
+},
+"periodos": {
+"columns": [
+"volatilidad_anual_mediana",
+"movimiento_semanal_tipico",
+"cuerpo_promedio_de_la_vela",
+"dias_con_martillo"
+],
+"index": [
+"train",
+"val",
+"test"
+],
+"data": [
+[
+0.651,
+0.061,
+0.432,
+0.017
+],
+[
+0.576,
+0.047,
+0.425,
+0.011
+],
+[
+0.422,
+0.035,
+0.433,
+0.006
+]
+]
+},
+"descartes": {
+"columns": [
+"qué se probó",
+"validación",
+"validación del base",
+"test",
+"test del base",
+"p test",
+"p test corregido (Holm)",
+"motivo"
+],
+"index": [
+"CNN, velas semanales",
+"CNN + acciones",
+"LSTM + acciones",
+"CNN + criptos",
+"LSTM + criptos",
+"CNN reentrenada",
+"LSTM reentrenada",
+"CNN-LSTM híbrida",
+"ResNet-18 (pre-entrenado en ImageNet)"
+],
+"data": [
+[
+"¿resumir la semana en una vela ve mejor que 7 velas diarias?",
+0.3529,
+0.3472,
+null,
+null,
+null,
+null,
+"no mejoró en validación"
+],
+[
+"más datos: 30 acciones líquidas de EE.UU. (2005-2020)",
+0.3468,
+0.3693,
+0.3503,
+0.3422,
+0.1668,
+1.0,
+"no mejoró en validación"
+],
+[
+"más datos: 30 acciones líquidas de EE.UU. (2005-2020)",
+0.3585,
+0.3922,
+0.3623,
+0.296,
+0.0759,
+0.6074,
+"no mejoró en validación"
+],
+[
+"más datos: ETH, LTC y XRP",
+0.3526,
+0.3693,
+0.3346,
+0.3422,
+0.4456,
+1.0,
+"no mejoró en validación"
+],
+[
+"más datos: ETH, LTC y XRP",
+0.3703,
+0.3922,
+0.3027,
+0.296,
+0.9261,
+1.0,
+"no mejoró en validación"
+],
+[
+"el mercado cambia: reentrenar cada 3 meses",
+null,
+0.3693,
+0.3218,
+0.3422,
+0.7133,
+1.0,
+"se evalúa por bloques de 3 meses (14.4): no tiene una validación única"
+],
+[
+"el mercado cambia: reentrenar cada 3 meses",
+null,
+0.3922,
+0.312,
+0.296,
+0.8342,
+1.0,
+"se evalúa por bloques de 3 meses (14.4): no tiene una validación única"
+],
+[
+"combinar convolución y recurrente (Livieris et al., 2021)",
+0.3741,
+0.3922,
+0.3079,
+0.296,
+0.9121,
+1.0,
+"no mejoró en validación"
+],
+[
+"una red de imágenes gigante ya entrenada (transfer learning)",
+0.3462,
+0.3693,
+0.3298,
+0.3422,
+0.6234,
+1.0,
+"no mejoró en validación"
+]
+]
+}
+}
