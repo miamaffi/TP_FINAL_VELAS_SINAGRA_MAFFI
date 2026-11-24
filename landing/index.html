@@ -1,175 +1,131 @@
 <title>Las velas de Bitcoin</title>
+<meta charset="utf-8">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: una sola columna de lectura (≈ 70ch) que se abre a ancho completo para los gráficos; el naranja de Bitcoin solo marca lo importante */
+/* Layout: una columna de lectura; los gráficos de velas ocupan todo el ancho y la línea de tiempo se desliza de costado */
 :root {
-  --bg: #fbfaf8;
-  --surface: #ffffff;
-  --ink: #1d1b19;
-  --ink-2: #57524c;
-  --ink-3: #8a847c;
-  --line: #e7e3dd;
-  --btc: #f7931a;
-  --btc-ink: #b15f00;
-  --btc-soft: #fdf0de;
-  --up: #1f9d6b;
-  --down: #d6455d;
-  --muted-mark: #b9b2a8;
-  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --bg: #fbfaf8; --surface: #ffffff; --ink: #1d1b19; --ink-2: #57524c; --ink-3: #8a847c; --line: #e7e3dd;
+  --btc: #f7931a; --btc-ink: #b15f00; --btc-soft: #fdf0de; --up: #1f9d6b; --down: #d6455d; --up-soft: #e4f4ec; --down-soft: #fbe7ea; --muted-mark: #b9b2a8;
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif; --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #141210; --surface: #1d1a17; --ink: #f2eee8; --ink-2: #b8b0a6; --ink-3: #857d73; --line: #322d28;
-    --btc: #f7931a; --btc-ink: #ffb054; --btc-soft: #3a2610; --up: #3cc48b; --down: #ef6b80; --muted-mark: #5f5850;
-    color-scheme: dark;
-  }
-}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141210; --surface: #1d1a17; --ink: #f2eee8; --ink-2: #b8b0a6; --ink-3: #857d73; --line: #322d28;
+  --btc: #f7931a; --btc-ink: #ffb054; --btc-soft: #3a2610; --up: #3cc48b; --down: #ef6b80; --up-soft: #173126; --down-soft: #3a1c22; --muted-mark: #5f5850; color-scheme: dark; } }
 :root[data-theme="dark"] {
   --bg: #141210; --surface: #1d1a17; --ink: #f2eee8; --ink-2: #b8b0a6; --ink-3: #857d73; --line: #322d28;
-  --btc: #f7931a; --btc-ink: #ffb054; --btc-soft: #3a2610; --up: #3cc48b; --down: #ef6b80; --muted-mark: #5f5850;
-  color-scheme: dark;
-}
+  --btc: #f7931a; --btc-ink: #ffb054; --btc-soft: #3a2610; --up: #3cc48b; --down: #ef6b80; --up-soft: #173126; --down-soft: #3a1c22; --muted-mark: #5f5850; color-scheme: dark; }
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
 .wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .prose { max-width: 68ch; }
-h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.12; margin: 0; }
-h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 800; letter-spacing: -0.01em; }
-h3 { font-size: 1.15rem; font-weight: 700; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 800; }
+h3 { font-size: 1.1rem; font-weight: 600; }
 p { margin: 0; }
 a { color: var(--btc-ink); }
-.eyebrow { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--btc-ink); }
+.muted { color: var(--ink-2); } .small { font-size: 0.88rem; }
 .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
-.muted { color: var(--ink-2); }
-.small { font-size: 0.88rem; }
-section { padding-block: 72px 24px; border-top: 1px solid var(--line); }
-section .head { display: grid; gap: 12px; margin-bottom: 28px; }
+.pos { color: var(--up); } .neg { color: var(--down); }
+section { padding-block: 64px 16px; }
+section .head { display: grid; gap: 10px; margin-bottom: 24px; }
 :focus-visible { outline: 2px solid var(--btc); outline-offset: 2px; }
-
-/* Barra superior */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
-.top .wrap { display: flex; align-items: center; gap: 16px; height: 52px; }
-.top .brand { display: flex; align-items: center; gap: 8px; font-family: var(--f-display); font-weight: 700; white-space: nowrap; }
-.top nav { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; font-size: 0.88rem; margin-left: auto; }
-.top nav a { color: var(--ink-2); text-decoration: none; white-space: nowrap; }
-.top nav a:hover { color: var(--btc-ink); }
-
-/* Hero */
-.hero { padding-block: 56px 40px; }
-.hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
-.hero h1 { font-size: clamp(2.4rem, 6.4vw, 4.6rem); font-weight: 800; letter-spacing: -0.025em; margin-top: 14px; }
-.hero h1 em { font-style: normal; color: var(--btc); }
-.hero .lead { font-size: 1.15rem; color: var(--ink-2); margin-top: 18px; max-width: 52ch; }
-.hero .by { margin-top: 18px; font-size: 0.9rem; color: var(--ink-3); }
-.price-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 14px; }
-.price-card .logo-row { display: flex; align-items: center; gap: 12px; }
-.price-card .big { font-family: var(--f-display); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3rem); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; border-top: 1px solid var(--line); padding-top: 14px; }
-.kpis div span { display: block; font-size: 0.78rem; color: var(--ink-3); }
-.kpis div b { font-family: var(--f-mono); font-weight: 500; font-variant-numeric: tabular-nums; }
-.neg { color: var(--down); } .pos { color: var(--up); }
-
-/* Respuesta corta */
-.answer { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.answer div { border-top: 3px solid var(--btc); padding-top: 12px; }
-.answer div:nth-child(3) { border-top-color: var(--ink); }
-.answer b { font-family: var(--f-display); font-size: 1.05rem; display: block; margin-bottom: 4px; }
-.answer p { font-size: 0.93rem; color: var(--ink-2); }
-
-/* Anatomía */
-.two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
 .two > * { min-width: 0; }
-.facts { display: grid; gap: 14px; }
-.fact { display: grid; grid-template-columns: 92px 1fr; gap: 14px; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
-.fact .v { font-family: var(--f-display); font-weight: 800; font-size: 1.7rem; color: var(--btc-ink); font-variant-numeric: tabular-nums; }
-.fact p { font-size: 0.95rem; color: var(--ink-2); }
 svg text { font-family: var(--f-body); }
 
-/* Gráfico principal */
-.chart-box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
-.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
-.seg button { font: inherit; font-size: 0.84rem; background: transparent; color: var(--ink-2); border: 0; padding: 6px 11px; cursor: pointer; }
-.seg button + button { border-left: 1px solid var(--line); }
-.seg button[aria-pressed="true"] { background: var(--btc-soft); color: var(--btc-ink); font-weight: 600; }
-.legend-ohlc { font-family: var(--f-mono); font-size: 0.8rem; color: var(--ink-2); min-height: 1.4em; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
-#chart { height: 460px; width: 100%; }
-.keys { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.82rem; color: var(--ink-2); margin-top: 10px; }
-.keys i { display: inline-block; width: 18px; height: 3px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.top .wrap { display: flex; align-items: center; gap: 16px; height: 50px; }
+.top .brand { display: flex; align-items: center; gap: 8px; font-family: var(--f-display); font-weight: 600; white-space: nowrap; color: inherit; text-decoration: none; }
+.top nav { display: flex; gap: 14px; font-size: 0.88rem; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+.top nav a { color: var(--ink-2); text-decoration: none; white-space: nowrap; }
 
-/* Línea de tiempo de hitos */
-.hitos { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; margin-top: 18px; }
-.hito { text-align: left; font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; cursor: pointer; display: grid; gap: 6px; align-content: start; }
-.hito:hover { border-color: var(--btc); }
-.hito .mv { font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; font-variant-numeric: tabular-nums; }
-.hito .dt { font-family: var(--f-mono); font-size: 0.76rem; color: var(--ink-3); }
-.hito p { font-size: 0.86rem; color: var(--ink-2); }
-.hito.sel { border-color: var(--btc); box-shadow: 0 0 0 1px var(--btc); }
+.hero { padding-block: 48px 8px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 36px; align-items: center; }
+.hero h1 { font-size: clamp(2.2rem, 5.6vw, 3.8rem); font-weight: 800; letter-spacing: -0.02em; }
+.hero h1 em { font-style: normal; color: var(--btc); }
+.hero .lead { font-size: 1.1rem; color: var(--ink-2); margin-top: 16px; max-width: 54ch; }
+.hero .by { margin-top: 14px; font-size: 0.95rem; }
+.price { display: grid; gap: 10px; }
+.price .row { display: flex; align-items: center; gap: 12px; }
+.price .big { font-family: var(--f-display); font-weight: 800; font-size: clamp(2rem, 4.6vw, 2.8rem); font-variant-numeric: tabular-nums; }
+.kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; border-top: 1px solid var(--line); padding-top: 12px; font-size: 0.9rem; }
+.kpis span { display: block; font-size: 0.78rem; color: var(--ink-3); }
+.kpis b { font-family: var(--f-mono); font-weight: 500; }
 
-/* Tablas */
+.tl-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; font-size: 0.85rem; }
+.tl-tools button, .seg button { font: inherit; font-size: 0.84rem; background: var(--surface); color: var(--ink-2); border: 1px solid var(--line); border-radius: 8px; padding: 5px 11px; cursor: pointer; }
+.tl-tools button:hover, .seg button:hover { border-color: var(--btc); }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button[aria-pressed="true"] { background: var(--btc-soft); color: var(--btc-ink); border-color: var(--btc); font-weight: 600; }
+.scroller { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); scroll-behavior: smooth; }
+#timeline { display: block; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.stat b { display: block; font-family: var(--f-display); font-size: 1.7rem; font-weight: 800; color: var(--btc-ink); font-variant-numeric: tabular-nums; }
+.stat p { font-size: 0.88rem; color: var(--ink-2); }
+
+.ev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.ev { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 4px; align-content: start; }
+.ev .f { font-family: var(--f-mono); font-size: 0.76rem; color: var(--ink-3); }
+.ev .n { font-weight: 600; line-height: 1.3; min-height: 2.6em; color: inherit; text-decoration: none; }
+.ev .n:hover { color: var(--btc-ink); }
+.ev .r { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 0.85rem; flex-wrap: wrap; }
+.ev .r b { font-family: var(--f-display); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.tag { font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; white-space: nowrap; border: 1px solid var(--line); color: var(--ink-2); }
+.tag.bad { background: var(--down-soft); color: var(--down); border-color: transparent; }
+.tag.good { background: var(--up-soft); color: var(--up); border-color: transparent; }
+
+.cmp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 12px; }
+.cmp { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px; min-width: 0; }
+.cmp.btc { border-color: var(--btc); border-width: 2px; }
+.cmp .t { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; font-size: 0.9rem; }
+.cmp .t b { font-family: var(--f-display); }
+.cmp .s { font-size: 0.76rem; color: var(--ink-3); }
+
 .tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
 table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
-th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
 th { font-weight: 600; color: var(--ink-2); font-size: 0.8rem; background: var(--bg); }
 td.n, th.n { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
 tr:last-child td { border-bottom: 0; }
 tr.hl td { background: var(--btc-soft); }
-td.wrap-txt { white-space: normal; min-width: 220px; }
 
-/* Ciclos */
-.cyc-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.84rem; color: var(--ink-2); margin-bottom: 8px; }
-.cyc-legend i { display: inline-block; width: 16px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
-.heat td.c { text-align: center; font-family: var(--f-mono); font-weight: 500; }
+.fam-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.fam { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: grid; gap: 6px; align-content: start; }
+.fam.vig { border-color: var(--btc); border-width: 2px; }
+.fam .d { font-size: 0.82rem; line-height: 1.3; min-height: 2.6em; font-weight: 600; }
+.fam .q { font-size: 0.74rem; color: var(--ink-3); }
+.prow { display: grid; grid-template-columns: 54px 1fr 34px; gap: 6px; align-items: center; font-size: 0.72rem; color: var(--ink-3); }
+.prow .bar { position: relative; height: 9px; background: var(--bg); border-radius: 3px; }
+.prow .bar span { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; }
+.prow .bar i { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); }
+.prow b { font-family: var(--f-mono); font-weight: 500; color: var(--ink); text-align: right; }
+.verd { font-size: 0.76rem; font-weight: 600; }
 
-/* Patrones */
-.fam-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-.fam { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 8px; align-content: start; }
-.fam.vig { border-color: var(--btc); box-shadow: 0 0 0 1px var(--btc); }
-.fam .t { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
-.fam .t b { font-family: var(--f-display); }
-.fam .d { font-size: 0.8rem; color: var(--ink-2); line-height: 1.35; min-height: 2.7em; }
-.chip { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
-.chip.vig { background: var(--btc); border-color: var(--btc); color: #1d1b19; }
-.chip.off { border-color: var(--ink-3); }
-.zbars { display: grid; gap: 3px; }
-.zrow { display: grid; grid-template-columns: 62px 1fr 42px; align-items: center; gap: 6px; font-size: 0.72rem; color: var(--ink-3); }
-.zrow .bar { position: relative; height: 8px; }
-.zrow .bar::before { content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--line); }
-.zrow .bar span { position: absolute; top: 0; height: 8px; border-radius: 2px; }
-.zrow .v { font-family: var(--f-mono); text-align: right; color: var(--ink-2); }
-.callout { background: var(--btc-soft); border-radius: 12px; padding: 18px 20px; display: grid; gap: 6px; }
-.callout b { font-family: var(--f-display); font-size: 1.05rem; }
-
-/* Resultados */
-.res-row { display: grid; grid-template-columns: 210px 1fr 64px; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 0.9rem; }
+.res-row { display: grid; grid-template-columns: 200px 1fr 58px; gap: 10px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 0.9rem; }
 .res-row:last-child { border-bottom: 0; }
-.res-row .lab small { display: block; color: var(--ink-3); font-size: 0.74rem; }
-.res-row svg { width: 100%; height: 26px; overflow: visible; }
-.res-row .v { font-family: var(--f-mono); text-align: right; font-variant-numeric: tabular-nums; }
+.res-row small { display: block; color: var(--ink-3); font-size: 0.74rem; }
+.res-row svg { width: 100%; height: 24px; overflow: visible; }
+.res-row .v { font-family: var(--f-mono); text-align: right; }
 .tip { position: fixed; pointer-events: none; z-index: 50; background: var(--ink); color: var(--bg); font-size: 0.8rem; padding: 6px 9px; border-radius: 6px; max-width: 260px; line-height: 1.4; }
-
-.concl { display: grid; gap: 18px; counter-reset: c; }
-.concl li { list-style: none; display: grid; grid-template-columns: 44px 1fr; gap: 12px; }
-.concl li::before { counter-increment: c; content: counter(c); font-family: var(--f-display); font-weight: 800; font-size: 1.6rem; color: var(--btc); line-height: 1.1; }
-.concl ol { padding: 0; margin: 0; display: grid; gap: 18px; }
-footer { padding-block: 48px 64px; border-top: 1px solid var(--line); margin-top: 48px; font-size: 0.88rem; color: var(--ink-2); }
-footer ul { padding-left: 18px; display: grid; gap: 6px; }
+ol.concl { padding-left: 22px; display: grid; gap: 12px; margin: 0; }
+ol.concl li::marker { font-family: var(--f-display); font-weight: 800; color: var(--btc-ink); }
+footer { padding-block: 40px 56px; border-top: 1px solid var(--line); margin-top: 48px; font-size: 0.88rem; color: var(--ink-2); }
+footer ul { padding-left: 18px; display: grid; gap: 4px; }
 
 @media (max-width: 860px) {
-  .hero-grid, .two { grid-template-columns: 1fr; }
-  .answer { grid-template-columns: 1fr; }
-  .fam-grid { grid-template-columns: repeat(2, 1fr); }
-  .res-row { grid-template-columns: 130px 1fr 52px; }
-  #chart { height: 360px; }
+  .hero, .two { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .ev-grid, .cmp-grid, .fam-grid { grid-template-columns: 1fr 1fr; }
+  .res-row { grid-template-columns: 120px 1fr 50px; }
   .top nav { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
-html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+@media (max-width: 520px) { .ev-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .scroller { scroll-behavior: auto; } }
+html { scroll-padding-top: 60px; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -181,276 +137,188 @@ html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#inicio" style="text-decoration:none;color:inherit"><svg width="24" height="24" aria-hidden="true"><use href="#btc-logo"/></svg>Velas de Bitcoin</a>
+    <a class="brand" href="#inicio"><svg width="24" height="24" aria-hidden="true"><use href="#btc-logo"/></svg>Velas de Bitcoin</a>
     <nav aria-label="Secciones">
-      <a href="#vela">La vela</a><a href="#historia">Historia</a><a href="#ciclos">Ciclos</a><a href="#otros">Frente a otros</a><a href="#patrones">Patrones</a><a href="#prediccion">¿Predice?</a><a href="#conclusion">Conclusión</a>
+      <a href="#historia">Historia</a><a href="#tendencias">Cómo se mueve</a><a href="#eventos">Noticias</a><a href="#otras">Otras criptos</a><a href="#patrones">Patrones</a><a href="#prediccion">¿Predice?</a><a href="#conclusion">Conclusión</a>
     </nav>
   </div>
 </header>
 
 <main id="inicio">
   <div class="wrap hero">
-    <div class="hero-grid">
-      <div>
-        <span class="eyebrow">Trabajo práctico · Velas japonesas + Deep Learning</span>
-        <h1>¿Qué patrones de velas esconde <em>Bitcoin</em>?</h1>
-        <p class="lead">Armamos nuestra propia base de 5.577 velas diarias de Bitcoin (Bitstamp, 2011 a hoy), buscamos los patrones que se repiten y probamos si una red convolucional (CNN) y una recurrente (LSTM) los pueden usar para anticipar la semana siguiente.</p>
-        <p class="by">Mia Maffi · Noviembre 2026</p>
-      </div>
-      <div class="price-card" aria-label="Precio de Bitcoin">
-        <div class="logo-row">
-          <svg width="44" height="44" role="img" aria-label="Logo de Bitcoin"><use href="#btc-logo"/></svg>
-          <div><b style="font-family:var(--f-display)">Bitcoin · BTC/USD</b><div class="small muted" id="precio-fecha">Bitstamp</div></div>
-        </div>
-        <div class="big" id="precio">—</div>
-        <div class="small" id="precio-var"></div>
-        <div class="kpis">
-          <div><span>Máximo histórico (cierre)</span><b id="k-max">—</b></div>
-          <div><span>Distancia al máximo</span><b id="k-dd">—</b></div>
-          <div><span>Días desde el 4.º halving</span><b id="k-dias">—</b></div>
-          <div><span>Desde el halving (USD 64.990)</span><b id="k-hal">—</b></div>
-        </div>
-        <p class="small muted" style="font-size:0.76rem">Último dato de nuestra base. La vela del día todavía está abierta (cierra 00:00 UTC). <a href="https://www.bitstamp.net/markets/btc/usd/" target="_blank" rel="noopener">Ver precio en vivo ↗</a></p>
-      </div>
+    <div>
+      <h1>¿Qué patrones de velas esconde <em>Bitcoin</em>?</h1>
+      <p class="lead">Armamos nuestra propia base con todas las velas diarias de Bitcoin desde 2011, buscamos patrones que se repiten y probamos si una red convolucional (CNN) y una red recurrente (LSTM) pueden usarlos para anticipar qué pasa la semana siguiente.</p>
+      <p class="by"><b>Mia Maffi y Francesca Sinagra</b> <span class="muted">· Trabajo práctico de velas japonesas y deep learning · noviembre 2026</span></p>
     </div>
-    <div class="answer">
-      <div><b>Las velas tienen memoria… que se apaga</b><p>En 2013-2020, después de una semana fuerte el precio tendía a seguir para el mismo lado. En el ciclo actual esa inercia casi desapareció.</p></div>
-      <div><b>Hay un ciclo de 4 años</b><p>El año siguiente a cada halving fue de suba en los 4 ciclos, pero cada vez menos: +8.190%, +286%, +562%, +31%.</p></div>
-      <div><b>No sirven para predecir la semana</b><p>Ni la CNN, ni la LSTM, ni Monte Carlo, ni un modelo pre-entrenado le ganan al azar en el ciclo actual (abr-2024 → hoy).</p></div>
+    <div class="box price">
+      <div class="row">
+        <svg width="40" height="40" role="img" aria-label="Logo de Bitcoin"><use href="#btc-logo"/></svg>
+        <div><b>Bitcoin (BTC/USD)</b><div class="small muted" id="precio-fecha">Bitstamp</div></div>
+      </div>
+      <div class="big" id="precio">—</div>
+      <div class="kpis">
+        <div><span>Máximo histórico</span><b id="k-max">—</b></div>
+        <div><span>Distancia al máximo</span><b id="k-dd" class="neg">—</b></div>
+        <div><span>Desde el último halving</span><b id="k-hal">—</b></div>
+        <div><span>Días desde el halving</span><b id="k-dias">—</b></div>
+      </div>
+      <p class="small muted" style="font-size:0.76rem">Último dato de nuestra base. <a href="https://www.bitstamp.net/markets/btc/usd/" target="_blank" rel="noopener">Precio en vivo en Bitstamp ↗</a></p>
     </div>
   </div>
 
-  <!-- 1. LA VELA -->
-  <section id="vela">
-    <div class="wrap">
-      <div class="head prose">
-        <span class="eyebrow">01 · Cómo se ve Bitcoin en velas japonesas</span>
-        <h2>Una vela resume un día entero en cuatro precios</h2>
-        <p class="muted">Apertura, máximo, mínimo y cierre. El cuerpo va de la apertura al cierre: verde si subió, rojo si bajó. Las mechas marcan hasta dónde llegó el precio durante el día. Estas formas son las que la CNN mira como foto y la LSTM lee como secuencia.</p>
-      </div>
-      <div class="two">
-        <div class="chart-box">
-          <svg id="anatomia" viewBox="0 0 460 300" width="100%" role="img" aria-label="Anatomía de la última vela diaria de Bitcoin"></svg>
-          <p class="small muted" id="anat-txt" style="margin-top:6px"></p>
-        </div>
-        <div class="facts">
-          <div class="fact"><span class="v">67%</span><p><b>Volatilidad anual</b>, contra 19% del S&amp;P 500 y 31% de LLY (la acción de la planilla del profe). Las velas de Bitcoin tienen cuerpos y mechas grandes: el cuerpo medio es 2,3% del precio por día.</p></div>
-          <div class="fact"><span class="v">365</span><p><b>Velas por año</b>, contra 252 de una acción. Bitcoin opera 24/7, sin feriados ni fines de semana.</p></div>
-          <div class="fact"><span class="v">0%</span><p><b>Días con salto de apertura.</b> Cada vela empieza donde terminó la anterior. En las acciones pasa el 23-42% de los días, porque la noticia llega con el mercado cerrado.</p></div>
-          <div class="fact"><span class="v">5.577</span><p><b>Velas diarias</b> construidas por nosotros a partir de 133.837 velas de 1 hora de Bitstamp, validadas contra la diaria oficial (0,00% de diferencia) y contra Coinbase.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. HISTORIA -->
   <section id="historia">
     <div class="wrap">
       <div class="head prose">
-        <span class="eyebrow">02 · Cómo fue cambiando con los años</span>
-        <h2>15 años de velas, 4 halvings y 17 movimientos gigantes</h2>
-        <p class="muted">Marcamos como <b>hito</b> cada tramo en que el precio se duplicó o se cortó a la mitad (sin elegirlos a mano: lo detecta un algoritmo de zigzag). Tocá una tarjeta para ver ese tramo en el gráfico; pasá el mouse por las velas para ver sus precios.</p>
+        <h2>15 años de Bitcoin, vela por vela</h2>
+        <p class="muted">Cada vela es una semana. Las zonas rojas son las caídas en que el precio se cortó a la mitad o más, y las verdes las subidas en que se duplicó o más. Las flechas marcan qué estaba pasando en cada momento. Deslizá hacia el costado para recorrer los años.</p>
       </div>
-      <div class="chart-box">
-        <div class="controls">
-          <div class="seg" role="group" aria-label="Tamaño de vela">
-            <button type="button" id="b-sem" aria-pressed="true">Semanal</button>
-            <button type="button" id="b-dia" aria-pressed="false">Diaria</button>
-          </div>
-          <div class="seg" role="group" aria-label="Período" id="periodos">
-            <button type="button" data-r="todo" aria-pressed="true">Todo</button>
-            <button type="button" data-r="2012">Ciclo 2012</button>
-            <button type="button" data-r="2016">Ciclo 2016</button>
-            <button type="button" data-r="2020">Ciclo 2020</button>
-            <button type="button" data-r="2024">Ciclo actual</button>
-            <button type="button" data-r="anio">Último año</button>
-          </div>
-          <div class="seg" role="group" aria-label="Escala">
-            <button type="button" id="b-log" aria-pressed="true">Log</button>
-            <button type="button" id="b-lin" aria-pressed="false">Lineal</button>
-          </div>
-        </div>
-        <div class="legend-ohlc" id="ohlc">&nbsp;</div>
-        <div id="chart" role="img" aria-label="Gráfico de velas de Bitcoin desde 2011"></div>
-        <div class="keys">
-          <span><i style="background:var(--btc)"></i>Hitos: tramos ×2 / ÷2</span>
-          <span><b style="color:var(--btc-ink)">H</b> Halving</span>
-          <span><b style="color:var(--ink-2)">1-18</b> Eventos (lista abajo)</span>
-        </div>
+      <div class="tl-tools">
+        <span class="muted">Ir a:</span>
+        <button type="button" data-y="2011">2011</button><button type="button" data-y="2014">2014</button><button type="button" data-y="2017">2017</button><button type="button" data-y="2020">2020</button><button type="button" data-y="2023">2023</button><button type="button" data-y="2027">Hoy</button>
       </div>
-      <h3 style="margin-top:32px">Los 17 hitos y qué estaba pasando</h3>
-      <p class="small muted" style="margin-top:4px">El contexto describe lo que pasaba en ese momento, no prueba que haya sido la causa.</p>
-      <div class="hitos" id="hitos"></div>
-
-      <h3 style="margin-top:40px">Eventos: ¿qué hizo el precio en los 7 días siguientes?</h3>
-      <p class="small muted" style="margin-top:4px">El percentil compara esa semana con todas las semanas desde 2013. <b>13 de 18</b> eventos fueron seguidos por una semana extrema (percentil ≤ 10 o ≥ 90).</p>
-      <div class="tbl-wrap" style="margin-top:12px"><table id="t-eventos"><thead><tr><th class="n">#</th><th>Fecha</th><th>Evento</th><th class="n">7 días después</th><th class="n">Percentil</th></tr></thead><tbody></tbody></table></div>
+      <div class="scroller" id="scroller"><svg id="timeline" role="img" aria-label="Velas semanales de Bitcoin desde 2011 con los principales hechos marcados"></svg></div>
+      <p class="small muted" style="margin-top:8px">Escala logarítmica: la misma distancia vertical es el mismo porcentaje, así se puede comparar 2013 con 2025. Las líneas naranjas punteadas son los halvings, cuando se reduce a la mitad la emisión de bitcoins nuevos (cada ~4 años).</p>
     </div>
   </section>
 
-  <!-- 3. CICLOS -->
-  <section id="ciclos">
+  <section id="tendencias">
     <div class="wrap">
       <div class="head prose">
-        <span class="eyebrow">03 · El ciclo del halving</span>
-        <h2>Cada ciclo sube menos y el mercado se va calmando</h2>
-        <p class="muted">Cada ~4 años la recompensa de los mineros se divide por dos (halving). Si superponemos los cuatro ciclos desde el día del halving, se ve el mismo dibujo, cada vez más chato.</p>
+        <h2>Cómo se mueven las velas de Bitcoin</h2>
+        <p class="muted">Contamos las 5.000 velas diarias desde 2013 para ver qué forma tienen y cómo fueron cambiando.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>50%</b><p>de las velas son verdes. Ni en los años de suba pasa del 62% (2013).</p></div>
+        <div class="stat"><b>6,4% → 2,9%</b><p>es lo que se mueve un día típico, del mínimo al máximo, en 2013 y en 2026.</p></div>
+        <div class="stat"><b>−30%</b><p>más chicas son las velas del fin de semana: sábado y domingo se opera menos.</p></div>
+        <div class="stat"><b>−49%</b><p>la peor vela: el 11 de abril de 2013, cuando colapsó Mt. Gox. La segunda, −39% por el COVID (12-mar-2020).</p></div>
       </div>
       <div class="two">
-        <div class="chart-box">
-          <div class="cyc-legend" id="cyc-legend"></div>
-          <svg id="ciclos-svg" viewBox="0 0 520 320" width="100%" role="img" aria-label="Precio de cada ciclo relativo al día del halving"></svg>
-          <p class="small muted">Precio relativo al día del halving (×1 = mismo precio), escala log. El punto marca el día de hoy.</p>
+        <div class="box">
+          <h3>Cuánto se mueve un día típico, por año</h3>
+          <p class="small muted" style="margin-bottom:8px">Distancia mediana entre el mínimo y el máximo de la vela diaria.</p>
+          <svg id="rango-svg" viewBox="0 0 460 230" width="100%" role="img" aria-label="Rango diario mediano por año"></svg>
+          <p class="small muted">Las velas son cada vez más chicas: el mercado creció y se calmó. Igual se mueve el doble que el S&amp;P 500.</p>
         </div>
-        <div style="display:grid;gap:22px;min-width:0">
-          <div>
-            <h3>Rendimiento de cada año del ciclo</h3>
-            <div class="tbl-wrap heat" style="margin-top:10px"><table id="t-ciclos"></table></div>
-          </div>
-          <div>
-            <h3>Volatilidad anual (mediana)</h3>
-            <svg id="vol-svg" viewBox="0 0 420 130" width="100%" role="img" aria-label="Volatilidad anual por período"></svg>
-            <p class="small muted">El mercado de hoy se mueve un tercio menos que el de 2013-2020. La forma de las velas también cambia con la fase: en el año 1 hay 42% de velas verdes contra 24% rojas (χ², p &lt; 0,001).</p>
-          </div>
+        <div style="display:grid;gap:16px">
+          <div class="box"><h3>Así se ve una suba</h3><p class="small muted" id="ej-sube-txt"></p><svg id="ej-sube" viewBox="0 0 460 130" width="100%" role="img" aria-label="Velas diarias de una suba"></svg></div>
+          <div class="box"><h3>Así se ve una caída</h3><p class="small muted" id="ej-baja-txt"></p><svg id="ej-baja" viewBox="0 0 460 130" width="100%" role="img" aria-label="Velas diarias de una caída"></svg></div>
         </div>
       </div>
+      <p class="muted prose" style="margin-top:18px">Las tendencias no se ven en una vela suelta sino en la suma: en una suba hay apenas unas velas verdes más que rojas, pero las verdes son más grandes. Por eso los patrones de una sola vela, como el martillo, dicen tan poco.</p>
     </div>
   </section>
 
-  <!-- 4. BENCHMARK -->
-  <section id="otros">
+  <section id="eventos">
     <div class="wrap">
       <div class="head prose">
-        <span class="eyebrow">04 · Frente a otras criptos y mercados</span>
-        <h2>Bitcoin marca el paso del mercado cripto</h2>
-        <p class="muted">Comparamos el mismo período (nov-2017 → hoy) con Ethereum, Litecoin y XRP, con el S&amp;P 500, el Nasdaq, el oro y LLY. Las otras criptos se mueven con Bitcoin (correlación 0,57-0,80), pero con más riesgo y menos rendimiento.</p>
+        <h2>Qué pasó con el precio después de cada noticia</h2>
+        <p class="muted">Cada tarjeta muestra las velas diarias de los 10 días anteriores y los 7 posteriores a la noticia (zona naranja). En 13 de las 18 noticias, la semana siguiente estuvo entre las más extremas de toda la historia.</p>
       </div>
-      <div class="two">
-        <div class="chart-box">
-          <svg id="bench-svg" viewBox="0 0 520 340" width="100%" role="img" aria-label="Rendimiento anual contra volatilidad anual"></svg>
-          <p class="small muted">Arriba a la izquierda es mejor: más rendimiento con menos riesgo.</p>
-        </div>
-        <div class="tbl-wrap"><table id="t-bench"></table></div>
-      </div>
+      <div class="ev-grid" id="eventos-grid"></div>
     </div>
   </section>
 
-  <!-- 5. PATRONES -->
+  <section id="otras">
+    <div class="wrap">
+      <div class="head prose">
+        <h2>Bitcoin frente a otras criptos y la bolsa</h2>
+        <p class="muted">Las mismas fechas y la misma escala para todos: 100 es el precio del primer día. Elegí un momento para comparar.</p>
+      </div>
+      <div class="seg" id="ventanas" role="group" aria-label="Momento a comparar"></div>
+      <div class="cmp-grid" id="cmp"></div>
+      <p class="muted prose" style="margin-top:16px">Ethereum, XRP y Litecoin hacen el mismo dibujo que Bitcoin pero más exagerado: se mueven con él (correlación de 0,57 a 0,80) y caen más fuerte. El S&amp;P 500 casi no se mueve en la misma escala y no tiene velas los fines de semana.</p>
+      <div class="tbl-wrap" style="margin-top:16px"><table id="t-bench"></table></div>
+    </div>
+  </section>
+
   <section id="patrones">
     <div class="wrap">
       <div class="head prose">
-        <span class="eyebrow">05 · Los patrones que se repiten</span>
-        <h2>Lo que esconden las velas es inercia, y se está apagando</h2>
-        <p class="muted">Probamos 7 patrones de los libros y 10 familias que una máquina (K-means) encontró sola en las semanas de 2013-2020, sin mirar el futuro. Para cada uno medimos qué hizo el precio en los 7 días siguientes, comparado con un día cualquiera, en tres períodos. Con 17 pruebas a la vez alguna sale "significativa" de casualidad, así que corregimos los p-valores (Holm).</p>
+        <h2>Los patrones que se repiten</h2>
+        <p class="muted">Le pedimos a un algoritmo (K-means) que agrupe todas las semanas de 2013 a 2020 según la forma de sus velas, sin decirle qué pasó después. Encontró 10 familias. Después miramos qué hizo el precio la semana siguiente, en tres épocas.</p>
       </div>
-
-      <div class="callout" style="margin-bottom:24px">
-        <b>Cómo leer las barras</b>
-        <p class="small">Efecto en los 7 días siguientes, en unidades de volatilidad: <span style="color:var(--up)">a la derecha</span>, el precio subió más que un día cualquiera; <span style="color:var(--down)">a la izquierda</span>, bajó más. Tres barras por patrón: entrenamiento (2013-2020), validación (2020-2024) y ciclo actual (2024-hoy).</p>
-      </div>
-
-      <h3>Las 10 familias que encontró la máquina</h3>
-      <p class="small muted" style="margin:4px 0 14px">La semana típica de cada familia. 4 de las 10 tuvieron un efecto real que se apagó en el ciclo actual; una sola sigue vigente.</p>
+      <p class="small muted" style="margin-bottom:12px">La barra muestra cuántas veces la semana siguiente fue de suba (o de caída). La raya negra es lo normal para cualquier semana de esa época.</p>
       <div class="fam-grid" id="familias"></div>
-
-      <h3 style="margin-top:40px">Los patrones de los libros</h3>
-      <p class="small muted" style="margin:4px 0 12px">Solo <b>tres soldados blancos</b> (tres velas verdes seguidas) se distingue del azar, y también se apagó. El martillo, el más famoso, apareció 28 veces en 13 años y no anticipa nada.</p>
-      <div class="tbl-wrap"><table id="t-clasicos"></table></div>
-
-      <div class="two" style="margin-top:40px">
-        <div>
-          <h3>La planilla del profe, aplicada a Bitcoin</h3>
-          <p class="small muted" style="margin:4px 0 12px">Regla: si las 3 velas anteriores fueron casi todas para arriba ("sharpe" &gt; 0,9), ¿aumenta la chance de subir más de 3% en las 3 velas siguientes?</p>
-          <svg id="planilla-svg" viewBox="0 0 420 170" width="100%" role="img" aria-label="Probabilidad de subir más de 3% con y sin la condición"></svg>
-          <p class="small muted">En Bitcoin la regla suma 5 puntos (inercia); en LLY no sirve.</p>
+      <div class="two" style="margin-top:28px">
+        <div class="prose">
+          <h3>Lo que encontramos</h3>
+          <p class="muted" style="margin-top:6px">Entre 2013 y 2020, después de una semana de suba con una vela verde fuerte al final (F8), la semana siguiente subía el 59% de las veces, contra 39% de cualquier semana. Hoy sube el 33%, igual que cualquier semana. Pasó lo mismo con otras tres familias: <b>Bitcoin tenía inercia y la fue perdiendo</b>.</p>
+          <p class="muted" style="margin-top:10px">La única que sigue funcionando es la F10: una semana en bajada que termina con una vela roja fuerte. En el ciclo actual, la semana siguiente fue de caída el 39% de las veces, contra 33% normal.</p>
         </div>
         <div>
-          <h3>¿A qué se parece hoy? (Shazam de velas)</h3>
-          <p class="small muted" style="margin:4px 0 12px">Buscamos las 5 semanas del pasado cuya foto de velas más se parece a la última. ¿Qué pasó después?</p>
-          <div class="tbl-wrap"><table>
-            <thead><tr><th>Gemela</th><th class="n">7 días después</th><th class="n">30 días después</th></tr></thead>
-            <tbody>
-              <tr><td>27-08-2015</td><td class="n pos">+1,0%</td><td class="n pos">+3,9%</td></tr>
-              <tr><td>23-11-2025</td><td class="n pos">+4,1%</td><td class="n pos">+0,7%</td></tr>
-              <tr><td>10-02-2026</td><td class="n neg">−1,9%</td><td class="n pos">+2,5%</td></tr>
-              <tr><td>07-06-2026</td><td class="n pos">+3,8%</td><td class="n">0,0%</td></tr>
-              <tr><td>27-11-2019</td><td class="n neg">−4,4%</td><td class="n neg">−3,7%</td></tr>
-            </tbody>
-          </table></div>
-          <p class="small muted" style="margin-top:8px">Las gemelas siguieron caminos distintos: el parecido de la foto no dice hacia dónde sigue.</p>
+          <h3>Los patrones de los libros</h3>
+          <p class="small muted" style="margin:4px 0 10px">Solo "tres soldados blancos" (tres velas verdes seguidas) tuvo un efecto real, y también se apagó: la semana siguiente subía 53% de las veces en 2013-2020, 45% en 2020-2024 y 28% hoy. El martillo apareció 28 veces en 13 años.</p>
+          <div class="tbl-wrap"><table id="t-clasicos"></table></div>
+        </div>
+      </div>
+      <div class="two" style="margin-top:28px">
+        <div class="box">
+          <h3>La planilla del profe, aplicada a Bitcoin</h3>
+          <p class="small muted" style="margin:4px 0 8px">Si las 3 velas anteriores fueron casi todas para arriba, ¿sube la chance de ganar más de 3% en las 3 siguientes?</p>
+          <svg id="planilla-svg" viewBox="0 0 420 170" width="100%" role="img" aria-label="Probabilidad de subir más de 3% con y sin la condición"></svg>
+          <p class="small muted">En Bitcoin suma 5 puntos (otra vez, inercia). En LLY no sirve.</p>
+        </div>
+        <div class="box">
+          <h3>El año después de cada halving</h3>
+          <p class="small muted" style="margin:4px 0 8px">Siempre fue de suba, pero cada vez menos.</p>
+          <div class="tbl-wrap"><table id="t-ciclos"></table></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. PREDICCIÓN -->
   <section id="prediccion">
     <div class="wrap">
       <div class="head prose">
-        <span class="eyebrow">06 · ¿Sirven para predecir?</span>
-        <h2>El examen: anticipar si la semana siguiente sube, baja o queda lateral</h2>
-        <p class="muted">Los modelos aprendieron con 2013-2020, se ajustaron con 2020-2024 y se examinaron una sola vez con el ciclo actual: 941 días, del halving de abril de 2024 a hoy. Cada clase es un tercio de los días, así que <b>adivinar al azar da 0,333</b>. "Lateral" quiere decir que el movimiento fue chico para la volatilidad del momento.</p>
+        <h2>¿Sirven para predecir la semana siguiente?</h2>
+        <p class="muted">Entrenamos los modelos con 2013-2020, los ajustamos con 2020-2024 y los examinamos una sola vez con el ciclo actual: 941 días desde el halving de abril de 2024. Cada día tenían que decir si la semana siguiente subía, bajaba o quedaba lateral. Como cada opción es un tercio de los días, <b>adivinar al azar acierta 33%</b>.</p>
       </div>
-      <div class="chart-box">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px">
-          <b style="font-family:var(--f-display)">Acierto en el ciclo actual (balanced accuracy) con su intervalo de confianza del 95%</b>
-          <span class="small muted"><span style="color:var(--btc-ink)">●</span> nuestras redes · <span style="color:var(--ink-3)">●</span> el resto</span>
-        </div>
+      <div class="box">
+        <h3 style="margin-bottom:6px">Porcentaje de acierto en el ciclo actual</h3>
         <div id="resultados"></div>
-        <p class="small muted" style="margin-top:8px">Si la barra cruza la línea del azar, no se puede distinguir de adivinar. Ninguno queda significativo después de corregir por haber probado 11 modelos (p corregido ≥ 0,066).</p>
+        <p class="small muted" style="margin-top:8px">La raya es el acierto y la barra el rango probable. Ningún modelo se separa del azar de forma convincente.</p>
       </div>
-
-      <div class="two" style="margin-top:32px">
-        <div style="display:grid;gap:14px">
-          <h3>CNN (foto) contra LSTM (secuencia)</h3>
-          <p class="muted">La <b>CNN</b> mira una foto en blanco y negro de las últimas 5 velas; la <b>LSTM</b> lee las últimas 10 velas como una secuencia de números. La LSTM era la mejor en validación (0,392) y en el ciclo actual se desplomó a 0,296: aprendió algo que dejó de existir. La CNN quedó en 0,342, pegada al azar.</p>
-          <p class="muted">Las dos aprendieron a decir <b>"lateral"</b> en dos de cada tres días: aciertan cuando no pasa nada (67%) y fallan cuando hay un movimiento grande (16%).</p>
-          <div class="callout"><b>¿Y el estándar de la industria?</b><p class="small">Monte Carlo, simulando con los retornos del último año, llegó a 0,386 y es el único con probabilidades mejor calibradas que "un tercio para cada clase". Kronos, un modelo entrenado con 12.000 millones de velas, dio 0,388. Tampoco son significativos.</p></div>
+      <div class="two" style="margin-top:28px">
+        <div class="prose">
+          <h3>CNN contra LSTM</h3>
+          <p class="muted" style="margin-top:6px">La CNN mira una foto en blanco y negro de las últimas 5 velas. La LSTM lee las últimas 10 velas como una secuencia de números. La LSTM era la mejor antes del examen (39%) y en el ciclo actual bajó a 30%: aprendió algo que dejó de pasar. La CNN quedó en 34%, casi igual que el azar.</p>
+          <p class="muted" style="margin-top:10px">Las dos terminaron diciendo "lateral" dos de cada tres días. Aciertan cuando no pasa nada y fallan en las semanas grandes.</p>
+          <p class="muted" style="margin-top:10px">Monte Carlo (simular miles de caminos posibles con los movimientos del último año, lo que usa la industria) y Kronos (un modelo ya entrenado con millones de velas) llegaron a 39%, sin una diferencia clara con el azar.</p>
         </div>
-        <div style="display:grid;gap:14px;min-width:0">
-          <h3>Las semanas más extremas del ciclo actual</h3>
-          <div class="tbl-wrap"><table id="t-extremas"></table></div>
-          <p class="small muted">La caída de oct-2025 (−53%): en sus primeros 7 días Kronos dijo "baja" 5 veces, la CNN 1 y la LSTM 1.</p>
+        <div>
+          <h3>Las semanas más fuertes del ciclo actual</h3>
+          <div class="tbl-wrap" style="margin-top:8px"><table id="t-extremas"></table></div>
         </div>
       </div>
-
-      <div class="two" style="margin-top:32px">
+      <div class="two" style="margin-top:28px">
         <div>
           <h3>Lo que probamos y no mejoró</h3>
-          <p class="small muted" style="margin:4px 0 12px">Cada intento se decidió con la validación, sin mirar el examen.</p>
-          <div class="tbl-wrap"><table id="t-descartes"></table></div>
+          <div class="tbl-wrap" style="margin-top:8px"><table id="t-descartes"></table></div>
         </div>
         <div>
-          <h3>¿Y si hubiera invertido USD 1.000?</h3>
-          <p class="small muted" style="margin:4px 0 12px">Comprando solo las semanas en que cada modelo dijo "sube", desde el halving de 2024.</p>
+          <h3>Si hubiéramos invertido USD 1.000</h3>
+          <p class="small muted" style="margin:4px 0 8px">Comprando solo las semanas en que cada modelo dijo "sube", desde abril de 2024.</p>
           <svg id="inv-svg" viewBox="0 0 420 312" width="100%" role="img" aria-label="Capital final de la inversión simulada"></svg>
-          <p class="small muted">Tirar una moneda (azar) terminó con más plata que comprar y mantener. La ganancia de una estrategia en un solo período no prueba que funcione.</p>
+          <p class="small muted">Elegir semanas al azar terminó con más plata que comprar y quedarse. Ganar en un período no prueba que una estrategia funcione.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 7. CONCLUSIÓN -->
   <section id="conclusion">
-    <div class="wrap">
-      <div class="head prose">
-        <span class="eyebrow">07 · Conclusión</span>
-        <h2>Las velas de Bitcoin cuentan su historia, pero no anuncian la semana que viene</h2>
+    <div class="wrap two">
+      <div class="prose">
+        <h2>Conclusión</h2>
+        <p class="muted" style="margin-top:10px">Las velas de Bitcoin cuentan bien su historia, pero no anuncian la semana que viene.</p>
       </div>
-      <div class="two">
-        <div class="concl"><ol>
-          <li><div><b>Hubo inercia de corto plazo.</b> <span class="muted">En 2013-2020, después de rachas alcistas el precio seguía subiendo y después de semanas quietas tendía a bajar. Son 5 de 17 patrones, con p corregido 0,017.</span></div></li>
-          <li><div><b>Esa memoria se apagó a medida que el mercado maduró.</b> <span class="muted">Cuatro de esos cinco patrones dejaron de funcionar en el ciclo actual. Coincide con Urquhart (2016): Bitcoin fue ineficiente al principio y se vuelve eficiente.</span></div></li>
-          <li><div><b>Lo único vigente:</b> <span class="muted">una semana en bajada que cierra con una vela roja fuerte suele seguir bajando (−0,30 desvíos en el ciclo actual).</span></div></li>
-          <li><div><b>El ciclo de 4 años existe a escala de años,</b> <span class="muted">con rendimientos decrecientes, y los grandes movimientos coinciden con noticias que nadie sabía de antemano.</span></div></li>
-          <li><div><b>Para anticipar la semana siguiente, no alcanza.</b> <span class="muted">CNN, LSTM, Monte Carlo y Kronos quedan cerca del azar. El movimiento semanal del ciclo actual no estaba escrito en las velas: apoya la hipótesis de mercado eficiente (Fama, 1970) y coincide con Marshall et al. (2006) y Ho et al. (2021).</span></div></li>
-        </ol></div>
-        <div class="callout" style="align-self:start">
-          <b>La pregunta y la respuesta</b>
-          <p><b>¿Qué patrones de velas esconde Bitcoin?</b> Inercia de corto plazo que se fue apagando, un ciclo de 4 años con subas cada vez menores y movimientos gigantes atados a noticias.</p>
-          <p><b>¿Sirven para predecir?</b> No. Con 13 años de datos y las mismas herramientas que usan los papers (CNN sobre fotos de velas, como Jiang, Kelly y Xiu, 2023), el resultado en el ciclo actual es indistinguible del azar.</p>
-        </div>
-      </div>
+      <ol class="concl">
+        <li><b>Bitcoin tuvo inercia.</b> Entre 2013 y 2020, después de rachas de suba el precio seguía subiendo más de lo normal.</li>
+        <li><b>Esa inercia se fue apagando.</b> En el ciclo actual casi desapareció: el mercado es más grande, más tranquilo y más difícil de anticipar.</li>
+        <li><b>El ciclo del halving se ve a escala de años,</b> con subas cada vez menores. Los movimientos más grandes coinciden con noticias que nadie sabía de antemano.</li>
+        <li><b>Para anticipar la semana siguiente, las velas no alcanzan.</b> Ni la CNN, ni la LSTM, ni Monte Carlo, ni un modelo pre-entrenado le ganan claramente al azar. Es lo mismo que encontraron Marshall et al. (2006) en acciones y Ho et al. (2021) en criptos.</li>
+      </ol>
     </div>
   </section>
 </main>
@@ -459,8 +327,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 64px; }
   <div class="wrap two">
     <div>
       <h3 style="margin-bottom:8px">Cómo lo hicimos</h3>
-      <p>Velas propias de Bitstamp (1 hora → diarias, en UTC). Target: movimiento a 7 días dividido la volatilidad de los últimos 30 días, cortado en tercios con datos de 2013-2020. Split por halvings con 7 días de separación entre períodos para no filtrar información. p-valores por desplazamiento circular, intervalos por bootstrap por bloques y corrección de Holm. Todo corre en un notebook de Google Colab con GPU.</p>
-      <p style="margin-top:10px"><a href="https://github.com/miamaffi/TP_FINAL_VELAS_SINAGRA_MAFFI" target="_blank" rel="noopener">Código y resultados en GitHub ↗</a></p>
+      <p>Bajamos las velas de 1 hora de Bitstamp desde 2011 y armamos las diarias (validadas contra la diaria oficial y contra Coinbase). Separamos los datos por ciclos de halving para que los modelos nunca vean el futuro. Todo el trabajo está en un notebook de Google Colab.</p>
+      <p style="margin-top:8px"><a href="https://github.com/miamaffi/TP_FINAL_VELAS_SINAGRA_MAFFI" target="_blank" rel="noopener">Código y resultados en GitHub ↗</a></p>
     </div>
     <div>
       <h3 style="margin-bottom:8px">Bibliografía</h3>
@@ -469,7 +337,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 64px; }
         <li>Marshall, Young y Rose (2006). Candlestick technical trading strategies. <i>Journal of Banking &amp; Finance</i>.</li>
         <li>Urquhart (2016). The inefficiency of Bitcoin. <i>Economics Letters</i>.</li>
         <li>Ho, Chan, Pan y Li (2021). Do Candlestick Patterns Work in Cryptocurrency Trading? <i>IEEE Big Data</i>.</li>
-        <li>Cohen (2021). <i>Review of Quantitative Finance and Accounting</i>.</li>
         <li>Jiang, Kelly y Xiu (2023). (Re-)Imag(in)ing Price Trends. <i>Journal of Finance</i>.</li>
       </ul>
     </div>
@@ -477,309 +344,275 @@ html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 </footer>
 <div class="tip" id="tip" hidden></div>
 
-<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
 <script>
 (async function () {
   const $ = (s) => document.querySelector(s);
   const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const usd = (v, d = 0) => "USD " + v.toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const usd = (v) => "USD " + Math.round(v).toLocaleString("es-AR");
+  const usdP = (v) => "USD " + (v < 100 ? v.toLocaleString("es-AR", { maximumFractionDigits: 1 }) : Math.round(v).toLocaleString("es-AR"));
   const pct = (v, d = 0) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v * 100).toLocaleString("es-AR", { maximumFractionDigits: d, minimumFractionDigits: d }) + "%";
-  const dec = (v, d = 3) => v.toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
-  const fdate = (t) => new Date(t * 1000).toLocaleDateString("es-AR", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" });
+  const pp = (v) => Math.round(v * 100) + "%";
   const ts = (s) => Date.parse(s + "T00:00:00Z") / 1000;
+  const fecha = (t, o) => new Date(t * 1000).toLocaleDateString("es-AR", Object.assign({ timeZone: "UTC" }, o || { day: "numeric", month: "short", year: "numeric" }));
   const NS = "http://www.w3.org/2000/svg";
   const tip = $("#tip");
-  function showTip(e, html) { tip.innerHTML = html; tip.hidden = false; const x = Math.min(e.clientX + 14, innerWidth - 270); tip.style.left = x + "px"; tip.style.top = (e.clientY + 14) + "px"; }
-  function hideTip() { tip.hidden = true; }
+  const showTip = (e, html) => { tip.innerHTML = html; tip.hidden = false; tip.style.left = Math.min(e.clientX + 14, innerWidth - 270) + "px"; tip.style.top = (e.clientY + 14) + "px"; };
+  const hideTip = () => { tip.hidden = true; };
   function el(tag, attrs, parent, text) { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (text != null) n.textContent = text; if (parent) parent.appendChild(n); return n; }
 
   const [velas, D] = await Promise.all([fetch("btc_1d.json").then((r) => r.json()), fetch("datos.json").then((r) => r.json())]);
-  const HALVINGS = ["2012-11-28", "2016-07-09", "2020-05-11", "2024-04-20"].map(ts);
+  const HALVINGS = [["2012-11-28", "1.er halving"], ["2016-07-09", "2.º halving"], ["2020-05-11", "3.er halving"], ["2024-04-20", "4.º halving"]].map(([d, n]) => [ts(d), n]);
+  const ult = velas[velas.length - 1];
+
+  // Dibuja velas [t,o,h,l,c] en un SVG; devuelve la escala vertical
+  function velasSVG(svg, data, { L = 4, R, T = 6, B, sombra = null, marca = null, y: yFix = null }) {
+    const n = data.length, paso = (R - L) / n, w = Math.max(1, Math.min(paso * 0.7, 9));
+    let hi = -Infinity, lo = Infinity; data.forEach((v) => { hi = Math.max(hi, v[2]); lo = Math.min(lo, v[3]); });
+    if (yFix) { lo = yFix[0]; hi = yFix[1]; }
+    const Y = (p) => T + (hi - p) / (hi - lo) * (B - T);
+    if (sombra != null) el("rect", { x: L + sombra * paso, y: T - 4, width: R - L - sombra * paso, height: B - T + 8, fill: css("--btc-soft") }, svg);
+    if (marca != null) el("line", { x1: L + (marca + 0.5) * paso, x2: L + (marca + 0.5) * paso, y1: T - 4, y2: B + 4, stroke: css("--btc"), "stroke-width": 1.5, "stroke-dasharray": "3 2" }, svg);
+    const up = css("--up"), dn = css("--down");
+    data.forEach((v, i) => { const [, o, h, l, c] = v, x = L + (i + 0.5) * paso, col = c >= o ? up : dn;
+      el("line", { x1: x, x2: x, y1: Y(h), y2: Y(l), stroke: col, "stroke-width": Math.max(1, w / 5) }, svg);
+      el("rect", { x: x - w / 2, y: Y(Math.max(o, c)), width: w, height: Math.max(1, Math.abs(Y(o) - Y(c))), fill: col }, svg); });
+    return Y;
+  }
 
   // ---------- Precio ----------
-  const ult = velas[velas.length - 1], ant = velas[velas.length - 2];
-  let maxC = 0, maxT = 0; for (const v of velas) if (v[4] > maxC) { maxC = v[4]; maxT = v[0]; }
+  let maxC = 0, maxT = 0; velas.forEach((v) => { if (v[4] > maxC) { maxC = v[4]; maxT = v[0]; } });
   $("#precio").textContent = usd(ult[4]);
-  $("#precio-fecha").textContent = "Bitstamp · " + fdate(ult[0]);
-  const vd = ult[4] / ant[4] - 1;
-  $("#precio-var").innerHTML = `<span class="${vd >= 0 ? "pos" : "neg"} num">${pct(vd, 1)}</span> <span class="muted">contra el cierre del día anterior</span>`;
-  $("#k-max").textContent = usd(maxC) + " · " + new Date(maxT * 1000).toLocaleDateString("es-AR", { month: "short", year: "numeric", timeZone: "UTC" });
-  $("#k-dd").textContent = pct(ult[4] / maxC - 1); $("#k-dd").className = "neg";
-  $("#k-dias").textContent = Math.round((ult[0] - HALVINGS[3]) / 86400).toLocaleString("es-AR");
-  const hal = velas.find((v) => v[0] === HALVINGS[3]);
-  const vh = ult[4] / hal[4] - 1; $("#k-hal").textContent = pct(vh); $("#k-hal").className = vh >= 0 ? "pos" : "neg";
+  $("#precio-fecha").textContent = "Bitstamp · " + fecha(ult[0]);
+  $("#k-max").textContent = usd(maxC) + " (" + fecha(maxT, { month: "short", year: "numeric" }) + ")";
+  $("#k-dd").textContent = pct(ult[4] / maxC - 1);
+  const hal = velas.find((v) => v[0] === HALVINGS[3][0]), vh = ult[4] / hal[4] - 1;
+  $("#k-hal").textContent = pct(vh); $("#k-hal").className = vh >= 0 ? "pos" : "neg";
+  $("#k-dias").textContent = Math.round((ult[0] - HALVINGS[3][0]) / 86400).toLocaleString("es-AR");
 
-  // ---------- Anatomía (última vela cerrada) ----------
-  (function () {
-    const v = ant, [t, o, h, l, c] = v, svg = $("#anatomia");
-    const sube = c >= o, col = sube ? css("--up") : css("--down");
-    const y = (p) => 30 + (h - p) / (h - l) * 240;
-    const cx = 170;
-    el("line", { x1: cx, x2: cx, y1: y(h), y2: y(l), stroke: col, "stroke-width": 3 }, svg);
-    el("rect", { x: cx - 34, y: y(Math.max(o, c)), width: 68, height: Math.max(3, Math.abs(y(o) - y(c))), fill: col, rx: 3 }, svg);
-    const lab = (p, txt, side) => {
-      const yy = y(p), x2 = side > 0 ? 300 : 40;
-      el("line", { x1: cx + side * 40, x2: x2 - side * 4, y1: yy, y2: yy, stroke: css("--ink-3"), "stroke-dasharray": "3 3" }, svg);
-      el("text", { x: side > 0 ? 304 : 36, y: yy + 4, "text-anchor": side > 0 ? "start" : "end", "font-size": 13, fill: css("--ink") }, svg, txt);
-    };
-    lab(h, "Máximo " + usd(h), 1); lab(l, "Mínimo " + usd(l), 1);
-    lab(o, "Apertura", -1); lab(c, "Cierre", -1);
-    el("text", { x: 304, y: (y(o) + y(c)) / 2 + 4, "font-size": 13, fill: css("--ink-2") }, svg, "Cuerpo: " + pct(c / o - 1, 1));
-    $("#anat-txt").textContent = `La vela real del ${fdate(t)}: abrió en ${usd(o)}, llegó a ${usd(h)} y a ${usd(l)}, y cerró en ${usd(c)}.`;
-  })();
+  // ---------- Velas semanales ----------
+  const W = []; let cur = null;
+  for (const [t, o, h, l, c] of velas) { const lunes = t - ((new Date(t * 1000).getUTCDay() + 6) % 7) * 86400;
+    if (!cur || cur[0] !== lunes) { cur = [lunes, o, h, l, c]; W.push(cur); } else { cur[2] = Math.max(cur[2], h); cur[3] = Math.min(cur[3], l); cur[4] = c; } }
 
-  // ---------- Gráfico principal ----------
-  function semanales(d) {
-    const out = []; let cur = null;
-    for (const [t, o, h, l, c] of d) {
-      const day = new Date(t * 1000).getUTCDay(), lunes = t - ((day + 6) % 7) * 86400;
-      if (!cur || cur[0] !== lunes) { cur = [lunes, o, h, l, c]; out.push(cur); }
-      else { cur[2] = Math.max(cur[2], h); cur[3] = Math.min(cur[3], l); cur[4] = c; }
-    }
-    return out;
-  }
-  const W = semanales(velas);
-  let modo = "sem", rango = "todo";
-  const chartEl = $("#chart");
-  const chart = LightweightCharts.createChart(chartEl, { autoSize: true, handleScroll: true, handleScale: true,
-    rightPriceScale: { mode: LightweightCharts.PriceScaleMode.Logarithmic, borderVisible: false },
-    timeScale: { borderVisible: false }, crosshair: { mode: LightweightCharts.CrosshairMode.Normal } });
-  const serie = chart.addCandlestickSeries({ borderVisible: false, priceFormat: { type: "price", precision: 0, minMove: 1 } });
-  const zig = chart.addLineSeries({ lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
-  function tema() {
+  // ---------- Línea de tiempo ----------
+  const NOTAS = [
+    ["2011-10-17", "abajo", "Termina la primera burbuja y hackean Mt. Gox", "−81%"],
+    ["2013-04-08", "arriba", "Primera burbuja grande: llega a USD 230", "+10.000% desde 2011"],
+    ["2013-04-15", "abajo", "Mt. Gox colapsa por la avalancha de usuarios", "−70% en una semana"],
+    ["2013-12-02", "arriba", "Pasa los USD 1.000 por primera vez, con fuerte demanda desde China", "USD 1.132"],
+    ["2015-01-12", "abajo", "China prohíbe a los bancos operar bitcoin y quiebra Mt. Gox", "−85% en un año"],
+    ["2017-12-11", "arriba", "Boom de las ICO y lanzan futuros de bitcoin en Chicago", "USD 19.188"],
+    ["2018-12-10", "abajo", "Explota la burbuja de las ICO: China las prohíbe y la SEC sanciona", "−83%"],
+    ["2019-06-24", "arriba", "Facebook anuncia su moneda Libra", "×4 desde el piso"],
+    ["2020-03-09", "abajo", "Pánico del COVID: el 12 de marzo cae 39% en un día", "−63%"],
+    ["2021-04-12", "arriba", "Tesla y MicroStrategy compran bitcoin, Coinbase sale a la bolsa", "USD 63.564"],
+    ["2021-07-19", "abajo", "Tesla deja de aceptar bitcoin y China prohíbe la minería", "−53%"],
+    ["2021-11-08", "arriba", "Inflación récord en EE.UU. y El Salvador lo adopta como moneda", "USD 67.559"],
+    ["2022-11-21", "abajo", "Suben las tasas y quiebran Terra/Luna y FTX", "−77%"],
+    ["2024-01-08", "arriba", "Aprueban los ETF de bitcoin en EE.UU.", "Entra Wall Street"],
+    ["2024-11-04", "arriba", "Gana Trump las elecciones", "+30% en una semana"],
+    ["2025-10-06", "arriba", "Récord histórico", "USD 124.728"],
+    ["2026-06-29", "abajo", "Liquidaciones récord tras los aranceles a China y salen fondos de los ETF", "−53%"],
+  ];
+  function partir(s, max) { const out = []; let l = ""; s.split(" ").forEach((w) => { if ((l + " " + w).trim().length > max) { out.push(l); l = w; } else l = (l + " " + w).trim(); }); if (l) out.push(l); return out; }
+  function dibujarTimeline() {
+    const svg = $("#timeline"); svg.innerHTML = "";
+    const n = W.length, PASO = 4, L = 56, ANCHO = 214, FILA = 66, T = 236, B = 616, H = 616 + 44 + 3 * FILA;
+    const R = L + n * PASO + 160;
+    svg.setAttribute("width", R); svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${R} ${H}`);
+    const lo = Math.log(1.5), hi = Math.log(200000);
+    const Y = (p) => T + (hi - Math.log(Math.max(p, 1.5))) / (hi - lo) * (B - T), X = (i) => L + (i + 0.5) * PASO;
+    const idx = (t) => { let a = 0, b = n - 1; while (a < b) { const m = (a + b + 1) >> 1; if (W[m][0] <= t) a = m; else b = m - 1; } return a; };
+    D.hitos.forEach((h) => { const a = X(idx(ts(h.inicio))), b = X(idx(ts(h.fin)));
+      el("rect", { x: a, y: T - 10, width: Math.max(1, b - a), height: B - T + 20, fill: h.tipo === "subida" ? css("--up-soft") : css("--down-soft") }, svg); });
+    [10, 100, 1000, 10000, 100000].forEach((p) => { el("line", { x1: L, x2: L + n * PASO, y1: Y(p), y2: Y(p), stroke: css("--line") }, svg);
+      el("text", { x: L - 6, y: Y(p) + 4, "text-anchor": "end", "font-size": 11, fill: css("--ink-3") }, svg, p >= 1000 ? (p / 1000) + " mil" : String(p)); });
+    for (let y = 2012; y <= 2026; y++) { const x = X(idx(ts(y + "-01-01")));
+      el("text", { x, y: B + 30, "text-anchor": "middle", "font-size": 12, "font-weight": 600, fill: css("--ink-2") }, svg, y); }
+    HALVINGS.forEach(([t, nom]) => { const x = X(idx(t)); el("line", { x1: x, x2: x, y1: T - 10, y2: B + 10, stroke: css("--btc"), "stroke-dasharray": "4 3", "stroke-width": 1.5 }, svg);
+      el("text", { x: x + 4, y: T - 14, "font-size": 10.5, fill: css("--btc-ink") }, svg, nom); });
     const up = css("--up"), dn = css("--down");
-    chart.applyOptions({ layout: { background: { color: css("--surface") }, textColor: css("--ink-2"), fontFamily: "IBM Plex Mono, monospace" },
-      grid: { vertLines: { color: css("--line") }, horzLines: { color: css("--line") } } });
-    serie.applyOptions({ upColor: up, downColor: dn, wickUpColor: up, wickDownColor: dn });
-    zig.applyOptions({ color: css("--btc") });
+    W.forEach(([t, o, h, l, c], i) => { const x = X(i), col = c >= o ? up : dn;
+      el("line", { x1: x, x2: x, y1: Y(h), y2: Y(l), stroke: col, "stroke-width": 0.8 }, svg);
+      el("rect", { x: x - 1.5, y: Y(Math.max(o, c)), width: 3, height: Math.max(0.8, Math.abs(Y(o) - Y(c))), fill: col }, svg); });
+    const xu = X(n - 1), yu = Y(ult[4]);
+    el("circle", { cx: xu, cy: yu, r: 4, fill: css("--btc") }, svg);
+    el("text", { x: xu + 8, y: yu + 4, "font-size": 12, "font-weight": 700, fill: css("--ink") }, svg, "Hoy " + usd(ult[4]));
+    const defs = el("defs", {}, svg), mk = el("marker", { id: "flecha", viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" }, defs);
+    el("path", { d: "M0 0L10 5L0 10z", fill: css("--ink-2") }, mk);
+    const filas = { arriba: [[], [], []], abajo: [[], [], []] };
+    const capaFlechas = el("g", {}, svg), capaCajas = el("g", {}, svg);
+    NOTAS.forEach(([d, lado, txt, dato]) => {
+      const i = idx(ts(d)), x = X(i), v = W[i];
+      const bx = Math.min(Math.max(x - 40, 4), R - ANCHO - 4);
+      const fs = filas[lado]; let f = 0; while (f < 2 && fs[f].some((x0) => Math.abs(x0 - bx) < ANCHO + 10)) f++; fs[f].push(bx);
+      const lineas = partir(txt, 36), alto = 30 + lineas.length * 14;
+      const by = lado === "arriba" ? T - 30 - alto - f * FILA : B + 44 + f * FILA;
+      const color = lado === "arriba" ? css("--up") : css("--down");
+      const g = el("g", {}, capaCajas);
+      el("rect", { x: bx, y: by, width: ANCHO, height: alto, rx: 6, fill: css("--surface"), stroke: color }, g);
+      el("text", { x: bx + 9, y: by + 17, "font-size": 12.5, "font-weight": 700, fill: color }, g, dato);
+      lineas.forEach((ln, k) => el("text", { x: bx + 9, y: by + 33 + k * 14, "font-size": 11.5, fill: css("--ink") }, g, ln));
+      const y1 = lado === "arriba" ? by + alto : by, y2 = lado === "arriba" ? Y(v[2]) - 4 : Y(v[3]) + 4;
+      el("line", { x1: Math.min(Math.max(x, bx + 12), bx + ANCHO - 12), y1, x2: x, y2, stroke: css("--ink-2"), "stroke-width": 1.2, "marker-end": "url(#flecha)" }, capaFlechas);
+    });
+    const ov = el("rect", { x: L, y: T - 10, width: n * PASO, height: B - T + 20, fill: "transparent" }, svg);
+    ov.addEventListener("mousemove", (e) => { const r = svg.getBoundingClientRect(), i = Math.max(0, Math.min(n - 1, Math.floor((e.clientX - r.left - L) / PASO))), [t, o, h, l, c] = W[i];
+      showTip(e, `<b>Semana del ${esc(fecha(t))}</b><br>Abrió ${usdP(o)} · cerró ${usdP(c)}<br>Máx ${usdP(h)} · mín ${usdP(l)} · <b>${pct(c / o - 1, 1)}</b>`); });
+    ov.addEventListener("mouseleave", hideTip);
+    return { X, idx };
   }
-  function datosModo() { return modo === "sem" ? W : velas; }
-  function cargar() {
-    const d = datosModo();
-    serie.setData(d.map(([t, o, h, l, c]) => ({ time: t, open: o, high: h, low: l, close: c })));
-    const barra = (t) => { let lo = 0, hi = d.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (d[m][0] <= t) lo = m; else hi = m - 1; } return d[lo][0]; };
-    const marks = [];
-    HALVINGS.forEach((t) => marks.push({ time: barra(t), position: "belowBar", color: css("--btc-ink"), shape: "arrowUp", text: "H" }));
-    D.eventos.forEach((e, i) => marks.push({ time: barra(ts(e.fecha)), position: "aboveBar", color: css("--ink-3"), shape: "circle", text: String(i + 1) }));
-    marks.sort((a, b) => a.time - b.time);
-    serie.setMarkers(marks);
-    const pts = [{ time: ts(D.hitos[0].inicio), value: D.hitos[0].p0 }].concat(D.hitos.map((h) => ({ time: ts(h.fin), value: h.p1 })));
-    zig.setData(pts.map((p) => ({ time: barra(p.time), value: p.value })).filter((p, i, a) => i === 0 || p.time > a[i - 1].time));
-  }
-  function verRango(desde, hasta) { chart.timeScale().setVisibleRange({ from: desde, to: hasta }); }
-  const RANGOS = { todo: [velas[0][0], ult[0]], 2012: [ts("2012-09-01"), ts("2016-07-09")], 2016: [ts("2016-04-01"), ts("2020-05-11")], 2020: [ts("2020-02-01"), ts("2024-04-20")], 2024: [ts("2024-01-15"), ult[0]], anio: [ult[0] - 365 * 86400, ult[0]] };
-  function aplicarRango() { const [a, b] = RANGOS[rango]; verRango(a, b); }
-  tema(); cargar(); aplicarRango();
-  function press(grupo, btn) { grupo.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn))); }
-  $("#b-sem").onclick = (e) => { modo = "sem"; press(e.target.parentNode, e.target); cargar(); aplicarRango(); };
-  $("#b-dia").onclick = (e) => { modo = "dia"; press(e.target.parentNode, e.target); cargar(); aplicarRango(); };
-  $("#b-log").onclick = (e) => { press(e.target.parentNode, e.target); chart.applyOptions({ rightPriceScale: { mode: LightweightCharts.PriceScaleMode.Logarithmic } }); };
-  $("#b-lin").onclick = (e) => { press(e.target.parentNode, e.target); chart.applyOptions({ rightPriceScale: { mode: LightweightCharts.PriceScaleMode.Normal } }); };
-  $("#periodos").querySelectorAll("button").forEach((b) => b.onclick = () => { rango = b.dataset.r; press($("#periodos"), b); aplicarRango(); document.querySelectorAll(".hito.sel").forEach((x) => x.classList.remove("sel")); });
-  chart.subscribeCrosshairMove((p) => {
-    const d = p && p.time ? p.seriesData.get(serie) : null;
-    if (!d) { $("#ohlc").innerHTML = "&nbsp;"; return; }
-    const ch = d.close / d.open - 1;
-    $("#ohlc").innerHTML = `${esc(fdate(p.time))}${modo === "sem" ? " (semana)" : ""} · A ${usd(d.open)} · Máx ${usd(d.high)} · Mín ${usd(d.low)} · C ${usd(d.close)} <span class="${ch >= 0 ? "pos" : "neg"}">${pct(ch, 1)}</span>`;
-  });
-  const mq = matchMedia("(prefers-color-scheme: dark)");
-  const retema = () => { tema(); cargar(); dibujarTodo(); };
-  mq.addEventListener("change", retema);
-  new MutationObserver(retema).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  let TL = dibujarTimeline();
+  document.querySelectorAll(".tl-tools button").forEach((b) => b.onclick = () => { $("#scroller").scrollLeft = TL.X(TL.idx(ts(b.dataset.y + "-01-01"))) - 80; });
 
-  // ---------- Hitos ----------
-  const hc = $("#hitos");
-  D.hitos.forEach((h) => {
-    const b = document.createElement("button"); b.type = "button"; b.className = "hito";
-    const sube = h.tipo === "subida", mv = h.mov.replace("%", "").replace("-", "");
-    const mvTxt = (sube ? "+" : "−") + Number(mv).toLocaleString("es-AR") + "%";
-    const fi = (s) => new Date(ts(s) * 1000).toLocaleDateString("es-AR", { month: "short", year: "numeric", timeZone: "UTC" });
-    b.innerHTML = `<span class="mv ${sube ? "pos" : "neg"}">${esc(mvTxt)}</span>
-      <span class="dt">${esc(fi(h.inicio))} → ${esc(fi(h.fin))} · ${h.dias} días${h.abierto ? " · abierto" : ""}</span>
-      <span class="dt">${esc(usd(h.p0))} → ${esc(usd(h.p1))}</span>
-      <p>${esc(h.contexto)}</p>`;
-    b.onclick = () => {
-      document.querySelectorAll(".hito.sel").forEach((x) => x.classList.remove("sel")); b.classList.add("sel");
-      press($("#periodos"), null);
-      const a = ts(h.inicio), z = ts(h.fin), pad = Math.max(20, (z - a) / 86400 * 0.25) * 86400;
-      if ((z - a) / 86400 < 200 && modo === "sem") { modo = "dia"; press($("#b-dia").parentNode, $("#b-dia")); cargar(); }
-      verRango(a - pad, Math.min(z + pad, ult[0]));
-      chartEl.scrollIntoView({ block: "center" });
-    };
-    hc.appendChild(b);
-  });
+  // ---------- Tendencias ----------
+  function dibujarRango() {
+    const svg = $("#rango-svg"); svg.innerHTML = "";
+    const por = {}; velas.forEach(([t, o, h, l]) => { const y = new Date(t * 1000).getUTCFullYear(); if (y >= 2013) (por[y] = por[y] || []).push(h / l - 1); });
+    const anios = Object.keys(por), med = anios.map((y) => { const a = por[y].sort((p, q) => p - q); return a[Math.floor(a.length / 2)]; });
+    const L = 30, R = 450, T = 20, B = 200, bw = (R - L) / anios.length, Y = (v) => B - v / 0.07 * (B - T);
+    [0, 0.02, 0.04, 0.06].forEach((v) => { el("line", { x1: L, x2: R, y1: Y(v), y2: Y(v), stroke: css("--line") }, svg); el("text", { x: L - 4, y: Y(v) + 4, "text-anchor": "end", "font-size": 10, fill: css("--ink-3") }, svg, v * 100 + "%"); });
+    anios.forEach((y, i) => { const x = L + i * bw + 3, last = i === anios.length - 1;
+      el("rect", { x, y: Y(med[i]), width: bw - 6, height: B - Y(med[i]), rx: 3, fill: i === 0 || last ? css("--btc") : css("--muted-mark") }, svg);
+      el("text", { x: x + (bw - 6) / 2, y: B + 14, "text-anchor": "middle", "font-size": 10, fill: css("--ink-3") }, svg, "'" + y.slice(2));
+      if (i === 0 || last || y === "2017" || y === "2021") el("text", { x: x + (bw - 6) / 2, y: Y(med[i]) - 5, "text-anchor": "middle", "font-size": 10.5, fill: css("--ink") }, svg, (med[i] * 100).toFixed(1).replace(".", ",") + "%"); });
+  }
+  function ejemplo(id, desde, hasta) {
+    const svg = $("#" + id); svg.innerHTML = "";
+    const d = velas.filter((v) => v[0] >= ts(desde) && v[0] <= ts(hasta));
+    velasSVG(svg, d, { R: 456, B: 124 });
+    const verdes = d.filter((v) => v[4] > v[1]).length, mov = d[d.length - 1][4] / d[0][1] - 1;
+    $("#" + id + "-txt").textContent = `${fecha(d[0][0], { month: "short", year: "numeric" })} a ${fecha(d[d.length - 1][0], { month: "short", year: "numeric" })}: ${pct(mov)} en ${d.length} días, con ${Math.round(verdes / d.length * 100)}% de velas verdes.`;
+  }
 
   // ---------- Eventos ----------
-  $("#t-eventos tbody").innerHTML = D.eventos.map((e, i) => {
-    const r = parseFloat(e.ret) / 100, ext = e.pct <= 10 || e.pct >= 90;
-    return `<tr${ext ? ' class="hl"' : ""}><td class="n">${i + 1}</td><td class="num">${esc(new Date(ts(e.fecha) * 1000).toLocaleDateString("es-AR", { timeZone: "UTC" }))}</td>
-      <td><a href="${e.fuente.startsWith("https://") ? esc(e.fuente) : "#"}" target="_blank" rel="noopener">${esc(e.evento)}</a></td>
-      <td class="n ${r >= 0 ? "pos" : "neg"}">${pct(r, 1)}</td><td class="n">${e.pct}</td></tr>`;
-  }).join("");
+  function dibujarEventos() {
+    const g = $("#eventos-grid"); g.innerHTML = "";
+    D.eventos.forEach((e) => {
+      const t = ts(e.fecha), i = velas.findIndex((v) => v[0] >= t), d = velas.slice(i - 10, i + 8), r = parseFloat(e.ret) / 100;
+      const tag = e.pct <= 10 ? `<span class="tag bad">de las 10% peores semanas</span>` : e.pct >= 90 ? `<span class="tag good">de las 10% mejores semanas</span>` : `<span class="tag">semana normal</span>`;
+      const c = document.createElement("div"); c.className = "ev";
+      c.innerHTML = `<span class="f">${esc(fecha(t))}</span><a class="n" href="${e.fuente.startsWith("https://") ? esc(e.fuente) : "#"}" target="_blank" rel="noopener">${esc(e.evento)}</a>`;
+      const svg = el("svg", { viewBox: "0 0 300 90", width: "100%", role: "img", "aria-label": "Velas alrededor de " + e.evento });
+      velasSVG(svg, d, { R: 296, B: 84, sombra: 10, marca: 10 });
+      c.appendChild(svg);
+      c.insertAdjacentHTML("beforeend", `<div class="r"><span class="muted">7 días después <b class="${r >= 0 ? "pos" : "neg"}">${pct(r, 1)}</b></span>${tag}</div>`);
+      g.appendChild(c);
+    });
+  }
 
-  // ---------- Tablas estáticas ----------
-  (function () {
-    const c = D.ciclos;
-    const color = (s) => { if (!s) return ""; const v = parseFloat(s.replace("+", "")); return v > 0 ? "pos" : "neg"; };
-    $("#t-ciclos").innerHTML = `<thead><tr><th></th>${c.columns.map((x) => `<th class="n">${esc(x)}</th>`).join("")}</tr></thead><tbody>` +
-      c.index.map((r, i) => `<tr${i === 3 ? ' class="hl"' : ""}><td>${esc(r.replace("ciclo", "Ciclo"))}</td>${c.data[i].map((v) => `<td class="c ${color(v)}">${v ? esc(v.replace("-", "−").replace(" (en curso)", "*")) : "—"}</td>`).join("")}</tr>`).join("") +
-      `</tbody>`;
-    const ex = D.extremas;
-    $("#t-extremas").innerHTML = `<thead><tr><th>Semana</th><th class="n">7 días</th><th>CNN</th><th>LSTM</th></tr></thead><tbody>` +
-      ex.index.map((f, i) => { const [r, , cnn, lstm] = ex.data[i]; const ok = (s) => s.includes("✔") ? `<span class="pos">${esc(s)}</span>` : `<span class="muted">${esc(s)}</span>`;
-        return `<tr><td class="num">${esc(f)}</td><td class="n ${r.startsWith("+") ? "pos" : "neg"}">${esc(r.replace("-", "−"))}</td><td>${ok(cnn)}</td><td>${ok(lstm)}</td></tr>`; }).join("") + `</tbody>`;
-    const de = D.descartes, iv = de.columns.indexOf("validación"), ib = de.columns.indexOf("validación del base");
-    $("#t-descartes").innerHTML = `<thead><tr><th>Intento</th><th class="n">Validación</th><th class="n">Sin el cambio</th></tr></thead><tbody>` +
-      de.index.map((n, i) => { const v = de.data[i][iv], b = de.data[i][ib]; return `<tr><td>${esc(n)}</td><td class="n">${v == null ? "por bloques" : dec(v)}</td><td class="n">${dec(b)}</td></tr>`; }).join("") + `</tbody>`;
-    $("#t-bench").innerHTML = `<thead><tr><th>Activo</th><th class="n">Rend. anual</th><th class="n">Volat.</th><th class="n">Peor caída</th><th class="n">Correl. BTC</th></tr></thead><tbody>` +
-      D.bench.map((b) => `<tr${b.activo.startsWith("Bitcoin") ? ' class="hl"' : ""}><td>${esc(b.activo)}</td><td class="n ${b.rend >= 0 ? "pos" : "neg"}">${pct(b.rend)}</td><td class="n">${pct(b.vol).replace("+", "")}</td><td class="n neg">${pct(b.caida)}</td><td class="n">${dec(b.corr, 2)}</td></tr>`).join("") + `</tbody>`;
-    const veredicto = (v) => v === "no se distingue del azar" ? `<span class="chip">azar</span>` : v.startsWith("real y") ? `<span class="chip vig">vigente</span>` : `<span class="chip off">real, se apagó</span>`;
-    $("#t-clasicos").innerHTML = `<thead><tr><th>Patrón</th><th class="n">Veces</th><th class="n">2013-20</th><th class="n">2020-24</th><th class="n">2024-hoy</th><th class="n">p corregido</th><th>Veredicto</th></tr></thead><tbody>` +
-      D.clasicos.map((c) => `<tr><td>${esc(c.nombre)}</td><td class="n">${c.veces}</td>${[c.tr, c.va, c.te].map((z) => `<td class="n ${z >= 0.1 ? "pos" : z <= -0.1 ? "neg" : ""}">${(z >= 0 ? "+" : "−") + dec(Math.abs(z), 2)}</td>`).join("")}<td class="n">${dec(c.holm, 3)}</td><td>${veredicto(c.veredicto)}</td></tr>`).join("") + `</tbody>`;
-  })();
+  // ---------- Comparación ----------
+  let ventana = 0;
+  function dibujarComparacion() {
+    const w = D.comparacion[ventana], box = $("#cmp"); box.innerHTML = "";
+    let lo = Infinity, hi = -Infinity; w.activos.forEach((a) => a.velas.forEach((v) => { lo = Math.min(lo, v[3]); hi = Math.max(hi, v[2]); }));
+    lo = Math.floor(lo / 10) * 10; hi = Math.ceil(hi / 10) * 10;
+    const T = 8, B = 214, Yg = (p) => T + (hi - p) / (hi - lo) * (B - T);
+    w.activos.forEach((a) => {
+      const d = a.velas.map((v) => [0, v[1], v[2], v[3], v[4]]), fin = d[d.length - 1][4] / 100 - 1;
+      const c = document.createElement("div"); c.className = "cmp" + (a.nombre === "Bitcoin" ? " btc" : "");
+      c.innerHTML = `<div class="t"><b>${esc(a.nombre)}</b><span class="num ${fin >= 0 ? "pos" : "neg"}">${pct(fin)}</span></div><div class="s">${d.length} velas</div>`;
+      const svg = el("svg", { viewBox: "0 0 200 222", width: "100%", role: "img", "aria-label": "Velas de " + a.nombre });
+      [lo, 100, hi].forEach((p) => { el("line", { x1: 26, x2: 198, y1: Yg(p), y2: Yg(p), stroke: css("--line"), "stroke-dasharray": p === 100 ? "" : "2 3" }, svg);
+        el("text", { x: 22, y: Yg(p) + 4, "text-anchor": "end", "font-size": 10, fill: css("--ink-3") }, svg, p); });
+      velasSVG(svg, d, { L: 26, R: 198, T, B, y: [lo, hi] });
+      c.appendChild(svg); box.appendChild(c);
+    });
+    document.querySelectorAll("#ventanas button").forEach((b, i) => b.setAttribute("aria-pressed", String(i === ventana)));
+  }
+  $("#ventanas").innerHTML = D.comparacion.map((w) => `<button type="button">${esc(w.titulo)}</button>`).join("");
+  document.querySelectorAll("#ventanas button").forEach((b, i) => b.onclick = () => { ventana = i; dibujarComparacion(); });
+  $("#t-bench").innerHTML = `<thead><tr><th>Desde nov-2017</th><th class="n">Rendimiento por año</th><th class="n">Cuánto se mueve por año</th><th class="n">Peor caída</th><th class="n">Velas por año</th></tr></thead><tbody>` +
+    D.bench.map((b) => `<tr${b.activo.startsWith("Bitcoin") ? ' class="hl"' : ""}><td>${esc(b.activo)}</td><td class="n ${b.rend >= 0 ? "pos" : "neg"}">${pct(b.rend)}</td><td class="n">${pp(b.vol)}</td><td class="n neg">${pct(b.caida)}</td><td class="n">${Math.round(b.velas)}</td></tr>`).join("") + `</tbody>`;
 
-  // ---------- Familias ----------
+  // ---------- Patrones ----------
   function dibujarFamilias() {
     const box = $("#familias"); box.innerHTML = "";
-    const zmax = 0.8;
     D.familias.forEach((f) => {
-      const real = f.holm < 0.05, vig = real && f.sost === "sí, hasta hoy";
-      const d = document.createElement("div"); d.className = "fam" + (vig ? " vig" : "");
-      const chip = vig ? `<span class="chip vig">vigente</span>` : real ? `<span class="chip off">se apagó</span>` : `<span class="chip">azar</span>`;
-      d.innerHTML = `<div class="t"><b>${esc(f.id)}</b>${chip}</div><div class="d">${esc(f.desc[0].toUpperCase() + f.desc.slice(1))}</div>`;
-      const svg = el("svg", { viewBox: "0 0 120 70", width: "100%", role: "img", "aria-label": "Semana típica de " + f.id });
-      const v = []; let prev = 100;
+      const real = f.holm < 0.05, vig = real && f.sost.startsWith("s");
+      const c = document.createElement("div"); c.className = "fam" + (vig ? " vig" : "");
+      const verd = vig ? `<span class="verd" style="color:var(--btc-ink)">Sigue funcionando</span>` : real ? `<span class="verd muted">Funcionó y se apagó</span>` : `<span class="verd" style="color:var(--ink-3)">Como cualquier semana</span>`;
+      c.innerHTML = `<div class="q">${esc(f.id)} · ${f.veces} veces</div><div class="d">${esc(f.desc[0].toUpperCase() + f.desc.slice(1))}</div>`;
+      const svg = el("svg", { viewBox: "0 0 120 64", width: "100%", role: "img", "aria-label": "Semana típica de " + f.id });
+      const d = []; let prev = 100;
       for (let i = 0; i < 5; i++) { const [r, cu, ms, mi] = f.centro.slice(i * 4, i * 4 + 4).map((x) => x * 0.02);
-        const o = prev * Math.exp(r - cu), c = o * Math.exp(cu), h = Math.max(o, c) * Math.exp(ms), l = Math.min(o, c) * Math.exp(-mi); v.push([o, h, l, c]); prev = c; }
-      const hi = Math.max(...v.map((x) => x[1])), lo = Math.min(...v.map((x) => x[2]));
-      const y = (p) => 4 + (hi - p) / (hi - lo) * 62;
-      v.forEach(([o, h, l, c], i) => { const x = 14 + i * 23, col = c >= o ? css("--up") : css("--down");
-        el("line", { x1: x, x2: x, y1: y(h), y2: y(l), stroke: col, "stroke-width": 1.5 }, svg);
-        el("rect", { x: x - 6, y: y(Math.max(o, c)), width: 12, height: Math.max(1.5, Math.abs(y(o) - y(c))), fill: col, rx: 1.5 }, svg); });
-      d.appendChild(svg);
-      const zb = document.createElement("div"); zb.className = "zbars";
-      [["2013-20", f.tr], ["2020-24", f.va], ["2024-hoy", f.te]].forEach(([n, z]) => {
-        const w = Math.min(Math.abs(z), zmax) / zmax * 50, col = z >= 0 ? "var(--up)" : "var(--down)";
-        zb.insertAdjacentHTML("beforeend", `<div class="zrow"><span>${n}</span><div class="bar"><span style="left:${z >= 0 ? 50 : 50 - w}%;width:${w}%;background:${col}"></span></div><span class="v">${(z >= 0 ? "+" : "−") + dec(Math.abs(z), 2)}</span></div>`);
-      });
-      d.appendChild(zb);
-      d.insertAdjacentHTML("beforeend", `<span class="small muted" style="font-size:0.74rem">${f.veces} veces · p corregido ${dec(f.holm, 3)}</span>`);
-      box.appendChild(d);
+        const o = prev * Math.exp(r - cu), cl = o * Math.exp(cu); d.push([0, o, Math.max(o, cl) * Math.exp(ms), Math.min(o, cl) * Math.exp(-mi), cl]); prev = cl; }
+      velasSVG(svg, d, { L: 4, R: 116, T: 4, B: 60 });
+      c.appendChild(svg);
+      c.insertAdjacentHTML("beforeend", `<div class="q">La semana siguiente ${f.dir === "sube" ? "subió" : "bajó"}:</div>`);
+      [["2013-20", 0], ["2020-24", 1], ["hoy", 2]].forEach(([n, k]) => { const p = f.pct[k], q = f.normal[k], col = f.dir === "sube" ? "var(--up)" : "var(--down)";
+        c.insertAdjacentHTML("beforeend", `<div class="prow"><span>${n}</span><div class="bar"><span style="width:${p / 0.7 * 100}%;background:${col}"></span><i style="left:${q / 0.7 * 100}%"></i></div><b>${pp(p)}</b></div>`); });
+      c.insertAdjacentHTML("beforeend", verd);
+      box.appendChild(c);
     });
+    const ver = (v) => v === "no se distingue del azar" ? `<span class="muted">nada</span>` : `<span style="color:var(--btc-ink);font-weight:600">funcionó, se apagó</span>`;
+    $("#t-clasicos").innerHTML = `<thead><tr><th>Patrón</th><th class="n">Veces</th><th class="n">Hoy, la semana siguiente…</th><th>Resultado</th></tr></thead><tbody>` +
+      D.clasicos.map((c) => `<tr><td>${esc(c.nombre)}</td><td class="n">${c.veces}</td><td class="n">${c.pct[2] == null ? "—" : `${c.dir === "sube" ? "subió" : "bajó"} ${pp(c.pct[2])} <span class="muted">(normal ${pp(c.normal[2])})</span>`}</td><td>${ver(c.veredicto)}</td></tr>`).join("") + `</tbody>`;
   }
-
-  // ---------- Ciclos superpuestos ----------
-  function dibujarCiclos() {
-    const svg = $("#ciclos-svg"); svg.innerHTML = "";
-    const L = 50, R = 470, T = 14, B = 286, DMAX = 1460;
-    const cols = [css("--muted-mark"), css("--ink-3"), css("--ink-2"), css("--btc")];
-    const nombres = ["2012", "2016", "2020", "2024 (actual)"];
-    const series = HALVINGS.map((h, k) => { const i0 = velas.findIndex((v) => v[0] >= h), base = velas[i0][4], s = [];
-      for (let i = i0; i < velas.length && (velas[i][0] - h) / 86400 <= DMAX; i++) s.push([(velas[i][0] - h) / 86400, velas[i][4] / base]); return s; });
-    const lmin = Math.log10(0.5), lmax = Math.log10(150);
-    const X = (d) => L + d / DMAX * (R - L), Y = (r) => B - (Math.log10(Math.max(r, 0.5)) - lmin) / (lmax - lmin) * (B - T);
-    [0.5, 1, 2, 5, 10, 20, 50, 100].forEach((r) => { el("line", { x1: L, x2: R, y1: Y(r), y2: Y(r), stroke: css("--line") }, svg);
-      el("text", { x: L - 6, y: Y(r) + 4, "text-anchor": "end", "font-size": 11, fill: css("--ink-3") }, svg, "×" + String(r).replace(".", ",")); });
-    [0, 1, 2, 3, 4].forEach((a) => el("text", { x: X(a * 365), y: B + 18, "text-anchor": "middle", "font-size": 11, fill: css("--ink-3") }, svg, a === 0 ? "halving" : "año " + a));
-    series.forEach((s, k) => {
-      el("path", { d: s.map((p, i) => (i ? "L" : "M") + X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1)).join(""), fill: "none", stroke: cols[k], "stroke-width": k === 3 ? 2.5 : 1.6 }, svg);
-      if (k === 3) { const p = s[s.length - 1]; el("circle", { cx: X(p[0]), cy: Y(p[1]), r: 5, fill: cols[3], stroke: css("--surface"), "stroke-width": 2 }, svg);
-        el("text", { x: X(p[0]) + 8, y: Y(p[1]) + 16, "font-size": 11, fill: css("--ink") }, svg, "hoy ×" + p[1].toFixed(2).replace(".", ",")); }
-    });
-    $("#cyc-legend").innerHTML = nombres.map((n, k) => `<span><i style="background:${cols[k]}"></i>Ciclo ${n}</span>`).join("");
-    const ov = el("rect", { x: L, y: T, width: R - L, height: B - T, fill: "transparent" }, svg);
-    const guia = el("line", { y1: T, y2: B, stroke: css("--ink-3"), "stroke-dasharray": "3 3", visibility: "hidden" }, svg);
-    ov.addEventListener("mousemove", (e) => { const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; const p = pt.matrixTransform(svg.getScreenCTM().inverse());
-      const dd = Math.round((p.x - L) / (R - L) * DMAX); guia.setAttribute("x1", X(dd)); guia.setAttribute("x2", X(dd)); guia.setAttribute("visibility", "visible");
-      showTip(e, `<b>Día ${dd} desde el halving</b><br>` + series.map((s, k) => { const q = s.find((x) => x[0] >= dd); return `Ciclo ${nombres[k]}: ${q ? "×" + q[1].toFixed(2).replace(".", ",") : "—"}`; }).join("<br>")); });
-    ov.addEventListener("mouseleave", () => { hideTip(); guia.setAttribute("visibility", "hidden"); });
-  }
-
-  // ---------- Volatilidad por período ----------
-  function dibujarVol() {
-    const svg = $("#vol-svg"); svg.innerHTML = "";
-    const p = D.periodos, nom = { train: "2013-2020", val: "2020-2024", test: "2024-hoy" };
-    p.index.forEach((k, i) => { const v = p.data[i][0], w = v / 0.7 * 280, yy = 10 + i * 40;
-      el("text", { x: 0, y: yy + 17, "font-size": 13, fill: css("--ink-2") }, svg, nom[k]);
-      el("rect", { x: 90, y: yy + 4, width: w, height: 18, rx: 4, fill: i === 2 ? css("--btc") : css("--muted-mark") }, svg);
-      el("text", { x: 96 + w, y: yy + 18, "font-size": 13, fill: css("--ink") }, svg, Math.round(v * 100) + "%"); });
-  }
-
-  // ---------- Benchmark ----------
-  function dibujarBench() {
-    const svg = $("#bench-svg"); svg.innerHTML = "";
-    const L = 56, R = 500, T = 16, B = 300, x0 = 0, x1 = 1.1, y0 = -0.1, y1 = 0.45;
-    const X = (v) => L + (v - x0) / (x1 - x0) * (R - L), Y = (v) => B - (v - y0) / (y1 - y0) * (B - T);
-    [0, 0.2, 0.4, 0.6, 0.8, 1].forEach((v) => { el("line", { x1: X(v), x2: X(v), y1: T, y2: B, stroke: css("--line") }, svg); el("text", { x: X(v), y: B + 18, "text-anchor": "middle", "font-size": 11, fill: css("--ink-3") }, svg, Math.round(v * 100) + "%"); });
-    [-0.1, 0, 0.1, 0.2, 0.3, 0.4].forEach((v) => { el("line", { x1: L, x2: R, y1: Y(v), y2: Y(v), stroke: v === 0 ? css("--ink-3") : css("--line") }, svg); el("text", { x: L - 6, y: Y(v) + 4, "text-anchor": "end", "font-size": 11, fill: css("--ink-3") }, svg, Math.round(v * 100) + "%"); });
-    el("text", { x: (L + R) / 2, y: B + 36, "text-anchor": "middle", "font-size": 12, fill: css("--ink-2") }, svg, "Volatilidad anual (riesgo) →");
-    el("text", { x: 14, y: (T + B) / 2, "text-anchor": "middle", "font-size": 12, fill: css("--ink-2"), transform: `rotate(-90 14 ${(T + B) / 2})` }, svg, "Rendimiento anual →");
-    const corto = { "Bitcoin (BTC)": "Bitcoin", "Ethereum (ETH)": "Ethereum", "Litecoin (LTC)": "Litecoin", "Ripple (XRP)": "XRP", "S&P 500": "S&P 500", "Nasdaq": "Nasdaq", "Oro": "Oro", "Eli Lilly (LLY)": "LLY" };
-    D.bench.forEach((b) => { const btc = b.activo.startsWith("Bitcoin"), cx = X(b.vol), cy = Y(b.rend);
-      const g = el("g", {}, svg);
-      el("circle", { cx, cy, r: btc ? 9 : 6, fill: btc ? css("--btc") : css("--ink-3"), stroke: css("--surface"), "stroke-width": 2 }, g);
-      const izq = b.vol > 0.9; el("text", { x: izq ? cx - 10 : cx + (btc ? 13 : 10), y: cy + 4, "text-anchor": izq ? "end" : "start", "font-size": btc ? 13 : 12, "font-weight": btc ? 700 : 400, fill: css("--ink") }, g, corto[b.activo] || b.activo.replace(/\s*\(.*\)/, ""));
-      el("circle", { cx, cy, r: 16, fill: "transparent" }, g).addEventListener("mousemove", (e) => showTip(e, `<b>${esc(b.activo)}</b><br>Rendimiento ${pct(b.rend)} · volatilidad ${Math.round(b.vol * 100)}%<br>Peor caída ${pct(b.caida)} · correlación con BTC ${dec(b.corr, 2)}`));
-      g.addEventListener("mouseleave", hideTip); });
-  }
-
-  // ---------- Planilla ----------
   function dibujarPlanilla() {
     const svg = $("#planilla-svg"); svg.innerHTML = "";
     const P = D.planilla, i0 = P.columns.indexOf("P(fut3 > 3%)"), i1 = P.columns.indexOf("P(fut3 > 3% | sharpe > 0,9)");
-    const nom = ["Bitcoin", "LLY"];
-    P.index.forEach((_, k) => { const a = P.data[k][i0], b = P.data[k][i1], yy = 8 + k * 80;
-      el("text", { x: 0, y: yy + 14, "font-size": 13, "font-weight": 700, fill: css("--ink") }, svg, nom[k]);
-      [["sin condición", a, css("--muted-mark")], ["con sharpe > 0,9", b, k === 0 ? css("--btc") : css("--ink-3")]].forEach(([n, v, c], j) => {
-        const y2 = yy + 22 + j * 24, w = v / 0.4 * 230;
-        el("text", { x: 0, y: y2 + 13, "font-size": 12, fill: css("--ink-2") }, svg, n);
-        el("rect", { x: 120, y: y2, width: w, height: 17, rx: 4, fill: c }, svg);
-        el("text", { x: 126 + w, y: y2 + 13, "font-size": 12, fill: css("--ink") }, svg, Math.round(v * 1000) / 10 + "%"); }); });
+    ["Bitcoin", "LLY"].forEach((nom, k) => { const yy = 8 + k * 80;
+      el("text", { x: 0, y: yy + 14, "font-size": 13, "font-weight": 700, fill: css("--ink") }, svg, nom);
+      [["cualquier día", P.data[k][i0], css("--muted-mark")], ["después de 3 velas de suba", P.data[k][i1], k === 0 ? css("--btc") : css("--ink-3")]].forEach(([n, v, c], j) => {
+        const y2 = yy + 22 + j * 24, w = v / 0.4 * 190;
+        el("text", { x: 0, y: y2 + 13, "font-size": 11.5, fill: css("--ink-2") }, svg, n);
+        el("rect", { x: 170, y: y2, width: w, height: 17, rx: 4, fill: c }, svg);
+        el("text", { x: 176 + w, y: y2 + 13, "font-size": 12, fill: css("--ink") }, svg, Math.round(v * 100) + "%"); }); });
   }
+  (function () {
+    const c = D.ciclos;
+    $("#t-ciclos").innerHTML = `<thead><tr><th>Halving</th><th class="n">Año siguiente</th><th class="n">2.º año</th></tr></thead><tbody>` +
+      c.index.map((r, i) => `<tr${i === 3 ? ' class="hl"' : ""}><td>${esc(r.replace("ciclo ", ""))}</td><td class="n pos">${esc(c.data[i][0])}</td><td class="n ${c.data[i][1].startsWith("-") ? "neg" : "pos"}">${esc(c.data[i][1].replace("-", "−"))}</td></tr>`).join("") + `</tbody>`;
+    const ex = D.extremas;
+    $("#t-extremas").innerHTML = `<thead><tr><th>Semana</th><th class="n">Movimiento</th><th>CNN</th><th>LSTM</th></tr></thead><tbody>` +
+      ex.index.map((f, i) => { const [r, , a, b] = ex.data[i], ok = (s) => s.includes("✔") ? `<span class="pos">${esc(s)}</span>` : `<span class="muted">${esc(s)}</span>`;
+        return `<tr><td class="num">${esc(f)}</td><td class="n ${r.startsWith("+") ? "pos" : "neg"}">${esc(r.replace("-", "−"))}</td><td>${ok(a)}</td><td>${ok(b)}</td></tr>`; }).join("") + `</tbody>`;
+    const de = D.descartes, iv = de.columns.indexOf("validación"), ib = de.columns.indexOf("validación del base");
+    $("#t-descartes").innerHTML = `<thead><tr><th>Qué probamos</th><th class="n">Acierto</th><th class="n">Sin el cambio</th></tr></thead><tbody>` +
+      de.index.map((n, i) => { const v = de.data[i][iv], b = de.data[i][ib]; return `<tr><td>${esc(n.replace(" (pre-entrenado en ImageNet)", ""))}</td><td class="n">${v == null ? "—" : pp(v)}</td><td class="n">${pp(b)}</td></tr>`; }).join("") + `</tbody>`;
+  })();
 
   // ---------- Resultados ----------
   function dibujarResultados() {
     const box = $("#resultados"); box.innerHTML = "";
-    const xs = 0.26, xe = 0.47, X = (v) => (v - xs) / (xe - xs) * 100;
-    const nombres = { "Monte Carlo (paseo aleatorio)": ["Monte Carlo", "paseo aleatorio"], "Monte Carlo (historia del último año)": ["Monte Carlo", "historia del último año"], "Kronos (pre-entrenado)": ["Kronos", "pre-entrenado"], "Chronos-2 (pre-entrenado)": ["Chronos-2", "pre-entrenado"] };
-    const sub = { "Baseline": "regla simple", "Red propia": "red propia", "Simulación": "simulación" };
-    const rows = [...D.test].sort((a, b) => b.ba - a.ba);
+    const xs = 0.25, xe = 0.47, X = (v) => (v - xs) / (xe - xs) * 100;
+    const nom = { "Monte Carlo (paseo aleatorio)": ["Monte Carlo", "simulación simple"], "Monte Carlo (historia del último año)": ["Monte Carlo", "con el último año"], "Kronos (pre-entrenado)": ["Kronos", "modelo ya entrenado"], "Chronos-2 (pre-entrenado)": ["Chronos-2", "modelo ya entrenado"], "Azar": ["Azar", "tirar un dado"], "Siempre sube": ["Siempre sube", "regla simple"], "Martillo": ["Martillo", "patrón de libro"], "Inercia": ["Inercia", "repetir la semana anterior"], "Gemela del pasado": ["Gemela del pasado", "la semana más parecida"], "CNN": ["CNN", "nuestra red (foto)"], "LSTM": ["LSTM", "nuestra red (secuencia)"] };
     const head = document.createElement("div"); head.className = "res-row"; head.style.borderBottom = "0";
-    head.innerHTML = `<span></span><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="height:14px"></svg><span></span>`;
-    box.appendChild(head);
-    [0.28, 0.333, 0.38, 0.43].forEach((v) => el("text", { x: X(v), y: 11, "text-anchor": "middle", "font-size": 4.2, fill: css("--ink-3") }, head.querySelector("svg"), v === 0.333 ? "azar" : dec(v, 2)));
-    rows.forEach((r) => {
-      const propio = r.tipo === "Red propia", [n, s] = nombres[r.modelo] || [r.modelo, sub[r.tipo] || r.tipo.toLowerCase()];
+    head.innerHTML = `<span></span><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="height:14px"></svg><span></span>`; box.appendChild(head);
+    [[0.3, "30%"], [1 / 3, "azar 33%"], [0.4, "40%"], [0.45, "45%"]].forEach(([v, t]) => el("text", { x: X(v), y: 11, "text-anchor": "middle", "font-size": 4.2, fill: css("--ink-3") }, head.querySelector("svg"), t));
+    [...D.test].sort((a, b) => b.ba - a.ba).forEach((r) => {
+      const propio = r.tipo === "Red propia", [n, s] = nom[r.modelo] || [r.modelo, r.tipo];
       const row = document.createElement("div"); row.className = "res-row";
-      row.innerHTML = `<span class="lab"><b style="${propio ? "color:var(--btc-ink)" : ""}">${esc(n)}</b><small>${esc(s)}</small></span>`;
-      const svg = el("svg", { viewBox: "0 0 100 26", preserveAspectRatio: "none" });
-      el("line", { x1: X(1 / 3), x2: X(1 / 3), y1: 0, y2: 26, stroke: css("--ink-3"), "stroke-dasharray": "1.5 1.5", "stroke-width": 0.4 }, svg);
-      const c = propio ? css("--btc") : css("--ink-3");
-      el("line", { x1: X(r.lo), x2: X(r.hi), y1: 13, y2: 13, stroke: c, "stroke-width": 2.2, "stroke-linecap": "round", "vector-effect": "non-scaling-stroke" }, svg);
-      el("line", { x1: X(r.ba), x2: X(r.ba), y1: 5, y2: 21, stroke: propio ? css("--btc-ink") : css("--ink"), "stroke-width": 4, "stroke-linecap": "round", "vector-effect": "non-scaling-stroke" }, svg);
-      row.appendChild(svg);
-      row.insertAdjacentHTML("beforeend", `<span class="v">${dec(r.ba)}</span>`);
-      row.addEventListener("mousemove", (e) => showTip(e, `<b>${esc(r.modelo)}</b><br>Acierto ${dec(r.ba)} (IC95 ${dec(r.lo)}-${dec(r.hi)})<br>p ${dec(r.p, 3)} · p corregido ${dec(r.holm, 3)}`));
-      row.addEventListener("mouseleave", hideTip);
-      box.appendChild(row);
+      row.innerHTML = `<span><b style="${propio ? "color:var(--btc-ink)" : ""}">${esc(n)}</b><small>${esc(s)}</small></span>`;
+      const svg = el("svg", { viewBox: "0 0 100 24", preserveAspectRatio: "none" });
+      el("line", { x1: X(1 / 3), x2: X(1 / 3), y1: 0, y2: 24, stroke: css("--ink-3"), "stroke-dasharray": "1.5 1.5", "stroke-width": 0.4 }, svg);
+      el("line", { x1: X(r.lo), x2: X(r.hi), y1: 12, y2: 12, stroke: propio ? css("--btc") : css("--muted-mark"), "stroke-width": 5, "stroke-linecap": "round", "vector-effect": "non-scaling-stroke" }, svg);
+      el("line", { x1: X(r.ba), x2: X(r.ba), y1: 4, y2: 20, stroke: propio ? css("--btc-ink") : css("--ink"), "stroke-width": 3, "vector-effect": "non-scaling-stroke" }, svg);
+      row.appendChild(svg); row.insertAdjacentHTML("beforeend", `<span class="v">${(r.ba * 100).toFixed(1).replace(".", ",")}%</span>`);
+      row.addEventListener("mousemove", (e) => showTip(e, `<b>${esc(r.modelo)}</b><br>Acertó ${(r.ba * 100).toFixed(1).replace(".", ",")}%<br>Rango probable: ${pp(r.lo)} a ${pp(r.hi)}`));
+      row.addEventListener("mouseleave", hideTip); box.appendChild(row);
     });
   }
-
-  // ---------- Inversión ----------
   function dibujarInv() {
     const svg = $("#inv-svg"); svg.innerHTML = "";
-    const rows = [...D.inversion].sort((a, b) => b.capital - a.capital), maxv = 2000, L = 150, R = 370;
-    const X = (v) => L + v / maxv * (R - L);
+    const rows = [...D.inversion].sort((a, b) => b.capital - a.capital), L = 150, R = 370, X = (v) => L + v / 2000 * (R - L);
     rows.forEach((r, i) => { const yy = 4 + i * 24, base = r.modelo === "Comprar y mantener", red = r.modelo === "CNN" || r.modelo === "LSTM";
-      el("text", { x: L - 8, y: yy + 14, "text-anchor": "end", "font-size": 12, "font-weight": base ? 700 : 400, fill: css("--ink") }, svg, r.modelo.replace(" (pre-entrenado)", "").replace("Monte Carlo (historia del último año)", "Monte Carlo (historia)").replace("Monte Carlo (paseo aleatorio)", "Monte Carlo (paseo)"));
+      el("text", { x: L - 8, y: yy + 14, "text-anchor": "end", "font-size": 12, "font-weight": base ? 700 : 400, fill: css("--ink") }, svg, r.modelo.replace(" (pre-entrenado)", "").replace("Monte Carlo (historia del último año)", "Monte Carlo (último año)").replace("Monte Carlo (paseo aleatorio)", "Monte Carlo (simple)").replace("Comprar y mantener", "Comprar y quedarse"));
       el("rect", { x: L, y: yy + 3, width: X(r.capital) - L, height: 16, rx: 3, fill: base ? css("--ink") : red ? css("--btc") : css("--muted-mark") }, svg);
       el("text", { x: X(r.capital) + 5, y: yy + 15, "font-size": 11, fill: css("--ink-2") }, svg, Math.round(r.capital).toLocaleString("es-AR")); });
     el("line", { x1: X(1000), x2: X(1000), y1: 0, y2: rows.length * 24 + 4, stroke: css("--ink-3"), "stroke-dasharray": "3 3" }, svg);
     el("text", { x: X(1000), y: rows.length * 24 + 16, "text-anchor": "middle", "font-size": 11, fill: css("--ink-3") }, svg, "USD 1.000 iniciales");
   }
 
-  function dibujarTodo() { dibujarFamilias(); dibujarCiclos(); dibujarVol(); dibujarBench(); dibujarPlanilla(); dibujarResultados(); dibujarInv(); }
+  function dibujarTodo() {
+    const sl = $("#scroller").scrollLeft; TL = dibujarTimeline(); $("#scroller").scrollLeft = sl;
+    dibujarRango(); ejemplo("ej-sube", "2020-10-01", "2021-01-08"); ejemplo("ej-baja", "2022-04-01", "2022-06-30");
+    dibujarEventos(); dibujarComparacion(); dibujarFamilias(); dibujarPlanilla(); dibujarResultados(); dibujarInv();
+  }
   dibujarTodo();
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", dibujarTodo);
+  new MutationObserver(dibujarTodo).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 })();
 </script>

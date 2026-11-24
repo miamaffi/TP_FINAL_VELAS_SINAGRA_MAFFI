@@ -50,3 +50,41 @@ datos = dict(hitos=hitos, eventos=eventos, bench=bench, familias=familias, clasi
              descartes=tabla("14_7_descartes.csv", index_col=0))
 json.dump(datos, open(out + "datos.json", "w"), ensure_ascii=False, indent=0, default=float)
 print(len(velas), velas[-1]); print(json.dumps(datos["ciclos"], ensure_ascii=False)[:300]); print(datos["periodos"]); print(datos["hitos_redes"]["columns"], datos["hitos_redes"]["data"][-1]); print(datos["planilla"])
+
+# ---- v2: porcentajes simples por período y velas de otros activos ----
+dd = pd.read_csv(S + "/corrida/datos_familias.csv", index_col=0)
+PER = ["train", "val", "test"]
+normal = {c: [(dd.clase[dd.periodo == p] == c).mean() for p in PER] for c in ["sube", "baja"]}
+def porc(m, c):
+    return [(dd.clase[m & (dd.periodo == p)] == c).mean() if (m & (dd.periodo == p)).any() else None for p in PER]
+for f in datos["familias"]:
+    n = int(f["id"][1:]); m = dd.familia == n
+    c = "sube" if f["tr"] >= 0 else "baja"
+    f.update(dir=c, pct=porc(m, c), normal=normal[c])
+for c_ in datos["clasicos"]:
+    m = dd["pat_" + c_["nombre"]]
+    c = "sube" if c_["tr"] >= 0 else "baja"
+    c_.update(dir=c, pct=porc(m, c), normal=normal[c])
+VENTANAS = [("Últimos 3 meses", "2026-08-24", "2026-11-23"), ("La caída de oct-2025", "2025-09-20", "2025-12-20"),
+            ("El pánico del COVID", "2020-02-10", "2020-04-30"), ("El pico de 2021", "2021-03-20", "2021-06-30")]
+ACT = [("Bitcoin", None), ("Ethereum", "ETH-USD"), ("XRP", "XRP-USD"), ("Litecoin", "LTC-USD"), ("S&P 500", "GSPC")]
+B = S + "/corrida/datos_tp_btc/raw/benchmark/"
+series = {}
+for nom, f in ACT:
+    if f is None:
+        x = v.set_index(v.fecha.dt.tz_localize(None).dt.normalize())[["open", "high", "low", "close"]]
+    else:
+        x = pd.read_csv(B + f + ".csv", index_col=0, parse_dates=True)[["open", "high", "low", "close"]]
+    series[nom] = x
+comp = []
+for titulo, a, z in VENTANAS:
+    w = {"titulo": titulo, "desde": a, "hasta": z, "activos": []}
+    for nom, _ in ACT:
+        x = series[nom].loc[a:z].dropna()
+        base = x.open.iloc[0]
+        w["activos"].append({"nombre": nom, "velas": [[k.strftime("%Y-%m-%d")] + [round(float(q) / base * 100, 2) for q in r] for k, r in x.iterrows()]})
+    comp.append(w)
+datos["comparacion"] = comp
+datos["normal"] = normal
+json.dump(datos, open(out + "datos.json", "w"), ensure_ascii=False, separators=(",", ":"), default=float)
+print("v2 ok", [(f["id"], f["dir"], [round(p, 2) for p in f["pct"]]) for f in datos["familias"]][:3], len(json.dumps(datos)))
