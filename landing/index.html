@@ -1,5 +1,4 @@
 <title>Las velas de Bitcoin</title>
-<meta charset="utf-8">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -44,7 +43,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .top nav a { color: var(--ink-2); text-decoration: none; white-space: nowrap; }
 
 .hero { padding-block: 48px 8px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 36px; align-items: center; }
-.hero h1 { font-size: clamp(2.2rem, 5.6vw, 3.8rem); font-weight: 800; letter-spacing: -0.02em; }
+.hero h1 { font-size: clamp(1.8rem, 3.8vw, 2.6rem); font-weight: 800; letter-spacing: -0.015em; }
 .hero h1 em { font-style: normal; color: var(--btc); }
 .hero .lead { font-size: 1.1rem; color: var(--ink-2); margin-top: 16px; max-width: 54ch; }
 .hero .by { margin-top: 14px; font-size: 0.95rem; }
@@ -60,8 +59,17 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tl-tools button:hover, .seg button:hover { border-color: var(--btc); }
 .seg { display: flex; flex-wrap: wrap; gap: 6px; }
 .seg button[aria-pressed="true"] { background: var(--btc-soft); color: var(--btc-ink); border-color: var(--btc); font-weight: 600; }
-.scroller { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); scroll-behavior: smooth; }
-#timeline { display: block; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px; }
+.legend-ohlc { font-family: var(--f-mono); font-size: 0.8rem; color: var(--ink-2); min-height: 1.4em; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+#chart { height: 480px; width: 100%; }
+.keys { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.82rem; color: var(--ink-2); margin-top: 10px; }
+.hitos { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 16px; }
+.hito { text-align: left; font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; cursor: pointer; display: grid; gap: 4px; align-content: start; }
+.hito:hover { border-color: var(--btc); }
+.hito.sel { border-color: var(--btc); box-shadow: 0 0 0 1px var(--btc); }
+.hito .mv { font-family: var(--f-display); font-weight: 800; font-size: 1.25rem; }
+.hito .dt { font-family: var(--f-mono); font-size: 0.76rem; color: var(--ink-3); }
+.hito p { font-size: 0.86rem; color: var(--ink-2); }
 
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
 .stat b { display: block; font-family: var(--f-display); font-size: 1.7rem; font-weight: 800; color: var(--btc-ink); font-variant-numeric: tabular-nums; }
@@ -122,9 +130,9 @@ footer ul { padding-left: 18px; display: grid; gap: 4px; }
   .ev-grid, .cmp-grid, .fam-grid { grid-template-columns: 1fr 1fr; }
   .res-row { grid-template-columns: 120px 1fr 50px; }
   .top nav { display: none; }
+  #chart { height: 380px; }
 }
 @media (max-width: 520px) { .ev-grid { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { .scroller { scroll-behavior: auto; } }
 html { scroll-padding-top: 60px; }
 </style>
 
@@ -149,7 +157,7 @@ html { scroll-padding-top: 60px; }
     <div>
       <h1>¿Qué patrones de velas esconde <em>Bitcoin</em>?</h1>
       <p class="lead">Armamos nuestra propia base con todas las velas diarias de Bitcoin desde 2011, buscamos patrones que se repiten y probamos si una red convolucional (CNN) y una red recurrente (LSTM) pueden usarlos para anticipar qué pasa la semana siguiente.</p>
-      <p class="by"><b>Mia Maffi y Francesca Sinagra</b> <span class="muted">· Trabajo práctico de velas japonesas y deep learning · noviembre 2026</span></p>
+      <p class="by"><b>Mia Maffi y Francesca Sinagra</b></p>
     </div>
     <div class="box price">
       <div class="row">
@@ -171,17 +179,36 @@ html { scroll-padding-top: 60px; }
     <div class="wrap">
       <div class="head prose">
         <h2>15 años de Bitcoin, vela por vela</h2>
-        <p class="muted">Cada vela es una semana. Las zonas rojas son las caídas en que el precio se cortó a la mitad o más, y las verdes las subidas en que se duplicó o más. Las flechas marcan qué estaba pasando en cada momento. Deslizá hacia el costado para recorrer los años.</p>
+        <p class="muted">Las flechas marcan los movimientos más fuertes y qué estaba pasando en ese momento. Tocá una tarjeta de abajo para ir a ese momento en el gráfico. Podés acercar con la rueda del mouse y arrastrar para moverte.</p>
       </div>
-      <div class="tl-tools">
-        <span class="muted">Ir a:</span>
-        <button type="button" data-y="2011">2011</button><button type="button" data-y="2014">2014</button><button type="button" data-y="2017">2017</button><button type="button" data-y="2020">2020</button><button type="button" data-y="2023">2023</button><button type="button" data-y="2027">Hoy</button>
+      <div class="box">
+        <div class="controls">
+          <div class="seg" role="group" aria-label="Tamaño de vela">
+            <button type="button" id="b-sem" aria-pressed="true">Semanal</button>
+            <button type="button" id="b-dia" aria-pressed="false">Diaria</button>
+          </div>
+          <div class="seg" role="group" aria-label="Período" id="periodos">
+            <button type="button" data-r="todo" aria-pressed="true">Todo</button>
+            <button type="button" data-r="2012">Ciclo 2012</button>
+            <button type="button" data-r="2016">Ciclo 2016</button>
+            <button type="button" data-r="2020">Ciclo 2020</button>
+            <button type="button" data-r="2024">Ciclo actual</button>
+            <button type="button" data-r="anio">Último año</button>
+          </div>
+          <div class="seg" role="group" aria-label="Escala">
+            <button type="button" id="b-log" aria-pressed="true">Log</button>
+            <button type="button" id="b-lin" aria-pressed="false">Lineal</button>
+          </div>
+        </div>
+        <div class="legend-ohlc" id="ohlc">&nbsp;</div>
+        <div id="chart" role="img" aria-label="Gráfico de velas de Bitcoin desde 2011"></div>
+        <div class="keys">
+          <span><b class="pos">▲</b> subida fuerte</span><span><b class="neg">▼</b> caída fuerte</span><span><b style="color:var(--btc-ink)">H</b> halving (se reduce a la mitad la emisión de bitcoins nuevos)</span>
+        </div>
       </div>
-      <div class="scroller" id="scroller"><svg id="timeline" role="img" aria-label="Velas semanales de Bitcoin desde 2011 con los principales hechos marcados"></svg></div>
-      <p class="small muted" style="margin-top:8px">Escala logarítmica: la misma distancia vertical es el mismo porcentaje, así se puede comparar 2013 con 2025. Las líneas naranjas punteadas son los halvings, cuando se reduce a la mitad la emisión de bitcoins nuevos (cada ~4 años).</p>
+      <div class="hitos" id="hitos"></div>
     </div>
   </section>
-
   <section id="tendencias">
     <div class="wrap">
       <div class="head prose">
@@ -344,6 +371,7 @@ html { scroll-padding-top: 60px; }
 </footer>
 <div class="tip" id="tip" hidden></div>
 
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
 <script>
 (async function () {
   const $ = (s) => document.querySelector(s);
@@ -395,76 +423,79 @@ html { scroll-padding-top: 60px; }
   for (const [t, o, h, l, c] of velas) { const lunes = t - ((new Date(t * 1000).getUTCDay() + 6) % 7) * 86400;
     if (!cur || cur[0] !== lunes) { cur = [lunes, o, h, l, c]; W.push(cur); } else { cur[2] = Math.max(cur[2], h); cur[3] = Math.min(cur[3], l); cur[4] = c; } }
 
-  // ---------- Línea de tiempo ----------
-  const NOTAS = [
-    ["2011-10-17", "abajo", "Termina la primera burbuja y hackean Mt. Gox", "−81%"],
-    ["2013-04-08", "arriba", "Primera burbuja grande: llega a USD 230", "+10.000% desde 2011"],
-    ["2013-04-15", "abajo", "Mt. Gox colapsa por la avalancha de usuarios", "−70% en una semana"],
-    ["2013-12-02", "arriba", "Pasa los USD 1.000 por primera vez, con fuerte demanda desde China", "USD 1.132"],
-    ["2015-01-12", "abajo", "China prohíbe a los bancos operar bitcoin y quiebra Mt. Gox", "−85% en un año"],
-    ["2017-12-11", "arriba", "Boom de las ICO y lanzan futuros de bitcoin en Chicago", "USD 19.188"],
-    ["2018-12-10", "abajo", "Explota la burbuja de las ICO: China las prohíbe y la SEC sanciona", "−83%"],
-    ["2019-06-24", "arriba", "Facebook anuncia su moneda Libra", "×4 desde el piso"],
-    ["2020-03-09", "abajo", "Pánico del COVID: el 12 de marzo cae 39% en un día", "−63%"],
-    ["2021-04-12", "arriba", "Tesla y MicroStrategy compran bitcoin, Coinbase sale a la bolsa", "USD 63.564"],
-    ["2021-07-19", "abajo", "Tesla deja de aceptar bitcoin y China prohíbe la minería", "−53%"],
-    ["2021-11-08", "arriba", "Inflación récord en EE.UU. y El Salvador lo adopta como moneda", "USD 67.559"],
-    ["2022-11-21", "abajo", "Suben las tasas y quiebran Terra/Luna y FTX", "−77%"],
-    ["2024-01-08", "arriba", "Aprueban los ETF de bitcoin en EE.UU.", "Entra Wall Street"],
-    ["2024-11-04", "arriba", "Gana Trump las elecciones", "+30% en una semana"],
-    ["2025-10-06", "arriba", "Récord histórico", "USD 124.728"],
-    ["2026-06-29", "abajo", "Liquidaciones récord tras los aranceles a China y salen fondos de los ETF", "−53%"],
+  // ---------- Gráfico principal ----------
+  const HITOS = [
+    ["2013-04-10", "2013-04-01", "2013-04-25", "baja", "Abr-2013", "−70% en una semana", "Mt. Gox, que manejaba casi todo el volumen, colapsa por la avalancha de usuarios y frena la operatoria.", "Mt. Gox −70%"],
+    ["2013-12-04", "2013-10-01", "2015-02-01", "baja", "Dic-2013 a ene-2015", "−85% en un año", "Pasa los USD 1.000 por primera vez y después China prohíbe a los bancos operar bitcoin y quiebra Mt. Gox (850.000 BTC perdidos).", "China y Mt. Gox −85%"],
+    ["2017-12-17", "2017-09-01", "2018-03-01", "sube", "Dic-2017", "USD 19.188", "Boom de las ICO (empresas que se financian emitiendo criptomonedas) y lanzan los futuros de bitcoin en Chicago.", "Boom ICO: USD 19.188"],
+    ["2018-12-15", "2017-12-01", "2019-02-01", "baja", "2018", "−83%", "Explota la burbuja de las ICO: China las prohíbe y la SEC de EE.UU. sanciona.", "ICO −83%"],
+    ["2020-03-12", "2020-02-01", "2020-04-15", "baja", "Mar-2020", "−39% en un día", "Pánico del COVID: el 12 de marzo todos los mercados se desploman a la vez.", "COVID −39%"],
+    ["2021-04-13", "2020-10-01", "2021-05-15", "sube", "Oct-2020 a abr-2021", "×13 desde el COVID", "Tesla y MicroStrategy compran bitcoin y Coinbase sale a la bolsa.", "Entran las empresas"],
+    ["2021-05-19", "2021-04-01", "2021-08-01", "baja", "May-2021", "−53%", "Tesla deja de aceptar bitcoin y China prohíbe la minería.", "Tesla + China −53%"],
+    ["2022-11-09", "2021-11-01", "2022-12-31", "baja", "2022", "−77%", "La Fed sube las tasas y quiebran en cadena Terra/Luna, Celsius y FTX.", "Tasas + FTX −77%"],
+    ["2024-01-10", "2023-12-01", "2024-04-30", "sube", "Ene-2024", "ETF aprobados", "La SEC aprueba los ETF de bitcoin: los fondos de Wall Street pueden comprarlo.", "ETF aprobados"],
+    ["2024-11-05", "2024-10-01", "2025-01-15", "sube", "Nov-2024", "+30% en una semana", "Gana Trump las elecciones de EE.UU. con promesas a favor de las criptomonedas.", "Gana Trump +30%"],
+    ["2025-10-06", "2025-08-01", "2025-11-30", "sube", "Oct-2025", "Récord: USD 124.728", "Máximo histórico, 534 días después del halving: casi igual que en los dos ciclos anteriores (526 y 548 días).", "Récord USD 124.728"],
+    ["2026-06-30", "2025-10-01", "2026-07-31", "baja", "Oct-2025 a jun-2026", "−53%", "Liquidaciones récord tras los aranceles a China, salen fondos de los ETF y empresas venden parte de sus bitcoins.", "Aranceles + ETF −53%"],
   ];
-  function partir(s, max) { const out = []; let l = ""; s.split(" ").forEach((w) => { if ((l + " " + w).trim().length > max) { out.push(l); l = w; } else l = (l + " " + w).trim(); }); if (l) out.push(l); return out; }
-  function dibujarTimeline() {
-    const svg = $("#timeline"); svg.innerHTML = "";
-    const n = W.length, PASO = 4, L = 56, ANCHO = 214, FILA = 66, T = 236, B = 616, H = 616 + 44 + 3 * FILA;
-    const R = L + n * PASO + 160;
-    svg.setAttribute("width", R); svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${R} ${H}`);
-    const lo = Math.log(1.5), hi = Math.log(200000);
-    const Y = (p) => T + (hi - Math.log(Math.max(p, 1.5))) / (hi - lo) * (B - T), X = (i) => L + (i + 0.5) * PASO;
-    const idx = (t) => { let a = 0, b = n - 1; while (a < b) { const m = (a + b + 1) >> 1; if (W[m][0] <= t) a = m; else b = m - 1; } return a; };
-    D.hitos.forEach((h) => { const a = X(idx(ts(h.inicio))), b = X(idx(ts(h.fin)));
-      el("rect", { x: a, y: T - 10, width: Math.max(1, b - a), height: B - T + 20, fill: h.tipo === "subida" ? css("--up-soft") : css("--down-soft") }, svg); });
-    [10, 100, 1000, 10000, 100000].forEach((p) => { el("line", { x1: L, x2: L + n * PASO, y1: Y(p), y2: Y(p), stroke: css("--line") }, svg);
-      el("text", { x: L - 6, y: Y(p) + 4, "text-anchor": "end", "font-size": 11, fill: css("--ink-3") }, svg, p >= 1000 ? (p / 1000) + " mil" : String(p)); });
-    for (let y = 2012; y <= 2026; y++) { const x = X(idx(ts(y + "-01-01")));
-      el("text", { x, y: B + 30, "text-anchor": "middle", "font-size": 12, "font-weight": 600, fill: css("--ink-2") }, svg, y); }
-    HALVINGS.forEach(([t, nom]) => { const x = X(idx(t)); el("line", { x1: x, x2: x, y1: T - 10, y2: B + 10, stroke: css("--btc"), "stroke-dasharray": "4 3", "stroke-width": 1.5 }, svg);
-      el("text", { x: x + 4, y: T - 14, "font-size": 10.5, fill: css("--btc-ink") }, svg, nom); });
+  function semanales(d) { const out = []; let cur = null;
+    for (const [t, o, h, l, c] of d) { const lunes = t - ((new Date(t * 1000).getUTCDay() + 6) % 7) * 86400;
+      if (!cur || cur[0] !== lunes) { cur = [lunes, o, h, l, c]; out.push(cur); } else { cur[2] = Math.max(cur[2], h); cur[3] = Math.min(cur[3], l); cur[4] = c; } }
+    return out; }
+  const SEM = semanales(velas);
+  let modo = "sem", rango = "todo";
+  const chartEl = $("#chart");
+  const chart = LightweightCharts.createChart(chartEl, { autoSize: true,
+    rightPriceScale: { mode: LightweightCharts.PriceScaleMode.Logarithmic, borderVisible: false, scaleMargins: { top: 0.08, bottom: 0.06 } },
+    localization: { locale: "es-AR", priceFormatter: (p) => Math.round(p).toLocaleString("es-AR") },
+    timeScale: { borderVisible: false }, crosshair: { mode: LightweightCharts.CrosshairMode.Normal } });
+  const serie = chart.addCandlestickSeries({ borderVisible: false, priceFormat: { type: "price", precision: 0, minMove: 1 } });
+  function temaChart() {
     const up = css("--up"), dn = css("--down");
-    W.forEach(([t, o, h, l, c], i) => { const x = X(i), col = c >= o ? up : dn;
-      el("line", { x1: x, x2: x, y1: Y(h), y2: Y(l), stroke: col, "stroke-width": 0.8 }, svg);
-      el("rect", { x: x - 1.5, y: Y(Math.max(o, c)), width: 3, height: Math.max(0.8, Math.abs(Y(o) - Y(c))), fill: col }, svg); });
-    const xu = X(n - 1), yu = Y(ult[4]);
-    el("circle", { cx: xu, cy: yu, r: 4, fill: css("--btc") }, svg);
-    el("text", { x: xu + 8, y: yu + 4, "font-size": 12, "font-weight": 700, fill: css("--ink") }, svg, "Hoy " + usd(ult[4]));
-    const defs = el("defs", {}, svg), mk = el("marker", { id: "flecha", viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" }, defs);
-    el("path", { d: "M0 0L10 5L0 10z", fill: css("--ink-2") }, mk);
-    const filas = { arriba: [[], [], []], abajo: [[], [], []] };
-    const capaFlechas = el("g", {}, svg), capaCajas = el("g", {}, svg);
-    NOTAS.forEach(([d, lado, txt, dato]) => {
-      const i = idx(ts(d)), x = X(i), v = W[i];
-      const bx = Math.min(Math.max(x - 40, 4), R - ANCHO - 4);
-      const fs = filas[lado]; let f = 0; while (f < 2 && fs[f].some((x0) => Math.abs(x0 - bx) < ANCHO + 10)) f++; fs[f].push(bx);
-      const lineas = partir(txt, 36), alto = 30 + lineas.length * 14;
-      const by = lado === "arriba" ? T - 30 - alto - f * FILA : B + 44 + f * FILA;
-      const color = lado === "arriba" ? css("--up") : css("--down");
-      const g = el("g", {}, capaCajas);
-      el("rect", { x: bx, y: by, width: ANCHO, height: alto, rx: 6, fill: css("--surface"), stroke: color }, g);
-      el("text", { x: bx + 9, y: by + 17, "font-size": 12.5, "font-weight": 700, fill: color }, g, dato);
-      lineas.forEach((ln, k) => el("text", { x: bx + 9, y: by + 33 + k * 14, "font-size": 11.5, fill: css("--ink") }, g, ln));
-      const y1 = lado === "arriba" ? by + alto : by, y2 = lado === "arriba" ? Y(v[2]) - 4 : Y(v[3]) + 4;
-      el("line", { x1: Math.min(Math.max(x, bx + 12), bx + ANCHO - 12), y1, x2: x, y2, stroke: css("--ink-2"), "stroke-width": 1.2, "marker-end": "url(#flecha)" }, capaFlechas);
-    });
-    const ov = el("rect", { x: L, y: T - 10, width: n * PASO, height: B - T + 20, fill: "transparent" }, svg);
-    ov.addEventListener("mousemove", (e) => { const r = svg.getBoundingClientRect(), i = Math.max(0, Math.min(n - 1, Math.floor((e.clientX - r.left - L) / PASO))), [t, o, h, l, c] = W[i];
-      showTip(e, `<b>Semana del ${esc(fecha(t))}</b><br>Abrió ${usdP(o)} · cerró ${usdP(c)}<br>Máx ${usdP(h)} · mín ${usdP(l)} · <b>${pct(c / o - 1, 1)}</b>`); });
-    ov.addEventListener("mouseleave", hideTip);
-    return { X, idx };
+    chart.applyOptions({ layout: { background: { color: css("--surface") }, textColor: css("--ink-2"), fontFamily: "IBM Plex Sans, sans-serif" },
+      grid: { vertLines: { color: css("--line") }, horzLines: { color: css("--line") } } });
+    serie.applyOptions({ upColor: up, downColor: dn, wickUpColor: up, wickDownColor: dn });
   }
-  let TL = dibujarTimeline();
-  document.querySelectorAll(".tl-tools button").forEach((b) => b.onclick = () => { $("#scroller").scrollLeft = TL.X(TL.idx(ts(b.dataset.y + "-01-01"))) - 80; });
+  function cargar() {
+    const d = modo === "sem" ? SEM : velas;
+    serie.setData(d.map(([t, o, h, l, c]) => ({ time: t, open: o, high: h, low: l, close: c })));
+    const barra = (t) => { let lo = 0, hi = d.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (d[m][0] <= t) lo = m; else hi = m - 1; } return d[lo][0]; };
+    const marks = HALVINGS.map(([t]) => ({ time: barra(t), position: "belowBar", color: css("--btc-ink"), shape: "circle", text: "H" }));
+    HITOS.forEach((h) => marks.push(h[3] === "sube"
+      ? { time: barra(ts(h[0])), position: "aboveBar", color: css("--up"), shape: "arrowDown", text: h[7] }
+      : { time: barra(ts(h[0])), position: "belowBar", color: css("--down"), shape: "arrowUp", text: h[7] }));
+    marks.sort((a, b) => a.time - b.time);
+    serie.setMarkers(marks);
+  }
+  const RANGOS = { todo: [velas[0][0], ult[0]], 2012: [ts("2012-09-01"), ts("2016-07-09")], 2016: [ts("2016-04-01"), ts("2020-05-11")], 2020: [ts("2020-02-01"), ts("2024-04-20")], 2024: [ts("2024-01-15"), ult[0]], anio: [ult[0] - 365 * 86400, ult[0]] };
+  const verRango = (a, b) => chart.timeScale().setVisibleRange({ from: a, to: b });
+  function press(grupo, btn) { grupo.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn))); }
+  function setModo(m) { modo = m; press($("#b-sem").parentNode, m === "sem" ? $("#b-sem") : $("#b-dia")); cargar(); }
+  temaChart(); cargar(); verRango(...RANGOS.todo);
+  $("#b-sem").onclick = () => { setModo("sem"); verRango(...RANGOS[rango]); };
+  $("#b-dia").onclick = () => { setModo("dia"); verRango(...RANGOS[rango]); };
+  $("#b-log").onclick = (e) => { press(e.target.parentNode, e.target); chart.applyOptions({ rightPriceScale: { mode: LightweightCharts.PriceScaleMode.Logarithmic } }); };
+  $("#b-lin").onclick = (e) => { press(e.target.parentNode, e.target); chart.applyOptions({ rightPriceScale: { mode: LightweightCharts.PriceScaleMode.Normal } }); };
+  $("#periodos").querySelectorAll("button").forEach((b) => b.onclick = () => { rango = b.dataset.r; press($("#periodos"), b); verRango(...RANGOS[rango]); document.querySelectorAll(".hito.sel").forEach((x) => x.classList.remove("sel")); });
+  chart.subscribeCrosshairMove((p) => {
+    const d = p && p.time ? p.seriesData.get(serie) : null;
+    if (!d) { $("#ohlc").innerHTML = "&nbsp;"; return; }
+    const ch = d.close / d.open - 1;
+    $("#ohlc").innerHTML = `${esc(fecha(p.time))}${modo === "sem" ? " (semana)" : ""} · abrió ${usdP(d.open)} · máx ${usdP(d.high)} · mín ${usdP(d.low)} · cerró ${usdP(d.close)} <span class="${ch >= 0 ? "pos" : "neg"}">${pct(ch, 1)}</span>`;
+  });
+  HITOS.forEach((h) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "hito";
+    b.innerHTML = `<span class="dt">${esc(h[4])}</span><span class="mv ${h[3] === "sube" ? "pos" : "neg"}">${esc(h[5])}</span><p>${esc(h[6])}</p>`;
+    b.onclick = () => {
+      document.querySelectorAll(".hito.sel").forEach((x) => x.classList.remove("sel")); b.classList.add("sel");
+      press($("#periodos"), null);
+      const a = ts(h[1]), z = ts(h[2]);
+      if ((z - a) / 86400 < 400) setModo("dia"); else setModo("sem");
+      verRango(a, Math.min(z, ult[0]));
+      chartEl.scrollIntoView({ block: "center", behavior: "smooth" });
+    };
+    $("#hitos").appendChild(b);
+  });
 
   // ---------- Tendencias ----------
   function dibujarRango() {
@@ -607,7 +638,7 @@ html { scroll-padding-top: 60px; }
   }
 
   function dibujarTodo() {
-    const sl = $("#scroller").scrollLeft; TL = dibujarTimeline(); $("#scroller").scrollLeft = sl;
+    temaChart(); cargar();
     dibujarRango(); ejemplo("ej-sube", "2020-10-01", "2021-01-08"); ejemplo("ej-baja", "2022-04-01", "2022-06-30");
     dibujarEventos(); dibujarComparacion(); dibujarFamilias(); dibujarPlanilla(); dibujarResultados(); dibujarInv();
   }
